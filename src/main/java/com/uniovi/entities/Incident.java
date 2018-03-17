@@ -1,11 +1,20 @@
 package com.uniovi.entities;
 
-import javax.persistence.*;
+import java.util.Map;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.uniovi.json.IncidentToJson;
 import com.uniovi.json.JsonToIncident;
+import com.uniovi.utils.PrintIncidentProperties;
 
 @Entity
 @JsonDeserialize(using = JsonToIncident.class)
@@ -27,6 +36,8 @@ public class Incident {
 	
 	@Enumerated(EnumType.STRING)
 	private InciState state;
+	
+	private Map<String,Object> properties;
 	
 	public Incident() {
 		
@@ -86,8 +97,22 @@ public class Incident {
 	public void setState(InciState state) {
 		this.state = state;
 	}
+
+	public Map<String, Object> getProperties() {
+		return properties;
+	}
 	
-	
+	public String getPrintedProperties() {
+		return new PrintIncidentProperties<String, Object>(getProperties()).toString();
+	}
+
+	public void setProperties(Map<String, Object> properties) {
+		this.properties = properties;
+	}
+
+	public Long getId() {
+		return id;
+	}
 	
 	
 }

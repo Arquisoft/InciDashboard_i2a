@@ -1,14 +1,19 @@
 package com.uniovi.json;
 
 import java.io.IOException;
+import java.io.StringWriter;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.uniovi.entities.Incident;
 
 public class IncidentToJson extends JsonSerializer<Incident>{
 
+	
+	private ObjectMapper mapper = new ObjectMapper();
+	
 	@Override
 	public void serialize(Incident incident, 
 			JsonGenerator jsonGenerator, SerializerProvider serProvider) throws IOException {
@@ -35,6 +40,14 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		
 		// state
 		jsonGenerator.writeStringField("state", incident.getState().toString());
+		
+		//properties
+		/*String jsonResult = mapper.writerWithDefaultPrettyPrinter()
+				  .writeValueAsString(incident.getProperties());
+		jsonGenerator.writeStringField("properties", jsonResult);*/
+		StringWriter writer = new StringWriter();
+        mapper.writeValue(writer, incident.getProperties());
+        jsonGenerator.writeFieldName(writer.toString());
 		
 	}
 

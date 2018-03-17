@@ -10,7 +10,7 @@
 
 	<name>InciDashboard_i2a</name>
 	<description>Incident dashboard of the system</description>
-	<url>https://github.com/juanaza/RedSocial_SDI</url>
+	<url>https://github.com/Arquisoft/InciDashboard_i2a</url>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -50,6 +50,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		
+		<dependency>
+			 <groupId>org.hsqldb</groupId>
+			 <artifactId>hsqldb</artifactId>
+			 <scope>runtime</scope>
 		</dependency>
 
 		<dependency>

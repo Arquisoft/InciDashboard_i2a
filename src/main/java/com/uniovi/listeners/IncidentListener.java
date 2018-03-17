@@ -11,8 +11,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 public class IncidentListener {
 	private static final Logger logger = Logger.getLogger(IncidentListener.class);
 	
-	@Autowired
-	private SimpMessagingTemplate messagingTemplate;
+//	@Autowired
+//	private SimpMessagingTemplate messagingTemplate;
 	
 	@KafkaListener(topics ="example")
 	public void listenExample(String data) {
