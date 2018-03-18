@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -35,19 +37,24 @@ public class Incident {
 	@JoinColumn(name="agent_id")
 	private Agent agent;
 	
+	@ElementCollection(targetClass=String.class)
 	private List<String> tags;
 	private LatLng location;
 	
 	@Enumerated(EnumType.STRING)
 	private InciState state;	
 	
+	@ElementCollection(targetClass=String.class)
 	private List<String> multimedia = new ArrayList<String>();	
-	private Map<String,Object> properties = new HashMap<String, Object>();
+	
+	@Transient
+	private Map<String,String> properties = new HashMap<String, String>();
 	
 	@ManyToOne
 	@JoinColumn(name="operator_id")
 	private Operator operator;
 	
+	@ElementCollection(targetClass=String.class)
 	private List<String> comments = new ArrayList<String>();
 	
 	public Incident() {
@@ -125,11 +132,11 @@ public class Incident {
 		this.multimedia.add(file);
 	}
 
-	public Map<String, Object> getProperties() {
+	public Map<String, String> getProperties() {
 		return properties;
 	}
 	
-	public void setProperties(Map<String, Object> properties) {
+	public void setProperties(Map<String, String> properties) {
 		this.properties = properties;
 	}	
 
