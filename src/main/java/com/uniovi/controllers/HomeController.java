@@ -18,8 +18,8 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String index(Model model) {
-		List<Incident> incidents = incidentsService.getIncidents();
-		model.addAttribute("incidentsList",incidents);
+		//List<Incident> incidents = incidentsService.getIncidents();
+		//model.addAttribute("incidentsList",incidents);
 		return "index";
 	}
 }

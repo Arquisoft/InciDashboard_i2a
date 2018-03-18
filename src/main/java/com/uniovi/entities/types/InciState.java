@@ -1,4 +1,4 @@
-package com.uniovi.entities;
+package com.uniovi.entities.types;
 
 public enum InciState {
 	OPEN,

@@ -1,18 +1,12 @@
 package com.uniovi.json;
 
 import java.io.IOException;
-import java.io.StringWriter;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.uniovi.entities.Incident;
 
 public class IncidentToJson extends JsonSerializer<Incident>{
-
-	
-	private ObjectMapper mapper = new ObjectMapper();
 	
 	@Override
 	public void serialize(Incident incident, 
@@ -30,7 +24,11 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		jsonGenerator.writeEndObject();
 		
 		// tags
-		jsonGenerator.writeStringField("tags", incident.getTags());
+		jsonGenerator.writeArrayFieldStart("tags");
+		for(String tag: incident.getTags()) {
+			jsonGenerator.writeString(tag);
+		}
+		jsonGenerator.writeEndArray();
 		
 		// location
 		jsonGenerator.writeObjectFieldStart("location");
@@ -41,14 +39,21 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		// state
 		jsonGenerator.writeStringField("state", incident.getState().toString());
 		
-		//properties
-		/*String jsonResult = mapper.writerWithDefaultPrettyPrinter()
-				  .writeValueAsString(incident.getProperties());
-		jsonGenerator.writeStringField("properties", jsonResult);*/
-		StringWriter writer = new StringWriter();
-        mapper.writeValue(writer, incident.getProperties());
-        jsonGenerator.writeFieldName(writer.toString());
+		//multimedia
+		jsonGenerator.writeArrayFieldStart("multimedia");
+		for(String multimedia: incident.getMultimedia()) {
+			jsonGenerator.writeString(multimedia);
+		}
+		jsonGenerator.writeEndArray();
 		
+		//properties
+		jsonGenerator.writeArrayFieldStart("properties");
+		for(String property: incident.getProperties().keySet()) {
+			jsonGenerator.writeObjectField(property, incident.getProperties().get(property));
+		}
+		jsonGenerator.writeEndObject();
+		
+		jsonGenerator.writeEndObject();
 	}
 
 }

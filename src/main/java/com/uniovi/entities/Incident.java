@@ -1,5 +1,8 @@
 package com.uniovi.entities;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -12,9 +15,10 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.uniovi.entities.types.InciState;
+import com.uniovi.entities.types.LatLng;
 import com.uniovi.json.IncidentToJson;
 import com.uniovi.json.JsonToIncident;
-import com.uniovi.utils.PrintIncidentProperties;
 
 @Entity
 @JsonDeserialize(using = JsonToIncident.class)
@@ -28,16 +32,23 @@ public class Incident {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name="agen_id")
+	@JoinColumn(name="agent_id")
 	private Agent agent;
 	
-	private String tags;
+	private List<String> tags;
 	private LatLng location;
 	
 	@Enumerated(EnumType.STRING)
-	private InciState state;
+	private InciState state;	
 	
-	private Map<String,Object> properties;
+	private List<String> multimedia = new ArrayList<String>();	
+	private Map<String,Object> properties = new HashMap<String, Object>();
+	
+	@ManyToOne
+	@JoinColumn(name="operator_id")
+	private Operator operator;
+	
+	private List<String> comments = new ArrayList<String>();
 	
 	public Incident() {
 		
@@ -74,12 +85,16 @@ public class Incident {
 		this.agent = agent;
 	}
 
-	public String getTags() {
+	public List<String> getTags() {
 		return tags;
 	}
 
-	public void setTags(String tags) {
+	public void setTags(List<String> tags) {
 		this.tags = tags;
+	}
+	
+	public void addTag(String tag) {
+		this.tags.add(tag);
 	}
 
 	public LatLng getLocation() {
@@ -96,23 +111,50 @@ public class Incident {
 
 	public void setState(InciState state) {
 		this.state = state;
+	}	
+
+	public List<String> getMultimedia() {
+		return multimedia;
+	}
+
+	public void setMultimedia(List<String> multimedia) {
+		this.multimedia = multimedia;
+	}
+	
+	public void addFile(String file) {
+		this.multimedia.add(file);
 	}
 
 	public Map<String, Object> getProperties() {
 		return properties;
 	}
 	
-	public String getPrintedProperties() {
-		return new PrintIncidentProperties<String, Object>(getProperties()).toString();
-	}
-
 	public void setProperties(Map<String, Object> properties) {
 		this.properties = properties;
+	}	
+
+	public Operator getOperator() {
+		return operator;
 	}
 
-	public Long getId() {
-		return id;
+	public void setOperator(Operator operator) {
+		this.operator = operator;
 	}
-	
+
+	public List<String> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<String> comments) {
+		this.comments = comments;
+	}
+
+	@Override
+	public String toString() {
+		return "Incident [id=" + id + ", agent=" + agent + ", name=" + name + ", description=" + description
+				+ ", location=" + location + ", state=" + state + ", tags=" + tags + ", multimedia=" + multimedia
+				+ ", properties=" + properties + ", operator=" + operator + "]";
+	}
+
 	
 }

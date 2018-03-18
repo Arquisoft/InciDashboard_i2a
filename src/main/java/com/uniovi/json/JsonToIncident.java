@@ -2,6 +2,7 @@ package com.uniovi.json;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -13,10 +14,10 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entities.Agent;
-import com.uniovi.entities.AgentKind;
-import com.uniovi.entities.InciState;
 import com.uniovi.entities.Incident;
-import com.uniovi.entities.LatLng;
+import com.uniovi.entities.types.AgentKind;
+import com.uniovi.entities.types.InciState;
+import com.uniovi.entities.types.LatLng;
 
 public class JsonToIncident extends JsonDeserializer<Incident>{
 
@@ -42,7 +43,11 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		incident.setAgent(agent);
 		
 		//Tags
-		incident.setTags(jsonAgent.get("tags").textValue());
+		Iterator<JsonNode> tagsList = json.get("tags").elements();
+		while(tagsList.hasNext()) {
+			JsonNode tag = tagsList.next();
+			incident.addTag(tag.textValue());
+		}
 		
 		//Location
 		LatLng location = new LatLng();
@@ -54,15 +59,17 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		//State
 		incident.setState(InciState.valueOf(json.get("state").textValue()));
 		
+		//Multimedia
+		Iterator<JsonNode> multimediaList = json.get("multimedia").elements();
+		while(tagsList.hasNext()) {
+			JsonNode file = multimediaList.next();
+			incident.addFile(file.textValue());
+		}
+		
 		//Properties
-		
-		String jsonInput = "{\"property\": \"value\"}";
-		TypeReference<HashMap<String, Object>> typeRef 
-		  = new TypeReference<HashMap<String, Object>>() {};
-		Map<String, Object> map = mapper.readValue(jsonInput, typeRef);
-		incident.setProperties(map);
-		
-		
+		JsonNode properties = json.get("properties");
+		ObjectMapper mapper = new ObjectMapper();
+		incident.setProperties(mapper.convertValue(properties, Map.class));		
 		return incident;
 	}
 

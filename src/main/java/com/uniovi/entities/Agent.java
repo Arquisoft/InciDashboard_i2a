@@ -2,6 +2,8 @@ package com.uniovi.entities;
 
 import javax.persistence.*;
 
+import com.uniovi.entities.types.AgentKind;
+
 @Entity
 public class Agent {
 	@Id 
