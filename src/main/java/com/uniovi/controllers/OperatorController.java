@@ -11,4 +11,9 @@ public class OperatorController {
 	public String getLogin() {
 		return "login";
 	}
+	
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public String getDashboard() {
+		return "dashboard";
+	}
 }

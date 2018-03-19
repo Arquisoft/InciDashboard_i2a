@@ -3,8 +3,30 @@
 	<head th:replace="fragments/head"/>
 	<body>
 		<h2>Incident dashboard:</h2>
-		<div class="container">
-		
+		<div class="table-responsive" name="tableIncidents">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Incident name</th>
+						<th>Description</th>
+						<th>Location</th>
+						<th>Tags</th>
+						<th>Additional information</th>
+						<th>Properties</th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="incident : ${incidentsList}">
+						<td th:text="${incident.name}">Incident name</td>
+						<td th:text="${incident.description}">Incident description</td>
+						<td th:text="${incident.location.toString()}">Incident
+							location</td>
+						<td th:text="${incident.tags}">Incident tags</td>
+						<td th:text="${incident.getPrintedProperties()}">Incident properties</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<footer th:replace="fragments/footer"/>
 	</body>

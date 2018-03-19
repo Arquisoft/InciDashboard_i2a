@@ -1,38 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<head th:replace="fragments/head">
 </head>
 <body>
-	<div class="container">
-		<h2>Incidents</h2>
-
-		<div class="table-responsive" name="tableIncidents">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Incident name</th>
-						<th>Description</th>
-						<th>Location</th>
-						<th>Tags</th>
-						<th>Additional information</th>
-						<th>Properties</th>
-						<th class="col-md-1"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="incident : ${incidentsList}">
-						<td th:text="${incident.name}">Incident name</td>
-						<td th:text="${incident.description}">Incident description</td>
-						<td th:text="${incident.location.toString()}">Incident
-							location</td>
-						<td th:text="${incident.tags}">Incident tags</td>
-						<td th:text="${incident.getPrintedProperties()}">Incident properties</td>
-					</tr>
-				</tbody>
-			</table>
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1 class="jumbotron-heading">Welcome to the Incident Dashboard</h1>
+			<p class="lead text-muted">
+				The Incident Dashboard will display incident information submitted by the Incidence Manager.
+			</p>
+			<p>
+				<a href="/login" class="btn btn-primary">Login</a>
+			</p>
 		</div>
-	</div>
+	</section>
+	<footer th:replace="fragments/footer"/>
 </body>
 </html>

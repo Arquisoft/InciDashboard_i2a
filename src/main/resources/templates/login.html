@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lan="en">
-	<head th:replace="fragments/head"/>
-	<body class="text-center">
+	<head th:replace="fragments/head">	
+	</head>
+	<body class="login">
 		<form class="form-signin" method="post" action="/login">
-			<img class="mb-4" src="/img/operator.png" alt="Operator login" width="100" height="100">
+			<div class="text-center">
+				<img class="mb-4" src="/img/operator.png" alt="Operator login" width="100" height="100">			
+			</div>
+			
 			<h1 class="h3 mb-3 font-weight-normal">Operator login</h1>
 	  		<label class="sr-only" for="username">Email address</label>
   			<input type="email" class="form-control" name="username" placeholder="Email address" required="true"/>
