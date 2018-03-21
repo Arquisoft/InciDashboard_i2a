@@ -8,22 +8,10 @@
 				<div class="panel-body">
 					<p><span sec:authentication="principal.username"></span> - <span>The following are a list of active incidents in the system</span>
 				</div>
-				<div id="mapa">
-					<!-- Aqui iria el mapa que no se carga pero tampoco da error -->
+				
+				<div id="mapa" style="width:100%;height:400px">
 				</div>
-				<script th:inline="javascript">
-					/*<![CDATA[*/
-						function initMap(){
-							var initialLatLng = {lat: 43.3634557, lng:-5.845935};
-							var map = new google.maps.Map($("#mapa"), {
-						          center: {lat: -34.397, lng: 150.644},
-						          zoom: 8
-					        });							
-						}
-					/*]]>*/
-				</script>
-
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAr9ogXGdZ9_qScXx3Pd8Rg0Kv5TuSV_U&callback=initMap"></script>
+				
 				<table class="table" name="tableIncidents">
 					<thead>
 						<tr>
@@ -44,7 +32,34 @@
 						</tr>
 					</tbody>				
 				</table>
-			</div>
+				
+			
+			</div>					
+			
+			<script th:inline="javascript">
+				/*<![CDATA[*/
+					function initMap(){
+						var initialLatLng = {lat: 40.6753526, lng:-6.6971668};
+						var map = new google.maps.Map(document.getElementById("mapa"), {
+							zoom: 5,  
+							center: initialLatLng          
+					    });		
+						
+						var incidents = [[${incidentsList}]];
+						for(i=0; i<incidents.length; i++){
+							var inciLocation = {
+									lat: parseInt(incidents[i].location.lat),
+									lng: parseInt(incidents[i].location.lng)
+							}
+							var marker = new google.maps.Marker({
+								position: inciLocation,
+								map: map
+							});
+						}						
+					}
+				/*]]>*/
+			</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAr9ogXGdZ9_qScXx3Pd8Rg0Kv5TuSV_U&callback=initMap" async defer></script>
 		</div>
 		
 		<footer th:replace="fragments/footer"/>

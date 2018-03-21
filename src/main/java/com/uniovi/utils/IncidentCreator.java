@@ -38,8 +38,8 @@ public class IncidentCreator {
 		int randIndex = randNum.nextInt(agents.size());
 		randIncident.setAgent(agents.get(randIndex));
 		
-		double lat = 40 + (randNum.nextDouble() * (43-40));
-		double lng = 5 + (randNum.nextDouble() * (30-5));
+		double lat = 35 + (randNum.nextDouble() * (44-35));
+		double lng = -10 + (randNum.nextDouble() * (5+10));
 		LatLng coords = new LatLng(lat, lng);
 		randIncident.setLocation(coords);
 		
