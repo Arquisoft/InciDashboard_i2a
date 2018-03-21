@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Incident;
-import com.uniovi.repositories.IncidentsRepository;
+import com.uniovi.repositories.IncidentRepository;
 
 @Service
-public class IncidentsService {
+public class IncidentService {
 
 	@Autowired
-	private IncidentsRepository incidentsRepository;
+	private IncidentRepository incidentsRepository;
+	
+	public void addIncident(Incident incident) {
+		this.incidentsRepository.save(incident);
+	}
 
 	public List<Incident> getIncidents() {
 		return incidentsRepository.findAll();

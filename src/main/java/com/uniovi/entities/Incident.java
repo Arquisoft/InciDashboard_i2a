@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.MapKeyColumn;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -47,7 +48,9 @@ public class Incident {
 	@ElementCollection(targetClass=String.class)
 	private List<String> multimedia = new ArrayList<String>();	
 	
-	@Transient
+	@ElementCollection
+	@MapKeyColumn(name="property")
+	@Column(name="value")
 	private Map<String,String> properties = new HashMap<String, String>();
 	
 	@ManyToOne

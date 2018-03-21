@@ -28,13 +28,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated()
 		.and()
 			.formLogin().loginPage("/login").permitAll()
-			.defaultSuccessUrl("/home").failureUrl("/login.html?error=true")
+			.defaultSuccessUrl("/dashboard").failureUrl("/login.html?error=true")
 		.and()
 			.logout().permitAll();
 	}
 	
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 

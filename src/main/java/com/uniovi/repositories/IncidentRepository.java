@@ -7,9 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.uniovi.entities.Incident;
 
-public interface IncidentsRepository extends CrudRepository<Incident, Long>{
-	
-	@Query("select i from Incident i")
+public interface IncidentRepository extends CrudRepository<Incident, Long>{
+
 	public List<Incident> findAll();
 
 }

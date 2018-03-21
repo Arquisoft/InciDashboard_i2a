@@ -22,11 +22,10 @@ public class Operator {
 		
 	}
 
-	public Operator(String email, String password, Set<Incident> incidents) {
+	public Operator(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
-		this.incidents = incidents;
 	}
 
 	public String getEmail() {
