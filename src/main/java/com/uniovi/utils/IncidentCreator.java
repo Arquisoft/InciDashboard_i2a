@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
@@ -19,9 +20,11 @@ public class IncidentCreator {
 	
 	private List<Agent> agents;
 	private Incident randIncident;
+	private Random randNum;
 	
 	public IncidentCreator() {
 		agents = new ArrayList<>();
+		randNum = new Random();
 	}
 	
 	public void setAgents(List<Agent> agents) {
@@ -32,11 +35,11 @@ public class IncidentCreator {
 		randIncident = new Incident();
 		randIncident.setName(RandomStringUtils.randomAlphabetic(7));
 		
-		int randIndex = (int) Math.random() * agents.size();
+		int randIndex = randNum.nextInt(agents.size());
 		randIncident.setAgent(agents.get(randIndex));
 		
-		double lat = (Math.random() * (43 - 40)) + 40;
-		double lng = (Math.random() * (30 - 5 )) + 5;
+		double lat = 40 + (randNum.nextDouble() * (43-40));
+		double lng = 5 + (randNum.nextDouble() * (30-5));
 		LatLng coords = new LatLng(lat, lng);
 		randIncident.setLocation(coords);
 		
@@ -48,10 +51,10 @@ public class IncidentCreator {
 	private Map<String, String> createRandomProperties(){
 		Map<String, String> randProperties = new HashMap<>();
 		
-		int randPriority = (int) Math.random() * 5;
+		int randPriority = randNum.nextInt(5);
 		randProperties.put("priority", String.valueOf(randPriority));
 		if(randIncident.getAgent().getKind().equals(AgentKind.SENSOR)) {
-			double randTemp = (Math.random() * (90 - 35)) + 35;
+			double randTemp = 35 + (randNum.nextDouble() * (90-35));
 			randProperties.put("temp", String.valueOf(randTemp));
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.HOUR, 1);

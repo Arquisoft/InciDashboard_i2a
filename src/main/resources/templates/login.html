@@ -15,13 +15,14 @@
 			<label class="sr-only" for="password">Password</label>
 	  		<input type="password" class="form-control" name="password" placeholder="Password" required="true"/>
 	  		
-	  		<button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
-				
 	  		<div th:if="${param.error}">
-	  			<div class="alert alert-danger" th:if="${param.error[0] == 'true'}">
-	  				<p>Incorrect username or password</p>
-	  			</div>
-	  		</div>		  		
+				<div class='alert alert-danger' th:if="${param.error[0] == 'true'}">
+					<p>Incorrect username or password</p>
+				</div>
+			</div>	
+			
+	  		<button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+  			  		  		
 	  	</form>
 		<footer th:replace="fragments/footer"/>
 	</body>

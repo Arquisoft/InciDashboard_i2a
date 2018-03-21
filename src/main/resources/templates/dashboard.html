@@ -2,30 +2,51 @@
 <html lan="en">
 	<head th:replace="fragments/head"/>
 	<body>
-		<h2>Incident dashboard:</h2>
-		<div class="table-responsive" name="tableIncidents">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Incident name</th>
-						<th>Description</th>
-						<th>Location</th>
-						<th>Tags</th>
-						<th>Additional information</th>
-						<th>Properties</th>
-						<th class="col-md-1"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="incident : ${incidentsList}">
-						<td th:text="${incident.name}">Incident name</td>
-						<td th:text="${incident.description}">Incident description</td>
-						<td th:text="${incident.location.toString()}">Incident
-							location</td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="container">
+			<h2>Incident dashboard:</h2>
+			<div class="panel panel-default">	
+				<div class="panel-body">
+					<p><span sec:authentication="principal.username"></span> - <span>The following are a list of active incidents in the system</span>
+				</div>
+				<div id="mapa">
+					<!-- Aqui iria el mapa que no se carga pero tampoco da error -->
+				</div>
+				<script th:inline="javascript">
+					/*<![CDATA[*/
+						function initMap(){
+							var initialLatLng = {lat: 43.3634557, lng:-5.845935};
+							var map = new google.maps.Map($("#mapa"), {
+						          center: {lat: -34.397, lng: 150.644},
+						          zoom: 8
+					        });							
+						}
+					/*]]>*/
+				</script>
+
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAr9ogXGdZ9_qScXx3Pd8Rg0Kv5TuSV_U&callback=initMap"></script>
+				<table class="table" name="tableIncidents">
+					<thead>
+						<tr>
+							<th>Agent</th>
+							<th>Agent kind</th>
+							<th>Incident name</th>
+							<th>Location</th>
+							<th>Properties</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="incident : ${incidentsList}">
+							<td th:text="${incident.agent.username}">Agent</td>
+							<td th:text="${incident.agent.kind}">Agent kind</td>
+							<td th:text="${incident.name}">Incident name</td>
+							<td th:text="${incident.location.toString()}">Incident location</td>
+							<td th:text="${incident.properties.toString()}">Incident properties</td>
+						</tr>
+					</tbody>				
+				</table>
+			</div>
 		</div>
+		
 		<footer th:replace="fragments/footer"/>
 	</body>
 </html>
