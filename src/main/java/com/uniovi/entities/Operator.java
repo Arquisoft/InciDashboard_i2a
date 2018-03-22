@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.uniovi.entities.types.OperatorKind;
+
 @Entity
 public class Operator {
 	@Id
