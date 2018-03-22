@@ -12,6 +12,8 @@
 				<div id="mapa" style="width:100%;height:400px">
 				</div>
 				
+				<br>
+				
 				<table class="table" name="tableIncidents">
 					<thead>
 						<tr>
@@ -19,7 +21,10 @@
 							<th>Agent kind</th>
 							<th>Incident name</th>
 							<th>Location</th>
+							<th>State</th>
 							<th>Properties</th>
+							<th>Comments</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -28,7 +33,10 @@
 							<td th:text="${incident.agent.kind}">Agent kind</td>
 							<td th:text="${incident.name}">Incident name</td>
 							<td th:text="${incident.location.toString()}">Incident location</td>
+							<td th:text="${incident.state.toString()}">Incident state</td>
 							<td th:text="${incident.properties.toString()}">Incident properties</td>
+							<td th:text="${incident.comments.toString()}">Incident comments</td>
+							<td><a th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
 						</tr>
 					</tbody>				
 				</table>
@@ -47,6 +55,7 @@
 						
 						var incidents = [[${incidentsList}]];
 						var markers = [];
+						var infoWindows = [];
 						for(i=0; i<incidents.length; i++){
 							var inciLocation = {
 									lat: parseFloat(incidents[i].location.lat),
@@ -54,14 +63,31 @@
 							}
 							markers[i] = new google.maps.Marker({
 								position: inciLocation,
-								title: incidents[i].id,
+								title: incidents[i].name,
 								map: map
 							});
 							markers[i].index = i;
+							markers[i].link = "/incident/edit/" + incidents[i].id;
+							
+							var contentString = "<div id='content'>" +
+								"<h3 id='firstHeading'>" + incidents[i].name + "</h3>" +
+								"<div id='bodyContent'>" + 
+									"<p>State: " + incidents[i].state + "</p>" + 
+									"<a href='" +  markers[i].link + "'>Modify</a>" +
+								"</div>" + 
+								"</div>";
+								
+							infoWindows[i] = new google.maps.InfoWindow({
+							    content: contentString
+							});
 							
 							google.maps.event.addListener(markers[i], 'click', function(){
-								alert(markers[this.index].getTitle());
-							});
+								infoWindows[this.index].open(map, this);
+							});					
+							
+							google.maps.event.addListener(markers[i], 'dblclick', function(){
+								window.open(this.link, "_self");
+							});							
 						}						
 					}
 				/*]]>*/

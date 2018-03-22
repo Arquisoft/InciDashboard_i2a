@@ -17,6 +17,10 @@ public class IncidentService {
 	public void addIncident(Incident incident) {
 		this.incidentsRepository.save(incident);
 	}
+	
+	public Incident getIncident(Long id) {
+		return incidentsRepository.findById(id).orElse(null);
+	}
 
 	public List<Incident> getIncidents() {
 		return incidentsRepository.findAll();

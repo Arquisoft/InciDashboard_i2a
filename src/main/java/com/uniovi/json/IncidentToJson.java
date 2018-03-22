@@ -15,7 +15,7 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		
 		jsonGenerator.writeStringField("id", String.valueOf(incident.getId()));
 		jsonGenerator.writeStringField("name", incident.getName());
-		//jsonGenerator.writeStringField("description", incident.getDescription());
+		jsonGenerator.writeStringField("description", incident.getDescription());
 		
 		// incident's agent
 		jsonGenerator.writeObjectFieldStart("agent");
@@ -25,11 +25,11 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		jsonGenerator.writeEndObject();
 		
 		// tags
-		/*jsonGenerator.writeArrayFieldStart("tags");
+		jsonGenerator.writeArrayFieldStart("tags");
 		for(String tag: incident.getTags()) {
 			jsonGenerator.writeString(tag);
 		}
-		jsonGenerator.writeEndArray();*/
+		jsonGenerator.writeEndArray();
 		
 		// location
 		jsonGenerator.writeObjectFieldStart("location");
@@ -38,19 +38,19 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		jsonGenerator.writeEndObject();
 		
 		// state
-		//jsonGenerator.writeStringField("state", incident.getState().toString());
+		jsonGenerator.writeStringField("state", incident.getState().toString());
 		
 		//multimedia
-		/*jsonGenerator.writeArrayFieldStart("multimedia");
+		jsonGenerator.writeArrayFieldStart("multimedia");
 		for(String multimedia: incident.getMultimedia()) {
 			jsonGenerator.writeString(multimedia);
 		}
-		jsonGenerator.writeEndArray();*/
+		jsonGenerator.writeEndArray();
 		
 		//properties
 		/*jsonGenerator.writeArrayFieldStart("properties");
 		for(String property: incident.getProperties().keySet()) {
-			jsonGenerator.writeObjectField(property, incident.getProperties().get(property));
+			jsonGenerator.writeStringField(property, incident.getProperties().get(property));
 		}
 		jsonGenerator.writeEndObject();*/
 		

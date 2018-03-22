@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.uniovi.entities.Agent;
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.types.AgentKind;
+import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 
 @Component
@@ -42,6 +43,7 @@ public class IncidentCreator {
 		double lng = -10 + (randNum.nextDouble() * (5+10));
 		LatLng coords = new LatLng(lat, lng);
 		randIncident.setLocation(coords);
+		randIncident.setState(InciState.OPEN);
 		
 		randIncident.setProperties(createRandomProperties());
 		

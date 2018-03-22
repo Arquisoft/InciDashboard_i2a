@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lan="en">
+	<head th:replace="fragments/head"/>
+	<body>
+		<div class="container">
+			<h2>Modify incident - <span th:text="${incident.name}"></span></h2>
+			<form class="form-horizontal" method="post" th:action="${'/incident/edit/' + incident.id}" th:object="${incident}">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="inciState">Incident state:</label>
+					<div class="col-sm-10">
+						<select id="state" class="form-control" name="inciState">
+							<option th:each="inciState : ${statesList}" th:value="${inciState}"
+								th:text="${inciState}"> Estado
+							</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="comment">Comment: </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="comment"
+							placeholder="Introduce comment for incident" required="true"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Modificar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<footer th:replace="fragments/footer"/>
+	</body>
+</html>
