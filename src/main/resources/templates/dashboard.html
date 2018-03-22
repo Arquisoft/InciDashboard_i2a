@@ -2,6 +2,7 @@
 <html lan="en">
 	<head th:replace="fragments/head"/>
 	<body>
+		<nav th:replace="fragments/nav" />
 		<div class="container">
 			<h2>Incident dashboard:</h2>
 			<div class="panel panel-default">	
@@ -9,40 +10,52 @@
 					<p><span sec:authentication="principal.username"></span> - <span>The following are a list of active incidents in the system</span>
 				</div>
 				
-				<div id="mapa" style="width:100%;height:400px">
-				</div>
+				<div class="card">
+					<h5 class="card-header">
+						Active incidents location
+					</h5>
+					<div class="card-body">
+						<div id="mapa" style="width:100%;height:400px">
+						</div>
+					</div>
+				</div>	
 				
 				<br>
 				
-				<table class="table" name="tableIncidents">
-					<thead>
-						<tr>
-							<th>Agent</th>
-							<th>Agent kind</th>
-							<th>Incident name</th>
-							<th>Location</th>
-							<th>State</th>
-							<th>Properties</th>
-							<th>Comments</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="incident : ${incidentsList}">
-							<td th:text="${incident.agent.username}">Agent</td>
-							<td th:text="${incident.agent.kind}">Agent kind</td>
-							<td th:text="${incident.name}">Incident name</td>
-							<td th:text="${incident.location.toString()}">Incident location</td>
-							<td th:text="${incident.state.toString()}">Incident state</td>
-							<td th:text="${incident.properties.toString()}">Incident properties</td>
-							<td th:text="${incident.comments.toString()}">Incident comments</td>
-							<td><a th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
-						</tr>
-					</tbody>				
-				</table>
-				
-			
-			</div>					
+				<div class="card">
+					<h5 class="card-header">
+						Active incidents details
+					</h5>
+					<div class="card-body">
+						<table class="table" name="tableIncidents">
+							<thead class="thead-light">
+								<tr>
+									<th>Agent</th>
+									<th>Agent kind</th>
+									<th>Incident name</th>
+									<th>Location</th>
+									<th>State</th>
+									<th>Properties</th>
+									<th>Comments</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="incident : ${incidentsList}">
+									<td th:text="${incident.agent.username}">Agent</td>
+									<td th:text="${incident.agent.kind}">Agent kind</td>
+									<td th:text="${incident.name}">Incident name</td>
+									<td th:text="${incident.location.toString()}">Incident location</td>
+									<td th:text="${incident.state.toString()}">Incident state</td>
+									<td th:text="${incident.properties.toString()}">Incident properties</td>
+									<td th:text="${incident.comments.toString()}">Incident comments</td>
+									<td><a th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
+								</tr>
+							</tbody>				
+						</table>
+					</div>
+				</div>			
+			</div>				
 			
 			<script th:inline="javascript">
 				/*<![CDATA[*/
