@@ -12,6 +12,7 @@ import com.uniovi.entities.Agent;
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.Operator;
 import com.uniovi.entities.types.AgentKind;
+import com.uniovi.entities.types.OperatorKind;
 import com.uniovi.utils.IncidentCreator;
 
 @Service
@@ -41,6 +42,10 @@ public class InsertSimpleDataService {
 		operators.add(new Operator("juan@gmail.com", "123456"));
 		operators.add(new Operator("chus@gmail.com", "123456"));
 		operators.add(new Operator("lorena@gmail.com", "123456"));
+		operators.add(new Operator("fireman@gmail.com", "123456", OperatorKind.FIREMAN));
+		operators.add(new Operator("police@gmail.com", "123456", OperatorKind.POLICE));
+		operators.add(new Operator("medic@gmail.com", "123456", OperatorKind.MEDIC));
+		operators.add(new Operator("rescue@gmail.com", "123456", OperatorKind.RESCUE));
 		
 		for(Operator op: operators) {
 			operatorService.addOperator(op);

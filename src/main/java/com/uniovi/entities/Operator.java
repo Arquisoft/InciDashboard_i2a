@@ -30,6 +30,11 @@ public class Operator {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public Operator(String email, String password, OperatorKind kind) {
+		this(email,password);
+		this.kind = kind;
+	}
 
 	public String getEmail() {
 		return email;
