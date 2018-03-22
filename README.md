@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/Arquisoft/InciDashboard_i2a/branch/master/graph/badge.svg)](https://codecov.io/gh/Arquisoft/InciDashboard_i2a)
 [![Build Status](https://travis-ci.org/Arquisoft/InciDashboard_i2a.svg?branch=master)](https://travis-ci.org/Arquisoft/InciDashboard_i2a)
 
-manage the incidents that appear in the system.
+-The incidence dashboard will be used by the incident management staff, and can visualize and manage the incidents that appear in the system.
 
 ## Team Members
 * Jesús Atorrasagasti García [@jesusatgar](https://github.com/jesusatgar)
