@@ -56,7 +56,7 @@ public class InsertSimpleDataService {
 		
 		incidentCreator.setAgents(agents);
 		
-		for(int i=0; i<10; i++) {
+		for(int i=0; i<25; i++) {
 			Incident randIncident = incidentCreator.createIncident();
 			incidents.add(randIncident);
 			incidentService.addIncident(randIncident);

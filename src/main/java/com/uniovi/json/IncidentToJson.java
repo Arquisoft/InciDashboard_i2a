@@ -13,6 +13,7 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 			JsonGenerator jsonGenerator, SerializerProvider serProvider) throws IOException {
 		jsonGenerator.writeStartObject();
 		
+		jsonGenerator.writeStringField("id", String.valueOf(incident.getId()));
 		jsonGenerator.writeStringField("name", incident.getName());
 		//jsonGenerator.writeStringField("description", incident.getDescription());
 		

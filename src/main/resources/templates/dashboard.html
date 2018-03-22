@@ -46,14 +46,21 @@
 					    });		
 						
 						var incidents = [[${incidentsList}]];
+						var markers = [];
 						for(i=0; i<incidents.length; i++){
 							var inciLocation = {
-									lat: parseInt(incidents[i].location.lat),
-									lng: parseInt(incidents[i].location.lng)
+									lat: parseFloat(incidents[i].location.lat),
+									lng: parseFloat(incidents[i].location.lng)
 							}
-							var marker = new google.maps.Marker({
+							markers[i] = new google.maps.Marker({
 								position: inciLocation,
+								title: incidents[i].id,
 								map: map
+							});
+							markers[i].index = i;
+							
+							google.maps.event.addListener(markers[i], 'click', function(){
+								alert(markers[this.index].getTitle());
 							});
 						}						
 					}
