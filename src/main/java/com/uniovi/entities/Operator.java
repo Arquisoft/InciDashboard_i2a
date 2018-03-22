@@ -14,6 +14,7 @@ public class Operator {
 	@Column(unique=true)
 	private String email;
 	private String password;
+	private OperatorKind kind;
 	
 	@OneToMany(mappedBy="operator", cascade=CascadeType.ALL)
 	private Set<Incident> incidents = new HashSet<>();

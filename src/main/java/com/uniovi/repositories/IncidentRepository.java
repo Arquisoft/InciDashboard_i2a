@@ -10,5 +10,5 @@ import com.uniovi.entities.Incident;
 public interface IncidentRepository extends CrudRepository<Incident, Long>{
 
 	public List<Incident> findAll();
-
+	
 }
