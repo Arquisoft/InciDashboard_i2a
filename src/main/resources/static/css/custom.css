@@ -32,8 +32,8 @@ footer {
   align-items: center;
   -webkit-box-pack: center;
   justify-content: center;
-  padding-top: 10%;
-  padding-bottom: 10%;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 .form-signin {

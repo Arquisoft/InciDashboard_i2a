@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Incident;
+import com.uniovi.entities.Operator;
 import com.uniovi.repositories.IncidentRepository;
 
 @Service
@@ -24,6 +25,10 @@ public class IncidentService {
 
 	public List<Incident> getIncidents() {
 		return incidentsRepository.findAll();
+	}
+	
+	public List<Incident> getIncidentsOfOperator(Operator operator){
+		return incidentsRepository.findAllByOperator(operator);
 	}
 	
 	

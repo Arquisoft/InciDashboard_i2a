@@ -59,6 +59,14 @@ public class Operator {
 	public void setIncidents(Set<Incident> incidents) {
 		this.incidents = incidents;
 	}
+	
+	public void assignIncident(Incident incident) {
+		this.incidents.add(incident);
+	}
+	
+	public boolean isAssignedToIncident(Incident incident) {
+		return this.incidents.contains(incident);
+	}
 
 	@Override
 	public int hashCode() {

@@ -15,8 +15,7 @@
 						Active incidents location
 					</h5>
 					<div class="card-body">
-						<div id="mapa" style="width:100%;height:400px">
-						</div>
+						<div id="mapa" style="width:100%;height:400px"></div>
 					</div>
 				</div>	
 				
@@ -26,7 +25,7 @@
 					<h5 class="card-header">
 						Active incidents details
 					</h5>
-					<div class="card-body">
+					<div class="card-body table-responsive">
 						<table class="table" name="tableIncidents">
 							<thead class="thead-light">
 								<tr>
@@ -36,6 +35,7 @@
 									<th>Location</th>
 									<th>State</th>
 									<th>Properties</th>
+									<th>Operator</th>
 									<th>Comments</th>
 									<th>Actions</th>
 								</tr>
@@ -47,9 +47,12 @@
 									<td th:text="${incident.name}">Incident name</td>
 									<td th:text="${incident.location.toString()}">Incident location</td>
 									<td th:text="${incident.state.toString()}">Incident state</td>
+									<td th:text="${incident.operator.email}">Operator</td>
 									<td th:text="${incident.properties.toString()}">Incident properties</td>
 									<td th:text="${incident.comments.toString()}">Incident comments</td>
-									<td><a th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
+									<div th:if="${activeOperator.isAssignedToIncident(incident) == true}">
+										<td><a th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
+									</div>
 								</tr>
 							</tbody>				
 						</table>
@@ -85,8 +88,9 @@
 							var contentString = "<div id='content'>" +
 								"<h3 id='firstHeading'>" + incidents[i].name + "</h3>" +
 								"<div id='bodyContent'>" + 
+									"<p>Submitted by: " + incidents[i].agent.username + "</p>" +
 									"<p>State: " + incidents[i].state + "</p>" + 
-									"<a href='" +  markers[i].link + "'>Modify</a>" +
+									"<a href='" +  markers[i].link + "'>Modify incident</a>" +
 								"</div>" + 
 								"</div>";
 								

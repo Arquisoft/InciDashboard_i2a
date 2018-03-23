@@ -2,6 +2,7 @@ package com.uniovi.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
@@ -33,15 +34,15 @@ public class InsertSimpleDataService {
 	private List<Agent> agents;
 	private List<Incident> incidents;
 	
+	private Random randNum;
+	
 	@PostConstruct
 	public void init() {
 		operators = new ArrayList<>();
 		agents = new ArrayList<>();
 		incidents = new ArrayList<>();
+		randNum = new Random();
 		
-		operators.add(new Operator("juan@gmail.com", "123456"));
-		operators.add(new Operator("chus@gmail.com", "123456"));
-		operators.add(new Operator("lorena@gmail.com", "123456"));
 		operators.add(new Operator("fireman@gmail.com", "123456", OperatorKind.FIREMAN));
 		operators.add(new Operator("police@gmail.com", "123456", OperatorKind.POLICE));
 		operators.add(new Operator("medic@gmail.com", "123456", OperatorKind.MEDIC));
@@ -63,8 +64,10 @@ public class InsertSimpleDataService {
 		
 		for(int i=0; i<25; i++) {
 			Incident randIncident = incidentCreator.createIncident();
+			randIncident.setOperator(operators.get(randNum.nextInt(operators.size())));
 			incidents.add(randIncident);
 			incidentService.addIncident(randIncident);
+			
 		}		
 	}
 }
