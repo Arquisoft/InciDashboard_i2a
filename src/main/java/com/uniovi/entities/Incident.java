@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -22,6 +22,7 @@ import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 import com.uniovi.json.IncidentToJson;
 import com.uniovi.json.JsonToIncident;
+import com.uniovi.utils.InciPropertiesConversor;
 
 @Entity
 @JsonDeserialize(using = JsonToIncident.class)
@@ -48,10 +49,9 @@ public class Incident {
 	@ElementCollection(targetClass=String.class)
 	private List<String> multimedia = new ArrayList<String>();	
 	
-	@ElementCollection
-	@MapKeyColumn(name="property")
-	@Column(name="value")
-	private Map<String,String> properties = new HashMap<String, String>();
+	@Column(columnDefinition="varchar(500)")
+	@Convert(converter=InciPropertiesConversor.class)
+	private Map<String,Object> properties = new HashMap<String, Object>();
 	
 	@ManyToOne
 	@JoinColumn(name="operator_id")
@@ -139,11 +139,11 @@ public class Incident {
 		this.multimedia.add(file);
 	}
 
-	public Map<String, String> getProperties() {
+	public Map<String, Object> getProperties() {
 		return properties;
 	}
 	
-	public void setProperties(Map<String, String> properties) {
+	public void setProperties(Map<String, Object> properties) {
 		this.properties = properties;
 	}	
 

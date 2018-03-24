@@ -48,11 +48,13 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		jsonGenerator.writeEndArray();
 		
 		//properties
-		/*jsonGenerator.writeArrayFieldStart("properties");
+		jsonGenerator.writeArrayFieldStart("properties");
 		for(String property: incident.getProperties().keySet()) {
-			jsonGenerator.writeStringField(property, incident.getProperties().get(property));
+			jsonGenerator.writeStartObject();
+			jsonGenerator.writeObjectField(property, incident.getProperties().get(property));
+			jsonGenerator.writeEndObject();
 		}
-		jsonGenerator.writeEndObject();*/
+		jsonGenerator.writeEndArray();
 		
 		jsonGenerator.writeEndObject();
 	}
