@@ -41,6 +41,8 @@ public class InciDashboardI2aApplicationTests {
 		assertEquals(AgentKind.SENSOR, person.getKind());
 		assertEquals("Agent [id=" + person.getId() + ", username=" + person.getUsername() + ", password="
 				+ person.getPassword() + ", kind=" + person.getKind() + "]", person.toString());
+		Agent person2 = new Agent("Agent1", "passwd", AgentKind.PERSON);
+		assertEquals(true, person.equals(person2));
 	}
 
 	@Test
@@ -129,6 +131,9 @@ public class InciDashboardI2aApplicationTests {
 		assertEquals(true, op.isAssignedToIncident(i3));
 		assertEquals("Operator [id=" + op.getId() + ", email=" + op.getEmail() + ", password=" + op.getPassword()
 				+ ", incidents=" + op.getIncidents() + "]", op.toString());
+		
+		Operator op2 = new Operator("op@gmail.com", "12345", OperatorKind.POLICE);
+		assertEquals(true, op.equals(op2));
 
 	}
 
