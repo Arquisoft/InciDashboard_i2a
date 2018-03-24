@@ -1,7 +1,5 @@
 package com.uniovi.services;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
