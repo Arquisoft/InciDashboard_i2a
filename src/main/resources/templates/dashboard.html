@@ -105,19 +105,7 @@
       						var countInProcess = 0;
       						
       						var values = [
-      							["Time"],
-      							[],
-      							[],
-      							[],
-      							[],
-      							[],
-      							[],
-      							[],
-      							[],
-      							[],
-      							[],
-      							[],
-      							[]     							
+      							["Time"]   							
       						];
       						var initial = 0;
       						for(i=0; i<incidents.length; i++){
@@ -144,6 +132,7 @@
       									var temp = tempInfo[1];
       									var index = j + 1;
       									if(initial==0){
+      										values.push([]);
       										values[index].push(time);
       									}
       									values[index].push(parseFloat(temp));
