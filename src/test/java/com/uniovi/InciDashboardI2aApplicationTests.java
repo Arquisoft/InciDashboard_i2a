@@ -65,7 +65,7 @@ public class InciDashboardI2aApplicationTests {
 
 		incident.setState(InciState.OPEN);
 
-		Map<String, String> properties = new HashMap<String, String>();
+		Map<String, Object> properties = new HashMap<String, Object>();
 		properties.put("danger", "medium");
 		properties.put("injured", "3");
 		properties.put("deaths", "1");
