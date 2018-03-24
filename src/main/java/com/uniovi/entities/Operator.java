@@ -27,13 +27,13 @@ public class Operator {
 
 	public Operator(String email, String password) {
 		super();
-		this.email = email;
-		this.password = password;
+		setEmail(email);
+		setPassword(password);
 	}
 	
 	public Operator(String email, String password, OperatorKind kind) {
 		this(email,password);
-		this.kind = kind;
+		setKind(kind);
 	}
 
 	public String getEmail() {
@@ -66,6 +66,18 @@ public class Operator {
 	
 	public boolean isAssignedToIncident(Incident incident) {
 		return this.incidents.contains(incident);
+	}
+
+	public OperatorKind getKind() {
+		return kind;
+	}
+
+	public void setKind(OperatorKind kind) {
+		this.kind = kind;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	@Override

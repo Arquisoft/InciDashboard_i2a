@@ -51,6 +51,10 @@ public class Agent {
 		this.kind = kind;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

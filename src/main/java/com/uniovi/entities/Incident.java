@@ -66,17 +66,13 @@ public class Incident {
 
 	public Incident(String name, Agent agent, LatLng location) {
 		super();
-		this.name = name;
-		this.agent = agent;
-		this.location = location;
+		setName(name);
+		setAgent(agent);
+		setLocation(location);
 	}
 	
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
