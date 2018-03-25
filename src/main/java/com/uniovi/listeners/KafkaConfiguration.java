@@ -44,4 +44,9 @@ public class KafkaConfiguration {
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, "es.uniovi");
 		return props;
 	}
+	
+	@Bean
+	public IncidentListener receiver() {
+	    return new IncidentListener();
+	}
 }
