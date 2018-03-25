@@ -66,6 +66,7 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		JsonNode properties = json.get("properties");
 		ObjectMapper mapper = new ObjectMapper();
 		incident.setProperties(mapper.convertValue(properties, Map.class));		
+		
 		return incident;
 	}
 

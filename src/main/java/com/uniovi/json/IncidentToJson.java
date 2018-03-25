@@ -56,6 +56,20 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		}
 		jsonGenerator.writeEndArray();
 		
+		//operator
+		jsonGenerator.writeObjectFieldStart("operator");
+		jsonGenerator.writeStringField("email", incident.getOperator().getEmail());
+		jsonGenerator.writeStringField("password", incident.getOperator().getPassword());
+		jsonGenerator.writeStringField("kind", incident.getOperator().getKind().toString());
+		jsonGenerator.writeEndObject();
+		
+		//comments
+		jsonGenerator.writeArrayFieldStart("comments");
+		for(String comment: incident.getComments()) {
+			jsonGenerator.writeString(comment);
+		}
+		jsonGenerator.writeEndArray();
+		
 		jsonGenerator.writeEndObject();
 	}
 

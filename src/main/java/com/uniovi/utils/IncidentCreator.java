@@ -59,8 +59,6 @@ public class IncidentCreator {
 		int randPriority = randNum.nextInt(5);
 		randProperties.put("priority", randPriority);
 		if(randIncident.getAgent().getKind().equals(AgentKind.SENSOR)) {
-			/*double randTemp = 35 + (randNum.nextDouble() * (90-35));
-			randProperties.put("temp", String.valueOf(randTemp));*/
 			createRandTemperatures(randProperties, 12);
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.HOUR, 1);
