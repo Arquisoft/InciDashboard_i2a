@@ -40,7 +40,7 @@ public class Incident {
 	private Agent agent;
 	
 	@ElementCollection(targetClass=String.class)
-	private List<String> tags;
+	private List<String> tags = new ArrayList<String>();
 	private LatLng location;
 	
 	@Enumerated(EnumType.STRING)
@@ -161,6 +161,10 @@ public class Incident {
 
 	public void setComments(List<String> comments) {
 		this.comments = comments;
+	}
+	
+	public void addComment(String comment) {
+		this.comments.add(comment);
 	}
 
 	@Override

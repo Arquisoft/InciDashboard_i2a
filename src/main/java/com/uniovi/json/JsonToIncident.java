@@ -13,9 +13,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entities.Agent;
 import com.uniovi.entities.Incident;
+import com.uniovi.entities.Operator;
 import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
+import com.uniovi.entities.types.OperatorKind;
 
 public class JsonToIncident extends JsonDeserializer<Incident>{
 
@@ -57,7 +59,7 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		
 		//Multimedia
 		Iterator<JsonNode> multimediaList = json.get("multimedia").elements();
-		while(tagsList.hasNext()) {
+		while(multimediaList.hasNext()) {
 			JsonNode file = multimediaList.next();
 			incident.addFile(file.textValue());
 		}
@@ -65,7 +67,22 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		//Properties
 		JsonNode properties = json.get("properties");
 		ObjectMapper mapper = new ObjectMapper();
-		incident.setProperties(mapper.convertValue(properties, Map.class));		
+		incident.setProperties(mapper.convertValue(properties, Map.class));	
+		
+		//Operator
+		Operator operator = new Operator();
+		JsonNode jsonOperator = json.get("operator");
+		operator.setEmail(jsonOperator.get("email").textValue());
+		operator.setPassword(jsonOperator.get("password").textValue());
+		operator.setKind(OperatorKind.valueOf(jsonOperator.get("kind").textValue()));
+		incident.setOperator(operator);
+		
+		//Comments
+		Iterator<JsonNode> commentsList = json.get("comments").elements();
+		while(commentsList.hasNext()) {
+			JsonNode comment = commentsList.next();
+			incident.addComment(comment.textValue());
+		}
 		
 		return incident;
 	}
