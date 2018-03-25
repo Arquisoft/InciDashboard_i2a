@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entities.Incident;
 import com.uniovi.services.AgentService;
 import com.uniovi.services.IncidentService;
+import com.uniovi.services.OperatorService;
 
 @ManagedBean
 public class IncidentListener {
@@ -21,6 +22,9 @@ public class IncidentListener {
 	
 	@Autowired
 	private AgentService agentsService;
+	
+	@Autowired
+	private OperatorService operatorsService;
 	
 	@Autowired
 	private IncidentService incidentsService;
@@ -38,6 +42,7 @@ public class IncidentListener {
 				ObjectMapper obj = new ObjectMapper();
 				Incident incident = obj.readValue(data.getBytes(), Incident.class);
 				agentsService.addAgent(incident.getAgent());
+				operatorsService.addOperator(incident.getOperator());
 				incidentsService.addIncident(incident);
 			}
 		}catch(JsonParseException e) {
