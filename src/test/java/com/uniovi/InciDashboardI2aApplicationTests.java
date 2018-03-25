@@ -3,6 +3,7 @@ package com.uniovi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.uniovi.entities.Agent;
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.Operator;
@@ -22,6 +25,8 @@ import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 import com.uniovi.entities.types.OperatorKind;
+import com.uniovi.json.IncidentToJson;
+import com.uniovi.listeners.IncidentListener;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,6 +48,17 @@ public class InciDashboardI2aApplicationTests {
 				+ person.getPassword() + ", kind=" + person.getKind() + "]", person.toString());
 		Agent person2 = new Agent("Agent1", "passwd", AgentKind.PERSON);
 		assertEquals(true, person.equals(person2));
+		assertEquals(false, person.equals(null));
+		
+		Operator o = new Operator("op@gmail.com", "12345", OperatorKind.MEDIC);
+		assertEquals(false, person.equals(o));
+		
+		person.setId(1L);
+		person2.setId(2L);
+		
+		assertEquals(false, person.equals(person2));
+		person.setId(null);
+		assertEquals(false, person.equals(person2));
 	}
 
 	@Test
@@ -78,6 +94,9 @@ public class InciDashboardI2aApplicationTests {
 		comments.add("fire in street xxx");
 		comments.add("3 injured people, 1 death");
 		incident.setComments(comments);
+		
+		incident.addComment("new comment");
+		comments.add("new comment");
 
 		List<String> multimedia = new ArrayList<String>();
 		multimedia.add("pic1.jpg");
@@ -134,6 +153,21 @@ public class InciDashboardI2aApplicationTests {
 		
 		Operator op2 = new Operator("op@gmail.com", "12345", OperatorKind.POLICE);
 		assertEquals(true, op.equals(op2));
+		assertEquals(false, op.equals(a));
+		assertEquals(false, op.equals(null));
+		
+		op.setEmail(null);
+		
+		assertEquals(false, op.equals(op2));
+		op.setEmail("op@hotmail.com");
+		assertEquals(false, op.equals(op2));
+		
+		op.setId(1L);
+		op2.setId(2L);
+		assertEquals(false, op.equals(op2));
+		
+		op.setId(null);
+		assertEquals(false, op.equals(op2));
 
 	}
 
