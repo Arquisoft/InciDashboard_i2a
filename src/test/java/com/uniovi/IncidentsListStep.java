@@ -65,7 +65,7 @@ public class IncidentsListStep {
 
 	}
 
-	@And("^ click on 'Assigned incidents'")
+	@And("^click on 'Assigned incidents'") //this should work
 	public void incidentsClick() {
 		driver.findElement(By.id("assignedIncidents")).click();
 	}
@@ -73,6 +73,7 @@ public class IncidentsListStep {
 	@Then("^operator's incidents are shown")
 	public void checkFail() {
 		if (driver.getCurrentUrl().equalsIgnoreCase("http://localhost:8082/operator/assignedIncidents")) {
+			//maybe we can check the number of incidents obtained .. next deliverable
 			System.out.println("Test Pass");
 		} else {
 			System.out.println("Test1 Failed");
