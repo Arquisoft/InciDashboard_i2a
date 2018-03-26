@@ -78,11 +78,15 @@
 										google.maps.event.addListener(markers[i], 'dblclick', function(){
 											window.open(this.link, "_self");
 										});
-									}															
-								}						
+									}														
+								}		
+								// Add a marker clusterer to manage the markers.
+						        var markerCluster = new MarkerClusterer(map, markers,
+						            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 							}
 						/*]]>*/
 					</script>
+					 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAr9ogXGdZ9_qScXx3Pd8Rg0Kv5TuSV_U&callback=initMap" async defer></script>
 					
 					<br>
