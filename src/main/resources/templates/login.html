@@ -12,10 +12,10 @@
 				
 				<h1 class="h3 mb-3 font-weight-normal">Operator login</h1>
 		  		<label class="sr-only" for="username">Email address</label>
-		 			<input type="email" class="form-control" name="username" placeholder="Email address" required="true"/>
+		 			<input type="email" id="email" class="form-control" name="username" placeholder="Email address" required="true"/>
 		  		
 				<label class="sr-only" for="password">Password</label>
-		  		<input type="password" class="form-control" name="password" placeholder="Password" required="true"/>
+		  		<input type="password" id = "pass"class="form-control" name="password" placeholder="Password" required="true"/>
 		  		
 		  		<div th:if="${param.error}">
 					<div class='alert alert-danger' th:if="${param.error[0] == 'true'}">
@@ -23,7 +23,7 @@
 					</div>
 				</div>	
 				
-		  		<button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>		 			  		  		
+		  		<button id="login" type="submit" class="btn btn-lg btn-primary btn-block">Login</button>		 			  		  		
 		  	</form>
 		</div>		
 		<footer th:replace="fragments/footer"/>
