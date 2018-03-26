@@ -37,6 +37,14 @@ public class OperatorController {
 		return "dashboard";
 	}
 	
+	@RequestMapping(value = "/dashboard/update", method = RequestMethod.GET)
+	public String updateDashboard(Model model) {
+		List<Incident> incidents = incidentsService.getIncidents();
+		model.addAttribute("activeOperator", getActiveOperator());
+		model.addAttribute("incidentsList", incidents);
+		return "dashboard :: dashboardInfo";
+	}
+	
 	@RequestMapping(value = "/operator/assignedIncidents", method = RequestMethod.GET)
 	public String getAssignedIncidents(Model model) {
 		model.addAttribute("incidentsList", incidentsService.getIncidentsOfOperator(getActiveOperator()));
