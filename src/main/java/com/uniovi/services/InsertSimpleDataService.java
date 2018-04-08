@@ -43,7 +43,9 @@ public class InsertSimpleDataService {
 		incidents = new ArrayList<>();
 		randNum = new Random();
 		
-		operators.add(new Operator("fireman@gmail.com", "123456", OperatorKind.FIREMAN));
+		operators.add(new Operator("fireman1@gmail.com", "123456", OperatorKind.FIREMAN));
+		operators.add(new Operator("fireman2@gmail.com", "123456", OperatorKind.FIREMAN));
+		operators.add(new Operator("fireman3@gmail.com", "123456", OperatorKind.FIREMAN));
 		operators.add(new Operator("police@gmail.com", "123456", OperatorKind.POLICE));
 		operators.add(new Operator("medic@gmail.com", "123456", OperatorKind.MEDIC));
 		operators.add(new Operator("rescue@gmail.com", "123456", OperatorKind.RESCUE));
@@ -52,22 +54,22 @@ public class InsertSimpleDataService {
 			operatorService.addOperator(op);
 		}
 		
-		agents.add(new Agent("javier@gmail.com", "123456", AgentKind.PERSON));
-		agents.add(new Agent("alba@gmail.com", "123456", AgentKind.ENTITY));
-		agents.add(new Agent("marcos@gmail.com", "123456", AgentKind.SENSOR));
-		
-		for(Agent ag: agents) {
-			agentService.addAgent(ag);
-		}
-		
-		incidentCreator.setAgents(agents);
-		
-		for(int i=0; i<15; i++) {
-			Incident randIncident = incidentCreator.createIncident();
-			randIncident.setOperator(operators.get(randNum.nextInt(operators.size())));
-			incidents.add(randIncident);
-			incidentService.addIncident(randIncident);
-			
-		}
+//		agents.add(new Agent("javier@gmail.com", "123456", AgentKind.PERSON));
+//		agents.add(new Agent("alba@gmail.com", "123456", AgentKind.ENTITY));
+//		agents.add(new Agent("marcos@gmail.com", "123456", AgentKind.SENSOR));
+//		
+//		for(Agent ag: agents) {
+//			agentService.addAgent(ag);
+//		}
+//		
+//		incidentCreator.setAgents(agents);
+//		
+//		for(int i=0; i<15; i++) {
+//			Incident randIncident = incidentCreator.createIncident();
+//			randIncident.setOperator(operators.get(randNum.nextInt(operators.size())));
+//			incidents.add(randIncident);
+//			incidentService.addIncident(randIncident);
+//			
+//		}
 	}
 }

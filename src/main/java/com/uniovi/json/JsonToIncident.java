@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -18,9 +20,13 @@ import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 import com.uniovi.entities.types.OperatorKind;
+import com.uniovi.services.OperatorService;
 
 public class JsonToIncident extends JsonDeserializer<Incident>{
 
+	@Autowired
+	private OperatorService operatorsService;
+	
 	@Override
 	public Incident deserialize(JsonParser jsonParser, DeserializationContext context)
 			throws IOException, JsonProcessingException {
@@ -34,10 +40,8 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		
 		//Agent
 		Agent agent = new Agent();
-		JsonNode jsonAgent = json.get("agent");
-		agent.setUsername(jsonAgent.get("username").textValue());
-		agent.setPassword(jsonAgent.get("password").textValue());
-		agent.setKind(AgentKind.valueOf(jsonAgent.get("kind").textValue()));
+		agent.setUsername(json.get("agentId").textValue());
+		agent.setKind(AgentKind.valueOf(json.get("kindCode").textValue()));
 		incident.setAgent(agent);
 		
 		//Tags
@@ -70,19 +74,8 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		incident.setProperties(mapper.convertValue(properties, Map.class));	
 		
 		//Operator
-		Operator operator = new Operator();
-		JsonNode jsonOperator = json.get("operator");
-		operator.setEmail(jsonOperator.get("email").textValue());
-		operator.setPassword(jsonOperator.get("password").textValue());
-		operator.setKind(OperatorKind.valueOf(jsonOperator.get("kind").textValue()));
-		incident.setOperator(operator);
-		
-		//Comments
-		Iterator<JsonNode> commentsList = json.get("comments").elements();
-		while(commentsList.hasNext()) {
-			JsonNode comment = commentsList.next();
-			incident.addComment(comment.textValue());
-		}
+		OperatorKind opKind = OperatorKind.valueOf(properties.get("type").textValue());	
+		incident.setOperator(operatorsService.getRandomOperatorOfKind(opKind));
 		
 		return incident;
 	}
