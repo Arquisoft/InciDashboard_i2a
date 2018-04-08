@@ -23,9 +23,6 @@ import com.uniovi.entities.types.OperatorKind;
 import com.uniovi.services.OperatorService;
 
 public class JsonToIncident extends JsonDeserializer<Incident>{
-
-	@Autowired
-	private OperatorService operatorsService;
 	
 	@Override
 	public Incident deserialize(JsonParser jsonParser, DeserializationContext context)
@@ -41,7 +38,7 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		//Agent
 		Agent agent = new Agent();
 		agent.setUsername(json.get("agentId").textValue());
-		agent.setKind(AgentKind.valueOf(json.get("kindCode").textValue()));
+		agent.setKind(AgentKind.values()[json.get("kindCode").asInt()]);
 		incident.setAgent(agent);
 		
 		//Tags
@@ -72,10 +69,6 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		JsonNode properties = json.get("properties");
 		ObjectMapper mapper = new ObjectMapper();
 		incident.setProperties(mapper.convertValue(properties, Map.class));	
-		
-		//Operator
-		OperatorKind opKind = OperatorKind.valueOf(properties.get("type").textValue());	
-		incident.setOperator(operatorsService.getRandomOperatorOfKind(opKind));
 		
 		return incident;
 	}

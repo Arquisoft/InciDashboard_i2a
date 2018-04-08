@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entities.Incident;
+import com.uniovi.entities.types.OperatorKind;
 import com.uniovi.services.AgentService;
 import com.uniovi.services.IncidentService;
 import com.uniovi.services.OperatorService;
@@ -41,6 +42,8 @@ public class IncidentListener {
 			if(data != null && data.length() != 0) {
 				ObjectMapper obj = new ObjectMapper();
 				Incident incident = obj.readValue(data.getBytes(), Incident.class);
+				OperatorKind opKind = OperatorKind.valueOf((String)incident.getProperties().get("type"));
+				incident.setOperator(operatorsService.getRandomOperatorOfKind(opKind));
 				agentsService.addAgent(incident.getAgent());
 				operatorsService.addOperator(incident.getOperator());
 				incidentsService.addIncident(incident);
