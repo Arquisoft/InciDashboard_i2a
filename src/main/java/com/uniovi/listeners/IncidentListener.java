@@ -7,6 +7,7 @@ import javax.annotation.ManagedBean;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -29,16 +30,15 @@ public class IncidentListener {
 	
 	@Autowired
 	private IncidentService incidentsService;
-	
-	@KafkaListener(topics ="example")
-	public void listenExample(String data) {
-		logger.info("New example incident received: " + data);
-	}
+
+	@Autowired
+	private SimpMessagingTemplate messagingTemplate;
 	
 	@KafkaListener(topics = "incident")
 	public void listenIncident(String data) {
 		logger.info("New incident received: " + data);
 		try {
+			messagingTemplate.convertAndSend("/incident", data);
 			if(data != null && data.length() != 0) {
 				ObjectMapper obj = new ObjectMapper();
 				Incident incident = obj.readValue(data.getBytes(), Incident.class);
