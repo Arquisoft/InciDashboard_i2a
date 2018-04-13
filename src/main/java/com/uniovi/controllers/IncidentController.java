@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.Operator;
 import com.uniovi.entities.types.InciState;
+import com.uniovi.entities.types.LatLng;
 import com.uniovi.services.IncidentService;
 import com.uniovi.services.OperatorService;
 
@@ -38,9 +39,12 @@ public class IncidentController {
 	}
 	
 	@RequestMapping(value = "/incident/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable Long id, @RequestParam String inciState, @RequestParam String comment) {
+	public String setEdit(Model model, @PathVariable Long id, @RequestParam String inciState, @RequestParam String latlng, @RequestParam String comment) {
 		Incident original = incidentService.getIncident(id);
+		String[] splitLocation = latlng.split(",");
+		LatLng location = new LatLng(Double.parseDouble(splitLocation[0]), Double.parseDouble(splitLocation[1]));
 		original.setState(InciState.valueOf(inciState));
+		original.setLocation(location);
 		original.getComments().add(comment);
 		incidentService.addIncident(original);
 		return "redirect:/dashboard";

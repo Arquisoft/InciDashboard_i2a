@@ -54,22 +54,22 @@ public class InsertSimpleDataService {
 			operatorService.addOperator(op);
 		}
 		
-//		agents.add(new Agent("javier@gmail.com", "123456", AgentKind.PERSON));
-//		agents.add(new Agent("alba@gmail.com", "123456", AgentKind.ENTITY));
-//		agents.add(new Agent("marcos@gmail.com", "123456", AgentKind.SENSOR));
-//		
-//		for(Agent ag: agents) {
-//			agentService.addAgent(ag);
-//		}
-//		
-//		incidentCreator.setAgents(agents);
-//		
-//		for(int i=0; i<15; i++) {
-//			Incident randIncident = incidentCreator.createIncident();
-//			randIncident.setOperator(operators.get(randNum.nextInt(operators.size())));
-//			incidents.add(randIncident);
-//			incidentService.addIncident(randIncident);
-//			
-//		}
+		agents.add(new Agent("javier@gmail.com", "123456", AgentKind.PERSON));
+		agents.add(new Agent("alba@gmail.com", "123456", AgentKind.ENTITY));
+		agents.add(new Agent("marcos@gmail.com", "123456", AgentKind.SENSOR));
+		
+		for(Agent ag: agents) {
+			agentService.addAgent(ag);
+		}
+		
+		incidentCreator.setAgents(agents);
+		
+		for(int i=0; i<15; i++) {
+			Incident randIncident = incidentCreator.createIncident();
+			randIncident.setOperator(operators.get(randNum.nextInt(operators.size())));
+			incidents.add(randIncident);
+			incidentService.addIncident(randIncident);
+			
+		}
 	}
 }
