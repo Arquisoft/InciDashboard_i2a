@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -15,12 +13,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entities.Agent;
 import com.uniovi.entities.Incident;
-import com.uniovi.entities.Operator;
 import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
-import com.uniovi.entities.types.OperatorKind;
-import com.uniovi.services.OperatorService;
 
 public class JsonToIncident extends JsonDeserializer<Incident>{
 	
