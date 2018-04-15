@@ -1,4 +1,4 @@
-var incidents = [];
+var mapIncidents = [];
 var activeOperator;
 var draggable = false;
 
@@ -11,28 +11,28 @@ function initMap(){
 
 	var markers = [];
 	var infoWindows = [];
-	for(i=0; i<incidents.length; i++){
+	for(i=0; i<mapIncidents.length; i++){
 		var inciLocation = {
-				lat: parseFloat(incidents[i].location.lat),
-				lng: parseFloat(incidents[i].location.lng)
+				lat: parseFloat(mapIncidents[i].location.lat),
+				lng: parseFloat(mapIncidents[i].location.lng)
 		}
 		markers[i] = new google.maps.Marker({
 			position: inciLocation,
-			title: incidents[i].name,
+			title: mapIncidents[i].name,
 			draggable: draggable,
 			map: map
 		});
 		
 		if(draggable == false){
 			markers[i].index = i;
-			markers[i].link = "/incident/edit/" + incidents[i].id;
+			markers[i].link = "/incident/edit/" + mapIncidents[i].id;
 
 			var contentString = "<div id='content'>" +
-				"<h3 id='firstHeading'>" + incidents[i].name + "</h3>" +
+				"<h3 id='firstHeading'>" + mapIncidents[i].name + "</h3>" +
 				"<div id='bodyContent'>" + 
-					"<p>Submitted by: " + incidents[i].agent.username + "</p>" +
-					"<p>Agent type: " + incidents[i].agent.kind + "</p>" +
-					"<p>State: " + incidents[i].state + "</p>" + 
+					"<p>Submitted by: " + mapIncidents[i].agent.username + "</p>" +
+					"<p>Agent type: " + mapIncidents[i].agent.kind + "</p>" +
+					"<p>State: " + mapIncidents[i].state + "</p>" + 
 					"<a href='" +  markers[i].link + "'>Modify incident</a>" +
 				"</div>" + 
 				"</div>";
@@ -45,7 +45,7 @@ function initMap(){
 				infoWindows[this.index].open(map, this);
 			});					
 			
-			if(incidents[i].operator.email == activeOperator.email){
+			if(mapIncidents[i].operator.email == activeOperator.email){
 				google.maps.event.addListener(markers[i], 'dblclick', function(){
 					window.open(this.link, "_self");
 				});
