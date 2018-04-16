@@ -41,6 +41,7 @@ public class Incident {
 	
 	@ElementCollection(targetClass=String.class)
 	private List<String> tags = new ArrayList<String>();
+	
 	private LatLng location;
 	
 	@Enumerated(EnumType.STRING)

@@ -1,6 +1,7 @@
 var chartIncidents = [];
 
 function drawChart(){
+	alert("drawing chart");
 	var countOpen = 0;
 	var countClosed = 0;
 	var countCancelled = 0;

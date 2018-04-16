@@ -49,7 +49,7 @@ function initMap(){
 				google.maps.event.addListener(markers[i], 'dblclick', function(){
 					window.open(this.link, "_self");
 				});
-			}	
+			}
 		}						
 		else{
 			google.maps.event.addListener(markers[i], "dragend", function(event){

@@ -54,7 +54,7 @@ public class InsertSimpleDataService {
 			operatorService.addOperator(op);
 		}
 		
-		agents.add(new Agent("javier@gmail.com", "123456", AgentKind.PERSON));
+		/*agents.add(new Agent("javier@gmail.com", "123456", AgentKind.PERSON));
 		agents.add(new Agent("alba@gmail.com", "123456", AgentKind.ENTITY));
 		agents.add(new Agent("marcos@gmail.com", "123456", AgentKind.SENSOR));
 		
@@ -70,6 +70,6 @@ public class InsertSimpleDataService {
 			incidents.add(randIncident);
 			incidentService.addIncident(randIncident);
 			
-		}
+		}*/
 	}
 }

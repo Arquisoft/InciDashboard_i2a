@@ -8,7 +8,7 @@ function connect(){
             var incident = JSON.parse(data.body);
 
             mapIncidents.push(incident);
-            charIncidents.push(incident);
+            chartIncidents.push(incident);
             updateCharts();
             initMap();
 		 });

@@ -17,6 +17,7 @@ import com.uniovi.entities.types.OperatorKind;
 import com.uniovi.services.AgentService;
 import com.uniovi.services.IncidentService;
 import com.uniovi.services.OperatorService;
+import com.uniovi.utils.JsonConversor;
 
 @ManagedBean
 public class IncidentListener {
@@ -34,19 +35,22 @@ public class IncidentListener {
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
 	
+	private JsonConversor jsonConversor = new JsonConversor();
+	
 	@KafkaListener(topics = "incident")
 	public void listenIncident(String data) {
 		logger.info("New incident received: " + data);
 		try {
-			messagingTemplate.convertAndSend("/incident", data);
 			if(data != null && data.length() != 0) {
+				
 				ObjectMapper obj = new ObjectMapper();
 				Incident incident = obj.readValue(data.getBytes(), Incident.class);
 				OperatorKind opKind = OperatorKind.valueOf((String)incident.getProperties().get("type"));
 				incident.setOperator(operatorsService.getRandomOperatorOfKind(opKind));
 				agentsService.addAgent(incident.getAgent());
-				operatorsService.addOperator(incident.getOperator());
 				incidentsService.addIncident(incident);
+				
+				messagingTemplate.convertAndSend("/incident", obj.writeValueAsString(incident));
 			}
 		}catch(JsonParseException e) {
 			e.printStackTrace();			

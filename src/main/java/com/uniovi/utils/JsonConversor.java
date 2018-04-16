@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.uniovi.entities.Incident;
 
 @Component
-public class JsonPropertiesConversor {
+public class JsonConversor {
 	//http://www.techtamasha.com/convert-json-to-map-in-java/168
 	
 	public <K, V> String mapToJson(Map<String, Object> map) {
