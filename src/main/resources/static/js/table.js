@@ -1,5 +1,4 @@
 function addIncidentToTable(incident){
-	alert(incident.location.toString());
 	$("#tableBody").append(
 		"<tr>"
 		+ "<td>" + incident.agent.username + "<td>"
