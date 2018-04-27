@@ -33,9 +33,13 @@ function initMap(){
 					"<p>Submitted by: " + mapIncidents[i].agent.username + "</p>" +
 					"<p>Agent type: " + mapIncidents[i].agent.kind + "</p>" +
 					"<p>State: " + mapIncidents[i].state + "</p>" + 
-					"<a href='" +  markers[i].link + "'>Modify incident</a>" +
-				"</div>" + 
-				"</div>";
+					"<p>Operator: " + mapIncidents[i].operator.email + "</p>";
+			
+			if(mapIncidents[i].operator.email == activeOperator.email){
+				contentString += "<a href='" +  markers[i].link + "'>Modify incident</a>";
+				
+			}
+			contentString += "</div></div>";
 				
 			infoWindows[i] = new google.maps.InfoWindow({
 			    content: contentString

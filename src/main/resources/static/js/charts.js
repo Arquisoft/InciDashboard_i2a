@@ -1,6 +1,11 @@
 var chartIncidents = [];
 
-function drawChart(){
+function updateCharts(){
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawCharts);
+}
+
+function drawCharts(){
 	var countOpen = 0;
 	var countClosed = 0;
 	var countCancelled = 0;

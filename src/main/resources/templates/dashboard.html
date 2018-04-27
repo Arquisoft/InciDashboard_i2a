@@ -67,17 +67,14 @@
 					
 					<script th:inline="javascript">
 						/*<![CDATA[*/
-							function updateCharts(){
-								chartIncidents = [[${incidentsList}]];
-								google.charts.load('current', {'packages':['corechart']});
-		      					google.charts.setOnLoadCallback(drawChart);	      						
-							}
+							chartIncidents = [[${incidentsList}]];
 							updateCharts();
 						/*]]>*/
 					</script>
 					
 					<br>
 					
+					<script src="/js/table.js"></script>
 					<div class="card">
 						<h5 class="card-header">
 							Active incidents details
@@ -97,7 +94,7 @@
 										<th>Actions</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="tableBody">
 									<tr th:each="incident : ${incidentsList}">
 										<td th:text="${incident.agent.username}">Agent</td>
 										<td th:text="${incident.agent.kind}">Agent kind</td>

@@ -10,7 +10,8 @@ function connect(){
             mapIncidents.push(incident);
             chartIncidents.push(incident);
             initMap();
-            updateCharts();            
+            updateCharts();  
+            addIncidentToTable(incident);
 		 });
 	});
 }
