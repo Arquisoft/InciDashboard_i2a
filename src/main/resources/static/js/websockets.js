@@ -9,8 +9,8 @@ function connect(){
 
             mapIncidents.push(incident);
             chartIncidents.push(incident);
-            updateCharts();
             initMap();
+            updateCharts();            
 		 });
 	});
 }

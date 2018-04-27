@@ -68,12 +68,9 @@
 					<script th:inline="javascript">
 						/*<![CDATA[*/
 							function updateCharts(){
+								chartIncidents = [[${incidentsList}]];
 								google.charts.load('current', {'packages':['corechart']});
-		      					google.charts.setOnLoadCallback(drawChart);
-		      					
-		      					chartIncidents = [[${incidentsList}]];	
-		      					alert("hola");
-		      					drawChart();
+		      					google.charts.setOnLoadCallback(drawChart);	      						
 							}
 							updateCharts();
 						/*]]>*/
