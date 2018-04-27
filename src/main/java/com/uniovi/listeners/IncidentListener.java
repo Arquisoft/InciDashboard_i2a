@@ -17,7 +17,6 @@ import com.uniovi.entities.types.OperatorKind;
 import com.uniovi.services.AgentService;
 import com.uniovi.services.IncidentService;
 import com.uniovi.services.OperatorService;
-import com.uniovi.utils.JsonConversor;
 
 @ManagedBean
 public class IncidentListener {
@@ -34,8 +33,6 @@ public class IncidentListener {
 
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
-	
-	private JsonConversor jsonConversor = new JsonConversor();
 	
 	@KafkaListener(topics = "incident")
 	public void listenIncident(String data) {
