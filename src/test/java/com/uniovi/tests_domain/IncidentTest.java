@@ -32,8 +32,8 @@ public class IncidentTest {
 		agent1 = new Agent("juan@gmail.com", "123456", AgentKind.PERSON);
 		agent2 = new Agent("rainsensor@gmail.com", "123456", AgentKind.SENSOR);
 		
-		op1 = new Operator("fireman@gmail.com", "123456", OperatorKind.FIREMAN);
-		op2 = new Operator("policeman@gmail.com", "123456", OperatorKind.POLICE);
+		op1 = new Operator("fireman@gmail.com", "123456", OperatorKind.FIREMAN, "ROLE_OPERATOR");
+		op2 = new Operator("policeman@gmail.com", "123456", OperatorKind.POLICE, "ROLE_OPERATOR");
 		
 		List<String> inci1_tags = new ArrayList<String>();
 		inci1_tags.add("fire");

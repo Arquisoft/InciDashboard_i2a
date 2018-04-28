@@ -21,6 +21,11 @@ public class Operator {
 	@OneToMany(mappedBy="operator", cascade=CascadeType.ALL)
 	private Set<Incident> incidents = new HashSet<>();
 	
+	private String role;
+	public boolean mapAccess;
+	public boolean chartAccess;
+	public boolean modifyAccess;
+	
 	public Operator() {
 		
 	}
@@ -31,9 +36,31 @@ public class Operator {
 		setPassword(password);
 	}
 	
-	public Operator(String email, String password, OperatorKind kind) {
+	public Operator(String email, String password, OperatorKind kind, String role) {
 		this(email,password);
 		setKind(kind);
+		setRole(role);		
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	public boolean isAdmin() {
+		return this.role.equals("ROLE_ADMIN");
+	}
+	
+	public void modifyOperatorRole(boolean asAdmin) {
+		if(asAdmin) {
+			setRole("ROLE_ADMIN");
+		}
+		else {
+			setRole("ROLE_OPERATOR");
+		}
 	}
 
 	public String getEmail() {
@@ -83,6 +110,30 @@ public class Operator {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public boolean hasMapAccess() {
+		return mapAccess;
+	}
+	
+	public void setMapAccess(boolean mapAccess) {
+		this.mapAccess = mapAccess;
+	}
+	
+	public boolean hasChartAccess() {
+		return chartAccess;
+	}
+	
+	public void setChartAccess(boolean chartAccess) {
+		this.chartAccess = chartAccess;
+	}
+	
+	public boolean hasModifyAccess() {
+		return modifyAccess;
+	}
+	
+	public void setModifyAccess(boolean modifyAccess) {
+		this.modifyAccess = modifyAccess;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -108,8 +159,9 @@ public class Operator {
 
 	@Override
 	public String toString() {
-		return "Operator [id=" + id + ", email=" + email + ", password=" + password + ", incidents=" + incidents + "]";
-	}
-		
+		return "Operator [id=" + id + ", email=" + email + ", password=" + password + ", kind=" + kind + ", incidents="
+				+ incidents + ", role=" + role + ", mapAccess=" + mapAccess + ", chartAccess=" + chartAccess
+				+ ", modifyAccess=" + modifyAccess + "]";
+	}	
 	
 }

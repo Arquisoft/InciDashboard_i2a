@@ -46,7 +46,7 @@ public class InciDashboardI2aApplicationTests {
 		assertEquals(true, person.equals(person2));
 		assertEquals(false, person.equals(null));
 		
-		Operator o = new Operator("op@gmail.com", "12345", OperatorKind.MEDIC);
+		Operator o = new Operator("op@gmail.com", "12345", OperatorKind.MEDIC, "ROLE_OPERATOR");
 		assertEquals(false, person.equals(o));
 		
 		person.setId(1L);
@@ -83,7 +83,7 @@ public class InciDashboardI2aApplicationTests {
 		properties.put("deaths", "1");
 		incident.setProperties(properties);
 
-		Operator op = new Operator("op1@gmail.com", "1234", OperatorKind.FIREMAN);
+		Operator op = new Operator("op1@gmail.com", "1234", OperatorKind.FIREMAN, "ROLE_OPERATOR");
 		incident.setOperator(op);
 
 		List<String> comments = new ArrayList<String>();
@@ -120,7 +120,7 @@ public class InciDashboardI2aApplicationTests {
 
 	@Test
 	public void operatorTest() {
-		Operator op = new Operator("op@gmail.com", "12345", OperatorKind.POLICE);
+		Operator op = new Operator("op@gmail.com", "12345", OperatorKind.POLICE, "ROLE_OPERATOR");
 
 		Agent a = new Agent("police", "12345", AgentKind.PERSON);
 
@@ -147,7 +147,7 @@ public class InciDashboardI2aApplicationTests {
 		assertEquals("Operator [id=" + op.getId() + ", email=" + op.getEmail() + ", password=" + op.getPassword()
 				+ ", incidents=" + op.getIncidents() + "]", op.toString());
 		
-		Operator op2 = new Operator("op@gmail.com", "12345", OperatorKind.POLICE);
+		Operator op2 = new Operator("op@gmail.com", "12345", OperatorKind.POLICE, "ROLE_OPERATOR");
 		assertEquals(true, op.equals(op2));
 		assertEquals(false, op.equals(a));
 		assertEquals(false, op.equals(null));

@@ -35,7 +35,7 @@ function initMap(){
 					"<p>State: " + mapIncidents[i].state + "</p>" + 
 					"<p>Operator: " + mapIncidents[i].operator.email + "</p>";
 			
-			if(mapIncidents[i].operator.email == activeOperator.email){
+			if(mapIncidents[i].operator.email == activeOperator.email && activeOperator.modifyAccess == true){
 				contentString += "<a href='" +  markers[i].link + "'>Modify incident</a>";
 				
 			}

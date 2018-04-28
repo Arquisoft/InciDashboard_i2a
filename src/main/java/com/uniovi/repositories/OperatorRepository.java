@@ -8,6 +8,7 @@ import com.uniovi.entities.Operator;
 import com.uniovi.entities.types.OperatorKind;
 
 public interface OperatorRepository extends CrudRepository<Operator, Long>{
+	List<Operator> findAll();
 	
 	Operator findByEmail(String email);
 	

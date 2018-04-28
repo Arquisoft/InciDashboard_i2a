@@ -43,12 +43,16 @@ public class InsertSimpleDataService {
 		incidents = new ArrayList<>();
 		randNum = new Random();
 		
-		operators.add(new Operator("fireman1@gmail.com", "123456", OperatorKind.FIREMAN));
-		operators.add(new Operator("fireman2@gmail.com", "123456", OperatorKind.FIREMAN));
-		operators.add(new Operator("fireman3@gmail.com", "123456", OperatorKind.FIREMAN));
-		operators.add(new Operator("police@gmail.com", "123456", OperatorKind.POLICE));
-		operators.add(new Operator("medic@gmail.com", "123456", OperatorKind.MEDIC));
-		operators.add(new Operator("rescue@gmail.com", "123456", OperatorKind.RESCUE));
+		Operator op1 = new Operator("fireman1@gmail.com", "123456", OperatorKind.FIREMAN, "ROLE_ADMIN");
+		op1.setMapAccess(true);
+		op1.setChartAccess(true);
+		op1.setModifyAccess(true);
+		operators.add(op1);
+		operators.add(new Operator("fireman2@gmail.com", "123456", OperatorKind.FIREMAN, "ROLE_OPERATOR"));
+		operators.add(new Operator("fireman3@gmail.com", "123456", OperatorKind.FIREMAN, "ROLE_OPERATOR"));
+		operators.add(new Operator("police@gmail.com", "123456", OperatorKind.POLICE, "ROLE_OPERATOR"));
+		operators.add(new Operator("medic@gmail.com", "123456", OperatorKind.MEDIC, "ROLE_OPERATOR"));
+		operators.add(new Operator("rescue@gmail.com", "123456", OperatorKind.RESCUE, "ROLE_OPERATOR"));
 		
 		for(Operator op: operators) {
 			operatorService.addOperator(op);
