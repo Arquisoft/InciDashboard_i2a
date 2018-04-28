@@ -1,8 +1,5 @@
 package com.uniovi.tests_domain;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -145,7 +145,8 @@ public class InciDashboardI2aApplicationTests {
 		assertEquals(true, op.isAssignedToIncident(i1));
 		assertEquals(true, op.isAssignedToIncident(i3));
 		assertEquals("Operator [id=" + op.getId() + ", email=" + op.getEmail() + ", password=" + op.getPassword()
-				+ ", incidents=" + op.getIncidents() + "]", op.toString());
+				+ ", kind=" + op.getKind() + ", incidents=" + op.getIncidents() + ", role=" + op.getRole() + ", mapAccess=" + op.hasMapAccess() + ", chartAccess=" + op.hasChartAccess()
+				+ ", modifyAccess=" + op.hasModifyAccess() +"]", op.toString());
 		
 		Operator op2 = new Operator("op@gmail.com", "12345", OperatorKind.POLICE, "ROLE_OPERATOR");
 		assertEquals(true, op.equals(op2));
