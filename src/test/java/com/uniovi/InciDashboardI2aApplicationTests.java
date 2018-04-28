@@ -3,7 +3,6 @@ package com.uniovi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,8 +15,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.uniovi.entities.Agent;
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.Operator;
@@ -25,8 +22,6 @@ import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 import com.uniovi.entities.types.OperatorKind;
-import com.uniovi.json.IncidentToJson;
-import com.uniovi.listeners.IncidentListener;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -46,6 +41,7 @@ public class InciDashboardI2aApplicationTests {
 		assertEquals(AgentKind.SENSOR, person.getKind());
 		assertEquals("Agent [id=" + person.getId() + ", username=" + person.getUsername() + ", password="
 				+ person.getPassword() + ", kind=" + person.getKind() + "]", person.toString());
+		
 		Agent person2 = new Agent("Agent1", "passwd", AgentKind.PERSON);
 		assertEquals(true, person.equals(person2));
 		assertEquals(false, person.equals(null));

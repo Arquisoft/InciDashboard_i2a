@@ -65,6 +65,23 @@ public class Incident {
 		
 	}
 
+	public Incident(Long id, String name, String description, Agent agent, List<String> tags, LatLng location,
+			InciState state, List<String> multimedia, Map<String, Object> properties, Operator operator,
+			List<String> comments) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.agent = agent;
+		this.tags = tags;
+		this.location = location;
+		this.state = state;
+		this.multimedia = multimedia;
+		this.properties = properties;
+		this.operator = operator;
+		this.comments = comments;
+	}
+
 	public Incident(String name, Agent agent, LatLng location) {
 		super();
 		setName(name);
