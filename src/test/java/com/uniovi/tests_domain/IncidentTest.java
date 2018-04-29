@@ -9,8 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entities.*;
 import com.uniovi.entities.types.*;
 
@@ -93,26 +91,6 @@ public class IncidentTest {
 		
 		inci2.setDescription("Rain storm affecting A-66 state");
 		Assert.assertEquals("Rain storm affecting A-66 state", inci2.getDescription());		
-	}
-	@Test
-	public void inciJsonConversorTest() {
-		ObjectMapper obj = new ObjectMapper();
-		String inci1JSON = "";
-		String inci2JSON = "";
-		try {
-			inci1JSON = obj.writeValueAsString(inci1);
-			inci2JSON = obj.writeValueAsString(inci2);
-		}catch(JsonProcessingException e) {
-			Assert.fail();
-		}
-		/*System.out.println(inci1JSON);
-		try {
-			assertEquals(inci1, obj.readValue(inci1JSON, Incident.class));
-			assertEquals(inci2, obj.readValue(inci2JSON, Incident.class));
-		} catch (IOException e) {
-			Assert.fail();
-		}*/
-		
 	}
 	
 	@Test

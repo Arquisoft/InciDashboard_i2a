@@ -16,20 +16,20 @@ function drawCharts(){
 	];
 	var initial = 0;
 	for(i=0; i<chartIncidents.length; i++){
-		if(chartIncidents[i].state == "OPEN"){
+		if(chartIncidents[i].state === "OPEN"){
 			countOpen++;
 		}
-		else if(chartIncidents[i].state == "CLOSED"){
+		else if(chartIncidents[i].state === "CLOSED"){
 			countClosed++;
 		}
-		else if(chartIncidents[i].state == "CANCELLED"){
+		else if(chartIncidents[i].state === "CANCELLED"){
 			countCancelled++;
 		}
 		else{
 			countInProcess++;
 		}      							
 		
-		if(chartIncidents[i].agent.kind == "SENSOR"){
+		if(chartIncidents[i].agent.kind === "SENSOR"){
 			values[0].push(chartIncidents[i].name);
 			var inciTemps = (chartIncidents[i].properties[0])["temp"];
 			if(inciTemps != null){

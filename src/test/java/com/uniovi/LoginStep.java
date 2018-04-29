@@ -14,13 +14,13 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class LoginStep {
-	static String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
-	static String gecko = "C:\\Firefox46.win\\geckodriver.exe";
-	static String URL = "http://localhost:8082/login";
-	static WebDriver driver = getDriver(PathFirefox);
+	private String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
+	private String gecko = "C:\\Firefox46.win\\geckodriver.exe";
+	private String URL = "http://localhost:8082/login";
+	private WebDriver driver = getDriver(PathFirefox);
 
 	@Before
-	public static WebDriver getDriver(String PathFirefox) {
+	public WebDriver getDriver(String PathFirefox) {
 		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
 		System.setProperty("webdriver.firefox.bin", PathFirefox);
 		System.setProperty("webdriver.firefox.marionette", gecko);
@@ -40,12 +40,12 @@ public class LoginStep {
 
 	// Antes de la primera prueba
 	@BeforeClass
-	static public void begin() {
+	public void begin() {
 	}
 
 	// Al finalizar la última prueba
 	@AfterClass
-	static public void end() {
+	public void end() {
 		// Cerramos el navegador al finalizar las pruebas
 		driver.quit();
 	}

@@ -16,7 +16,7 @@ function initMap(){
 		var inciLocation = {
 				lat: parseFloat(mapIncidents[i].location.lat),
 				lng: parseFloat(mapIncidents[i].location.lng)
-		}
+		};
 		markers[i] = new google.maps.Marker({
 			position: inciLocation,
 			title: mapIncidents[i].name,

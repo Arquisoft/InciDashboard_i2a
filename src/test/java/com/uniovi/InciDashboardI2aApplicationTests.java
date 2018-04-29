@@ -151,7 +151,7 @@ public class InciDashboardI2aApplicationTests {
 		Operator op2 = new Operator("op@gmail.com", "12345", OperatorKind.POLICE, "ROLE_OPERATOR");
 		assertEquals(true, op.equals(op2));
 		assertEquals(false, op.equals(a));
-		assertEquals(false, op.equals(null));
+		assertEquals(false, op == null);
 		
 		op.setEmail(null);
 		

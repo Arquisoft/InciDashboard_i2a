@@ -30,18 +30,12 @@ public class InsertSimpleDataService {
 	@Autowired
 	private IncidentCreator incidentCreator;
 	
-	private List<Operator> operators;
-	private List<Agent> agents;
-	private List<Incident> incidents;
-	
-	private Random randNum;
-	
 	@PostConstruct
 	public void init() {
-		operators = new ArrayList<>();
-		agents = new ArrayList<>();
-		incidents = new ArrayList<>();
-		randNum = new Random();
+		List<Operator> operators = new ArrayList<>();
+		List<Agent> agents = new ArrayList<>();
+		List<Incident> incidents = new ArrayList<>();
+		Random randNum = new Random();
 		
 		Operator op1 = new Operator("fireman1@gmail.com", "123456", OperatorKind.FIREMAN, "ROLE_ADMIN");
 		op1.setMapAccess(true);

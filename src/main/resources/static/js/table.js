@@ -11,7 +11,7 @@ function addIncidentToTable(incident){
 		+ "<td>" + incident.comments.toString() + "<td>"
 	);
 	
-	if(incident.operator.email == activeOperator.email){
+	if(incident.operator.email === activeOperator.email){
 		$("#tableBody").append(
 		"<div>"
 		+ "<td><a class='btn btn-primary' role='button' href='/incident/edit/" + incident.id + "'>Modify</a></td></tr>"
