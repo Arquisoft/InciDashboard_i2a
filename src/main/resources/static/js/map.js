@@ -4,13 +4,14 @@ var draggable = false;
 
 function initMap(){
 	var initialLatLng = {lat: 40.6753526, lng:-6.6971668};
-	var map = new google.maps.Map(document.getElementById("mapa"), {
+	var inciMap = new google.maps.Map(document.getElementById("mapa"), {
 		zoom: 5,  
 		center: initialLatLng          
     });		
 
 	var markers = [];
 	var infoWindows = [];
+	var i;
 	for(i=0; i<mapIncidents.length; i++){
 		var inciLocation = {
 				lat: parseFloat(mapIncidents[i].location.lat),
@@ -20,7 +21,7 @@ function initMap(){
 			position: inciLocation,
 			title: mapIncidents[i].name,
 			draggable: draggable,
-			map: map
+			map: inciMap
 		});
 		
 		if(draggable == false){
@@ -45,12 +46,12 @@ function initMap(){
 			    content: contentString
 			});
 			
-			google.maps.event.addListener(markers[i], 'click', function(){
-				infoWindows[this.index].open(map, this);
+			google.maps.event.addListener(markers[i], "click", function(){
+				infoWindows[this.index].open(inciMap, this);
 			});					
 			
-			if(mapIncidents[i].operator.email == activeOperator.email){
-				google.maps.event.addListener(markers[i], 'dblclick', function(){
+			if(mapIncidents[i].operator.email === activeOperator.email){
+				google.maps.event.addListener(markers[i], "dblclick", function(){
 					window.open(this.link, "_self");
 				});
 			}
@@ -63,6 +64,6 @@ function initMap(){
 		}
 	}		
 	// Add a marker clusterer to manage the markers.
-    var markerCluster = new MarkerClusterer(map, markers,
+    var markerCluster = new MarkerClusterer(inciMap, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }

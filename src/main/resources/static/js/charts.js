@@ -1,7 +1,7 @@
 var chartIncidents = [];
 
 function updateCharts(){
-	google.charts.load('current', {'packages':['corechart']});
+	google.charts.load("current", {"packages":["corechart"]});
 	google.charts.setOnLoadCallback(drawCharts);
 }
 
@@ -52,11 +52,11 @@ function drawCharts(){
 	if(chartIncidents.length > 0){
 		document.getElementById("cardPieChart").style.display = "block";
 		var data = google.visualization.arrayToDataTable([
-          ['Incident State', 'Number of chartIncidents'],
-          ['OPEN',     		countOpen],
-          ['CLOSED',      	countClosed],
-          ['CANCELLED',  	countCancelled],
-          ['IN_PROCESS', 	countInProcess]
+          ["Incident State", "Number of chartIncidents"],
+          ["OPEN",     		countOpen],
+          ["CLOSED",      	countClosed],
+          ["CANCELLED",  	countCancelled],
+          ["IN_PROCESS", 	countInProcess]
         ]);
 		
 		var options = {
@@ -65,7 +65,7 @@ function drawCharts(){
 				height: 400
 		};
 		
-		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+		var chart = new google.visualization.PieChart(document.getElementById("piechart"));
 		chart.draw(data, options);
 	}
 	
@@ -78,7 +78,7 @@ function drawCharts(){
 		};
 		
 		
-		var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+		var chart = new google.visualization.LineChart(document.getElementById("linechart"));
 		chart.draw(google.visualization.arrayToDataTable(values), options);
 	}      						
 }
