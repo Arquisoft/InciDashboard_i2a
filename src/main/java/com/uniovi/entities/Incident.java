@@ -5,16 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -22,50 +14,38 @@ import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 import com.uniovi.json.IncidentToJson;
 import com.uniovi.json.JsonToIncident;
-import com.uniovi.utils.InciPropertiesConversor;
 
-@Entity
+@Document(collection = "incidents")
 @JsonDeserialize(using = JsonToIncident.class)
 @JsonSerialize(using = IncidentToJson.class)
 public class Incident {
 	@Id 
-	@GeneratedValue
-	private Long id;
+	private String id;
 	
 	private String name;
 	private String description;
 	
-	@ManyToOne
-	@JoinColumn(name="agent_id")
 	private Agent agent;
 	
-	@ElementCollection(targetClass=String.class)
 	private List<String> tags = new ArrayList<String>();
 	
 	private LatLng location;
 	
-	@Enumerated(EnumType.STRING)
 	private InciState state;	
 	
-	@ElementCollection(targetClass=String.class)
 	private List<String> multimedia = new ArrayList<String>();	
 	
-	@Column(columnDefinition="varchar(500)")
-	@Convert(converter=InciPropertiesConversor.class)
 	private Map<String,Object> properties = new HashMap<String, Object>();
 	
-	@ManyToOne
-	@JoinColumn(name="operator_id")
 	private Operator operator;
 	
-	@ElementCollection(targetClass=String.class)
 	private List<String> comments = new ArrayList<String>();
 	
 	public Incident() {
 		
 	}
 
-	public Incident(Long id, String name, String description, Agent agent, List<String> tags, LatLng location,
+	public Incident(String id, String name, String description, Agent agent, List<String> tags, LatLng location,
 			InciState state, List<String> multimedia, Map<String, Object> properties, Operator operator,
 			List<String> comments) {
 		super();
@@ -89,7 +69,7 @@ public class Incident {
 		setLocation(location);
 	}
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 

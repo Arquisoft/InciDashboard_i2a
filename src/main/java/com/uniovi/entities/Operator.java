@@ -1,25 +1,17 @@
 package com.uniovi.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.*;
-
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 import com.uniovi.entities.types.OperatorKind;
 
-@Entity
+@Document(collection = "operators")
 public class Operator {
 	@Id
-	@GeneratedValue
-	private Long id;
+	private String id;
 	
-	@Column(unique=true)
 	private String email;
 	private String password;
 	private OperatorKind kind;
-	
-	@OneToMany(mappedBy="operator", cascade=CascadeType.ALL)
-	private Set<Incident> incidents = new HashSet<>();
 	
 	private String role;
 	public boolean mapAccess;
@@ -79,22 +71,6 @@ public class Operator {
 		this.password = password;
 	}
 
-	public Set<Incident> getIncidents() {
-		return incidents;
-	}
-
-	public void setIncidents(Set<Incident> incidents) {
-		this.incidents = incidents;
-	}
-	
-	public void assignIncident(Incident incident) {
-		this.incidents.add(incident);
-	}
-	
-	public boolean isAssignedToIncident(Incident incident) {
-		return this.incidents.contains(incident);
-	}
-
 	public OperatorKind getKind() {
 		return kind;
 	}
@@ -103,11 +79,11 @@ public class Operator {
 		this.kind = kind;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
@@ -159,9 +135,9 @@ public class Operator {
 
 	@Override
 	public String toString() {
-		return "Operator [id=" + id + ", email=" + email + ", password=" + password + ", kind=" + kind + ", incidents="
-				+ incidents + ", role=" + role + ", mapAccess=" + mapAccess + ", chartAccess=" + chartAccess
-				+ ", modifyAccess=" + modifyAccess + "]";
-	}	
+		return "Operator [id=" + id + ", email=" + email + ", password=" + password + ", kind=" + kind + ", role="
+				+ role + ", mapAccess=" + mapAccess + ", chartAccess=" + chartAccess + ", modifyAccess=" + modifyAccess
+				+ "]";
+	}
 	
 }

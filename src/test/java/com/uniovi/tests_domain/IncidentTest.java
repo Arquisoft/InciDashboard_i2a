@@ -48,7 +48,7 @@ public class IncidentTest {
 		inci1_comments.add("Fire affecting all school labs");
 		inci1_comments.add("Difficult access, crane needed");
 		
-		inci1 = new Incident(1L, "Fire", "Intense fire in the EII at UNIOVI", agent1, inci1_tags, new LatLng(43.354929,-5.851416), InciState.OPEN, inci1_multimedia, inci1_properties, op1, inci1_comments);
+		inci1 = new Incident("1L", "Fire", "Intense fire in the EII at UNIOVI", agent1, inci1_tags, new LatLng(43.354929,-5.851416), InciState.OPEN, inci1_multimedia, inci1_properties, op1, inci1_comments);
 	
 		List<String> inci2_tags = new ArrayList<String>();
 		inci2_tags.add("rain");
@@ -69,7 +69,7 @@ public class IncidentTest {
 		inci2_comments.add("Slippery road conditions");
 		inci2_comments.add("Chained car accidents");
 		
-		inci2 = new Incident(2L, "Rain", "Rain storm affecting A-66", agent2, inci2_tags, new LatLng(43.3584404,-5.8284433), InciState.OPEN, inci2_multimedia, inci2_properties, op2, inci2_comments);
+		inci2 = new Incident("2L", "Rain", "Rain storm affecting A-66", agent2, inci2_tags, new LatLng(43.3584404,-5.8284433), InciState.OPEN, inci2_multimedia, inci2_properties, op2, inci2_comments);
 	}
 	
 	@Test

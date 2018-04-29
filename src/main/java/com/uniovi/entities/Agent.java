@@ -1,19 +1,18 @@
 package com.uniovi.entities;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.uniovi.entities.types.AgentKind;
 
-@Entity
+@Document(collection = "agents")
 public class Agent {
-	@Id 
-	@GeneratedValue
-	private Long id;
+	@Id
+	private String id;
 	
 	private String username;
 	private String password;
 	
-	@Enumerated(EnumType.STRING)
 	private AgentKind kind;
 	
 	public Agent() {
@@ -51,11 +50,11 @@ public class Agent {
 		this.kind = kind;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

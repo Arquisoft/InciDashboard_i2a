@@ -62,12 +62,11 @@ public class InsertSimpleDataService {
 		
 		incidentCreator.setAgents(agents);
 		
-		for(int i=0; i<15; i++) {
+		for(int i=0; i<10; i++) {
 			Incident randIncident = incidentCreator.createIncident();
 			randIncident.setOperator(operators.get(randNum.nextInt(operators.size())));
 			incidents.add(randIncident);
-			incidentService.addIncident(randIncident);
-			
+			incidentService.addIncident(randIncident);			
 		}
 	}
 }
