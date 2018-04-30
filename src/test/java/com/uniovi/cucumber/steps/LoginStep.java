@@ -1,17 +1,19 @@
-package com.uniovi;
+package com.uniovi.cucumber.steps;
 
+import org.openqa.selenium.By;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class IncidentsListStep {
+public class LoginStep {
 	private String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
 	private String gecko = "C:\\Firefox46.win\\geckodriver.exe";
 	private String URL = "http://localhost:8082/login";
@@ -42,39 +44,43 @@ public class IncidentsListStep {
 	}
 
 	// Al finalizar la última prueba
-	@After
+	@AfterClass
 	public void end() {
 		// Cerramos el navegador al finalizar las pruebas
 		driver.quit();
 	}
+	
+	@Given("^an operator")
+	public void operator() {
+		
+	}
 
+	@When("^operator is in home page")
+	public void goToLogin() {
+		driver.get("http://localhost:8082/");
+	}
 
-	@When("^logged in")
-	public void logged() {
-		driver.get("http://localhost:8082/login");
+	@And("^clicks on Log In")
+	public void enterUsername() {
+		driver.findElement(By.id("login")).click();
+	}
+
+	@And("^fills in correctly the email and password")
+	public void enterPassword() {
 		driver.findElement(By.id("email")).sendKeys("fireman@gmail.com");
 		driver.findElement(By.id("pass")).sendKeys("123456");
 		driver.findElement(By.id("login")).click();
 	}
 
-	@And("^has assigned incidents")
-	public void incidentsAssigned() {
-
-	}
-
-	@And("^click on 'Assigned incidents'") //this should work
-	public void incidentsClick() {
-		driver.findElement(By.id("assignedIncidents")).click();
-	}
-
-	@Then("^operator's incidents are shown")
+	@Then("^operator is logged in")
 	public void checkFail() {
-		if (driver.getCurrentUrl().equalsIgnoreCase("http://localhost:8082/operator/assignedIncidents")) {
-			//maybe we can check the number of incidents obtained .. next deliverable
+		if (driver.getCurrentUrl().equalsIgnoreCase("http://localhost:8082/dashboard")) {
 			System.out.println("Test Pass");
 		} else {
 			System.out.println("Test1 Failed");
 		}
 		driver.close();
 	}
+
+
 }

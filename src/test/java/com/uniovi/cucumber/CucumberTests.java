@@ -1,4 +1,4 @@
-package com.uniovi;
+package com.uniovi.cucumber;
 import org.junit.runner.RunWith;
 import cucumber.api.junit.*;
 import cucumber.api.CucumberOptions; 
