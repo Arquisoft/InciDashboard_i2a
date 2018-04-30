@@ -14,16 +14,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.types.OperatorKind;
-import com.uniovi.services.AgentService;
 import com.uniovi.services.IncidentService;
 import com.uniovi.services.OperatorService;
 
 @ManagedBean
 public class IncidentListener {
 	private static final Logger logger = Logger.getLogger(IncidentListener.class);
-	
-	@Autowired
-	private AgentService agentsService;
 	
 	@Autowired
 	private OperatorService operatorsService;
@@ -44,10 +40,9 @@ public class IncidentListener {
 				Incident incident = obj.readValue(data.getBytes(), Incident.class);
 				OperatorKind opKind = OperatorKind.valueOf((String)incident.getProperties().get("type"));
 				incident.setOperator(operatorsService.getRandomOperatorOfKind(opKind));
-				agentsService.addAgent(incident.getAgent());
 				incidentsService.addIncident(incident);
 				
-				messagingTemplate.convertAndSend("/incident", obj.writeValueAsString(incident));
+				messagingTemplate.convertAndSend("/incident", incident);
 			}
 		}catch(JsonParseException e) {
 			e.printStackTrace();			

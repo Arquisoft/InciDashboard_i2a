@@ -11,9 +11,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uniovi.entities.Agent;
 import com.uniovi.entities.Incident;
-import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 
@@ -32,10 +30,8 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		incident.setDescription(json.get("description").textValue());
 		
 		//Agent
-		Agent agent = new Agent();
-		agent.setUsername(json.get("agentId").textValue());
-		agent.setKind(AgentKind.values()[json.get("kindCode").asInt()]);
-		incident.setAgent(agent);
+		incident.setAgentId(json.get("agentId").textValue());
+		incident.setKindCode(json.get("kindCode").asInt());
 		
 		//Tags
 		Iterator<JsonNode> tagsList = json.get("tags").elements();

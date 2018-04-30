@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,12 +21,13 @@ import com.uniovi.json.JsonToIncident;
 @JsonSerialize(using = IncidentToJson.class)
 public class Incident {
 	@Id 
-	private String id;
+	private ObjectId id;
 	
 	private String name;
 	private String description;
 	
-	private Agent agent;
+	private String agentId;
+	private int kindCode;
 	
 	private List<String> tags = new ArrayList<String>();
 	
@@ -44,15 +46,16 @@ public class Incident {
 	public Incident() {
 		
 	}
-
-	public Incident(String id, String name, String description, Agent agent, List<String> tags, LatLng location,
-			InciState state, List<String> multimedia, Map<String, Object> properties, Operator operator,
-			List<String> comments) {
+	
+	public Incident(ObjectId id, String name, String description, String agentId, int kindCode, List<String> tags,
+			LatLng location, InciState state, List<String> multimedia, Map<String, Object> properties,
+			Operator operator, List<String> comments) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.agent = agent;
+		this.agentId = agentId;
+		this.kindCode = kindCode;
 		this.tags = tags;
 		this.location = location;
 		this.state = state;
@@ -61,15 +64,8 @@ public class Incident {
 		this.operator = operator;
 		this.comments = comments;
 	}
-
-	public Incident(String name, Agent agent, LatLng location) {
-		super();
-		setName(name);
-		setAgent(agent);
-		setLocation(location);
-	}
 	
-	public String getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
@@ -89,12 +85,20 @@ public class Incident {
 		this.description = description;
 	}
 
-	public Agent getAgent() {
-		return agent;
+	public String getAgentId() {
+		return agentId;
 	}
 
-	public void setAgent(Agent agent) {
-		this.agent = agent;
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
+
+	public int getKindCode() {
+		return kindCode;
+	}
+
+	public void setKindCode(int kindCode) {
+		this.kindCode = kindCode;
 	}
 
 	public List<String> getTags() {
@@ -167,10 +171,9 @@ public class Incident {
 
 	@Override
 	public String toString() {
-		return "Incident [id=" + id + ", agent=" + agent + ", name=" + name + ", description=" + description
-				+ ", location=" + location + ", state=" + state + ", tags=" + tags + ", multimedia=" + multimedia
-				+ ", properties=" + properties + ", operator=" + operator + "]";
-	}
-
-	
+		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", agentId=" + agentId
+				+ ", kindCode=" + kindCode + ", tags=" + tags + ", location=" + location + ", state=" + state
+				+ ", multimedia=" + multimedia + ", properties=" + properties + ", operator=" + operator + ", comments="
+				+ comments + "]";
+	}	
 }

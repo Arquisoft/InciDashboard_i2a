@@ -31,8 +31,8 @@ function initMap(){
 			var contentString = "<div id='content'>" +
 				"<h3 id='firstHeading'>" + mapIncidents[i].name + "</h3>" +
 				"<div id='bodyContent'>" + 
-					"<p>Submitted by: " + mapIncidents[i].agent.username + "</p>" +
-					"<p>Agent type: " + mapIncidents[i].agent.kind + "</p>" +
+					"<p>Submitted by: " + mapIncidents[i].agentId + "</p>" +
+					"<p>Agent type: " + mapIncidents[i].kindCode + "</p>" +
 					"<p>State: " + mapIncidents[i].state + "</p>" + 
 					"<p>Operator: " + mapIncidents[i].operator.email + "</p>";
 			

@@ -1,46 +1,41 @@
 package com.uniovi.utils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
-import com.uniovi.entities.Agent;
 import com.uniovi.entities.Incident;
-import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 
 @Component
 public class IncidentCreator {
 	
-	private List<Agent> agents;
+	private String[] agentId;
+	private int[] kindCode;
 	private Incident randIncident;
 	private Random randNum;
 	private SimpleDateFormat dateFormat;
 	
 	public IncidentCreator() {
-		agents = new ArrayList<>();
+		agentId = new String[]{"javi@gmail.com", "alba@gmail.com", "marcos@gmail.com"};
+		kindCode = new int[] {1,2,3};
 		randNum = new Random();
 		dateFormat = new SimpleDateFormat("HH:mm");
-	}
-	
-	public void setAgents(List<Agent> agents) {
-		this.agents = agents;
 	}
 	
 	public Incident createIncident() {
 		randIncident = new Incident();
 		randIncident.setName(RandomStringUtils.randomAlphabetic(7));
 		
-		int randIndex = randNum.nextInt(agents.size());
-		randIncident.setAgent(agents.get(randIndex));
+		int randIndex = randNum.nextInt(agentId.length);
+		randIncident.setAgentId(agentId[randIndex]);
+		randIncident.setKindCode(kindCode[randIndex]);
 		
 		double lat = 35 + (randNum.nextDouble() * (44-35));
 		double lng = -10 + (randNum.nextDouble() * (5+10));
@@ -58,7 +53,7 @@ public class IncidentCreator {
 		
 		int randPriority = randNum.nextInt(5);
 		randProperties.put("priority", randPriority);
-		if(randIncident.getAgent().getKind().equals(AgentKind.SENSOR)) {
+		if(randIncident.getKindCode() == 3) {
 			createRandTemperatures(randProperties, 12);
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.HOUR, 1);

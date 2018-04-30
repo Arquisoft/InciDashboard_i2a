@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,17 +17,14 @@ public class IncidentTest {
 	private Incident inci1;
 	private Incident inci2;
 	
-	private Agent agent1;
-	private Agent agent2;
+	private String[] agentId = new String[]{"javi@gmail.com", "alba@gmail.com"};
+	private int[] kindCode = new int[] {1,2,3};
 	
 	private Operator op1;
 	private Operator op2;	
 	
 	@Before
-	public void setUp() {
-		agent1 = new Agent("juan@gmail.com", "123456", AgentKind.PERSON);
-		agent2 = new Agent("rainsensor@gmail.com", "123456", AgentKind.SENSOR);
-		
+	public void setUp() {		
 		op1 = new Operator("fireman@gmail.com", "123456", OperatorKind.FIREMAN, "ROLE_OPERATOR");
 		op2 = new Operator("policeman@gmail.com", "123456", OperatorKind.POLICE, "ROLE_OPERATOR");
 		
@@ -48,7 +46,7 @@ public class IncidentTest {
 		inci1_comments.add("Fire affecting all school labs");
 		inci1_comments.add("Difficult access, crane needed");
 		
-		inci1 = new Incident("1L", "Fire", "Intense fire in the EII at UNIOVI", agent1, inci1_tags, new LatLng(43.354929,-5.851416), InciState.OPEN, inci1_multimedia, inci1_properties, op1, inci1_comments);
+		inci1 = new Incident(new ObjectId("5ae6ec8b1e360737787ed702"), "Fire", "Intense fire in the EII at UNIOVI", agentId[0], kindCode[0], inci1_tags, new LatLng(43.354929,-5.851416), InciState.OPEN, inci1_multimedia, inci1_properties, op1, inci1_comments);
 	
 		List<String> inci2_tags = new ArrayList<String>();
 		inci2_tags.add("rain");
@@ -69,7 +67,7 @@ public class IncidentTest {
 		inci2_comments.add("Slippery road conditions");
 		inci2_comments.add("Chained car accidents");
 		
-		inci2 = new Incident("2L", "Rain", "Rain storm affecting A-66", agent2, inci2_tags, new LatLng(43.3584404,-5.8284433), InciState.OPEN, inci2_multimedia, inci2_properties, op2, inci2_comments);
+		inci2 = new Incident(new ObjectId("5ae6ec8b1e360737787ed707"), "Rain", "Rain storm affecting A-66", agentId[1], kindCode[1], inci2_tags, new LatLng(43.3584404,-5.8284433), InciState.OPEN, inci2_multimedia, inci2_properties, op2, inci2_comments);
 	}
 	
 	@Test
@@ -95,14 +93,14 @@ public class IncidentTest {
 	
 	@Test
 	public void inciAgentTest() {
-		Assert.assertEquals(agent1, inci1.getAgent());
-		Assert.assertEquals(agent2, inci2.getAgent());
+		Assert.assertEquals(agentId[0], inci1.getAgentId());
+		Assert.assertEquals(agentId[1], inci2.getAgentId());
 		
-		inci1.setAgent(agent2);
-		Assert.assertEquals(agent2, inci1.getAgent());
+		inci1.setAgentId(agentId[1]);
+		Assert.assertEquals(agentId[1], inci1.getAgentId());
 
-		inci2.setAgent(agent1);
-		Assert.assertEquals(agent1, inci2.getAgent());
+		inci2.setAgentId(agentId[0]);
+		Assert.assertEquals(agentId[0], inci2.getAgentId());
 	}
 	
 	@Test

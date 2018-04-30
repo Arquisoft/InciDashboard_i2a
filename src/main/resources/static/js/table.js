@@ -1,8 +1,8 @@
 function addIncidentToTable(incident){
 	$("#tableBody").append(
 		"<tr>"
-		+ "<td>" + incident.agent.username + "<td>"
-		+ "<td>" + incident.agent.kind.toString() + "<td>"
+		+ "<td>" + incident.agentId + "<td>"
+		+ "<td>" + incident.kindCode + "<td>"
 		+ "<td>" + incident.name + "<td>"
 		+ "<td>LatLng[lat=" + incident.location.lat + ",lng=" + incident.location.lng + "]<td>"
 		+ "<td>" + incident.state.toString() + "<td>"

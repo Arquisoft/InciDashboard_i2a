@@ -29,7 +29,7 @@ function drawCharts(){
 			countInProcess++;
 		}      							
 		
-		if(chartIncidents[i].agent.kind === "SENSOR"){
+		if(chartIncidents[i].kindCode === 3){
 			values[0].push(chartIncidents[i].name);
 			var inciTemps = (chartIncidents[i].properties[0])["temp"];
 			if(inciTemps != null){

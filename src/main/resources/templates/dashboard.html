@@ -87,7 +87,7 @@
 							<table class="table" name="tableIncidents">
 								<thead class="thead-light">
 									<tr>
-										<th>Agent</th>
+										<th>Agent Id</th>
 										<th>Agent kind</th>
 										<th>Incident name</th>
 										<th>Location</th>
@@ -100,8 +100,8 @@
 								</thead>
 								<tbody id="tableBody">
 									<tr th:each="incident : ${incidentsList}">
-										<td th:text="${incident.agent.username}">Agent</td>
-										<td th:text="${incident.agent.kind}">Agent kind</td>
+										<td th:text="${incident.agentId}">Agent</td>
+										<td th:text="${incident.kindCode}">Agent kind</td>
 										<td th:text="${incident.name}">Incident name</td>
 										<td th:text="${incident.location.toString()}">Incident location</td>
 										<td th:text="${incident.state.toString()}">Incident state</td>									

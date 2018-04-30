@@ -2,6 +2,7 @@ package com.uniovi.services;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,8 @@ public class IncidentService {
 		this.incidentsRepository.save(incident);
 	}
 	
-	public Incident getIncident(Long id) {
-		return incidentsRepository.findById(id).orElse(null);
+	public Incident getIncident(String id) {
+		return incidentsRepository.findById(new ObjectId(id)).orElse(null);
 	}
 
 	public List<Incident> getIncidents() {

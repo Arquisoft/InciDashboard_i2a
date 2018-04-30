@@ -28,7 +28,7 @@ public class IncidentController {
 	private OperatorService operatorsService;
 	
 	@RequestMapping(value = "/incident/edit/{id}")
-	public String getEdit(Model model, @PathVariable Long id) {
+	public String getEdit(Model model, @PathVariable String id) {
 		Incident incident = incidentService.getIncident(id);
 		if(incident.getOperator().equals(getActiveOperator())) {
 			model.addAttribute("incident", incident);
@@ -39,7 +39,7 @@ public class IncidentController {
 	}
 	
 	@RequestMapping(value = "/incident/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable Long id, @RequestParam String inciState, @RequestParam String latlng, @RequestParam String comment) {
+	public String setEdit(Model model, @PathVariable String id, @RequestParam String inciState, @RequestParam String latlng, @RequestParam String comment) {
 		Incident original = incidentService.getIncident(id);
 		if(!latlng.isEmpty()) {
 			String[] splitLocation = latlng.split(",");
