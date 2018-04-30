@@ -5,7 +5,7 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(Cucumber.class) 
 @CucumberOptions(
-	    glue = "cucumber.steps",
+	   // glue = "cucumber.steps",
 	    features = "src/test/java/com/uniovi/features/")
 public class CucumberTests {
 

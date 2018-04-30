@@ -18,6 +18,7 @@ public class LoginStep {
 	private String gecko = "C:\\Firefox46.win\\geckodriver.exe";
 	private String URL = "http://localhost:8082/login";
 	private WebDriver driver = getDriver(PathFirefox);
+	//private WebDriver driver = new Html
 
 	@Before
 	public WebDriver getDriver(String PathFirefox) {
@@ -50,12 +51,12 @@ public class LoginStep {
 		driver.quit();
 	}
 	
-	@Given("^an operator")
+	@Given("^an operator$")
 	public void operator() {
 		
 	}
 
-	@When("^operator is in home page")
+	@When("^operator is in home page$")
 	public void goToLogin() {
 		driver.get("http://localhost:8082/");
 	}

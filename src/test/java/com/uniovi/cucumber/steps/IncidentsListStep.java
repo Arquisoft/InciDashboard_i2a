@@ -29,8 +29,8 @@ public class IncidentsListStep {
 	@Before
 	public WebDriver getDriver(String PathFirefox) {
 		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
-		System.setProperty("webdriver.firefox.bin", PathFirefox);
-		System.setProperty("webdriver.firefox.marionette", gecko);
+		//System.setProperty("webdriver.firefox.bin", PathFirefox);
+		//System.setProperty("webdriver.firefox.marionette", gecko);
 		WebDriver driver = new FirefoxDriver();
 		return driver;
 	}
@@ -61,7 +61,7 @@ public class IncidentsListStep {
 	@When("^logged in")
 	public void logged() {
 		driver.get("http://localhost:8082/login");
-		driver.findElement(By.id("email")).sendKeys("fireman@gmail.com");
+		driver.findElement(By.id("email")).sendKeys("fireman1@gmail.com");
 		driver.findElement(By.id("pass")).sendKeys("123456");
 		driver.findElement(By.id("login")).click();
 	}
