@@ -10,8 +10,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.uniovi.entities.*;
-import com.uniovi.entities.types.*;
+import com.uniovi.entities.Incident;
+import com.uniovi.entities.Operator;
+import com.uniovi.entities.types.AgentKind;
+import com.uniovi.entities.types.InciState;
+import com.uniovi.entities.types.LatLng;
+import com.uniovi.entities.types.OperatorKind;
+import com.uniovi.utils.IncidentCreator;
+import com.uniovi.utils.PrintIncidentProperties;
 
 public class IncidentTest {
 	private Incident inci1;
@@ -156,6 +162,9 @@ public class IncidentTest {
 		
 		inci2.addFile("intervention2.txt");
 		Assert.assertEquals(3, inci2.getMultimedia().size());
+		inci1.setMultimedia(new ArrayList<String>());
+		Assert.assertTrue(inci1.getMultimedia().isEmpty());
+		
 	}
 	
 	@Test
@@ -168,6 +177,8 @@ public class IncidentTest {
 		
 		Assert.assertEquals(4, inci1.getProperties().size());
 		Assert.assertEquals(4, inci2.getProperties().size());
+		inci1.setProperties(new HashMap<String,Object>());
+		Assert.assertTrue(inci1.getProperties().size()==0);
 	}
 	
 	@Test
@@ -191,6 +202,28 @@ public class IncidentTest {
 		
 		Assert.assertEquals(3, inci1.getComments().size());
 		Assert.assertEquals(3, inci2.getComments().size());
+		
+		inci1.setComments(new ArrayList<String>());
+		Assert.assertTrue(inci1.getComments().isEmpty());
+		
+		Incident i2 = new Incident();
+		i2.setId(new ObjectId("507f1f77bcf86cd799439011"));
+		Assert.assertEquals("507f1f77bcf86cd799439011", i2.getId().toString());
+		i2.setKindCode(2);
+		Assert.assertEquals(i2.getKindCode(),2);
+		Assert.assertEquals(AgentKind.values()[1],i2.getAgentKind());
+	}
+	
+	@Test
+	public void testCreator() {
+		IncidentCreator creator = new IncidentCreator();
+		Incident i1 = creator.createIncident();
+		i1.setProperties(creator.createRandomProperties());
+		creator.createRandTemperatures(i1.getProperties(), 4);
+		i1.setProperties(new HashMap<String,Object>());
+		i1.getProperties().put("intervention", true);
+		PrintIncidentProperties<String, Object> print = new PrintIncidentProperties<>(i1.getProperties());
+		Assert.assertEquals("intervention=\"true\"", print.toString());
 	}
 
 }
