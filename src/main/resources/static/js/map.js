@@ -33,28 +33,32 @@ function initMap(){
 				"<div id='bodyContent'>" + 
 					"<p>Submitted by: " + mapIncidents[i].agentId + "</p>" +
 					"<p>Agent type: " + mapIncidents[i].kindCode + "</p>" +
-					"<p>State: " + mapIncidents[i].state + "</p>" + 
-					"<p>Operator: " + mapIncidents[i].operator.email + "</p>";
-			
-			if(mapIncidents[i].operator.email == activeOperator.email && activeOperator.modifyAccess == true){
-				contentString += "<a href='" +  markers[i].link + "'>Modify incident</a>";
+					"<p>State: " + mapIncidents[i].state + "</p>";
+						
+			if(mapIncidents[i].operator != null){
+				if(mapIncidents[i].operator.email == activeOperator.email && activeOperator.modifyAccess == true){
+					contentString += "<p>Operator: " + mapIncidents[i].operator.email + "</p>" +
+									"<a href='" +  markers[i].link + "'>Modify incident</a>";
+					
+				}
 				
+				if(mapIncidents[i].operator.email === activeOperator.email && activeOperator.modifyAccess == true){
+					alert(mapIncidents[i].operator.email);
+					google.maps.event.addListener(markers[i], "dblclick", function(){
+						window.open(this.link, "_self");
+					});
+				}
 			}
+			
 			contentString += "</div></div>";
-				
+			
 			infoWindows[i] = new google.maps.InfoWindow({
 			    content: contentString
 			});
 			
 			google.maps.event.addListener(markers[i], "click", function(){
 				infoWindows[this.index].open(inciMap, this);
-			});					
-			
-			if(mapIncidents[i].operator.email === activeOperator.email){
-				google.maps.event.addListener(markers[i], "dblclick", function(){
-					window.open(this.link, "_self");
-				});
-			}
+			});
 		}						
 		else{
 			google.maps.event.addListener(markers[i], "dragend", function(event){

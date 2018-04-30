@@ -100,17 +100,19 @@
 								</thead>
 								<tbody id="tableBody">
 									<tr th:each="incident : ${incidentsList}">
-										<td th:text="${incident.agentId}">Agent</td>
-										<td th:text="${incident.kindCode}">Agent kind</td>
-										<td th:text="${incident.name}">Incident name</td>
-										<td th:text="${incident.location.toString()}">Incident location</td>
-										<td th:text="${incident.state.toString()}">Incident state</td>									
-										<td th:text="${incident.properties.toString()}">Incident properties</td>
-										<td th:text="${incident.operator.email}">Operator</td>
-										<td th:text="${incident.comments.toString()}">Incident comments</td>
-										<div th:if="${incident.operator.email == activeOperator.email && activeOperator.modifyAccess==true}">
-											<td><a class="btn btn-primary" role="button" th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
-										</div>
+										<div th:if="${incident.operator != null}">
+											<td th:text="${incident.agentId}">Agent</td>
+											<td th:text="${incident.getAgentKind()}">Agent kind</td>
+											<td th:text="${incident.name}">Incident name</td>
+											<td th:text="${incident.location.toString()}">Incident location</td>
+											<td th:text="${incident.state.toString()}">Incident state</td>									
+											<td th:text="${incident.properties.toString()}">Incident properties</td>
+											<td th:text="${incident.operator.email}">Operator</td>
+											<td th:text="${incident.comments.toString()}">Incident comments</td>
+											<div th:if="${incident.operator.email == activeOperator.email && activeOperator.modifyAccess==true}">
+												<td><a class="btn btn-primary" role="button" th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
+											</div>
+										</div>										
 									</tr>
 								</tbody>				
 							</table>

@@ -13,7 +13,7 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 			JsonGenerator jsonGenerator, SerializerProvider serProvider) throws IOException {
 		jsonGenerator.writeStartObject();
 		
-		jsonGenerator.writeStringField("id", String.valueOf(incident.getId()));
+		jsonGenerator.writeStringField("id", incident.getId().toHexString());
 	
 		jsonGenerator.writeStringField("name", incident.getName());
 		jsonGenerator.writeStringField("description", incident.getDescription());
@@ -54,11 +54,13 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		jsonGenerator.writeEndArray();		
 		
 		//operator
-		jsonGenerator.writeObjectFieldStart("operator");
-		jsonGenerator.writeStringField("email", incident.getOperator().getEmail());
-		jsonGenerator.writeStringField("password", incident.getOperator().getPassword());
-		jsonGenerator.writeStringField("kind", incident.getOperator().getKind().toString());
-		jsonGenerator.writeEndObject();
+		if(incident.getOperator() != null) {
+			jsonGenerator.writeObjectFieldStart("operator");
+			jsonGenerator.writeStringField("email", incident.getOperator().getEmail());
+			jsonGenerator.writeStringField("password", incident.getOperator().getPassword());
+			jsonGenerator.writeStringField("kind", incident.getOperator().getKind().toString());
+			jsonGenerator.writeEndObject();
+		}	
 		
 		//comments
 		jsonGenerator.writeArrayFieldStart("comments");

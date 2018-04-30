@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 import com.uniovi.json.IncidentToJson;
@@ -65,6 +66,10 @@ public class Incident {
 		this.comments = comments;
 	}
 	
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+	
 	public ObjectId getId() {
 		return id;
 	}
@@ -95,6 +100,10 @@ public class Incident {
 
 	public int getKindCode() {
 		return kindCode;
+	}
+	
+	public AgentKind getAgentKind() {
+		return AgentKind.values()[kindCode-1];
 	}
 
 	public void setKindCode(int kindCode) {

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -25,6 +27,7 @@ public class JsonToIncident extends JsonDeserializer<Incident>{
 		JsonNode json = objectCodec.readTree(jsonParser);
 		
 		Incident incident = new Incident();
+		incident.setId(new ObjectId(json.get("incidentId").textValue()));
 		
 		incident.setName(json.get("name").textValue());
 		incident.setDescription(json.get("description").textValue());
