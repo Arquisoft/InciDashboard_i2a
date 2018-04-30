@@ -13,17 +13,14 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 			JsonGenerator jsonGenerator, SerializerProvider serProvider) throws IOException {
 		jsonGenerator.writeStartObject();
 		
-		jsonGenerator.writeStringField("id", String.valueOf(incident.getId()));
+		jsonGenerator.writeStringField("id", incident.getId().toHexString());
+	
 		jsonGenerator.writeStringField("name", incident.getName());
 		jsonGenerator.writeStringField("description", incident.getDescription());
 		
 		// incident's agent
-		jsonGenerator.writeObjectFieldStart("agent");
-		jsonGenerator.writeStringField("username", incident.getAgent().getUsername());
-		jsonGenerator.writeStringField("password", incident.getAgent().getPassword());
-		jsonGenerator.writeStringField("kind", incident.getAgent().getKind().toString());
-		jsonGenerator.writeEndObject();
-		
+		jsonGenerator.writeStringField("agentId", incident.getAgentId());
+		jsonGenerator.writeStringField("kindCode", String.valueOf(incident.getKindCode()));		
 		// tags
 		jsonGenerator.writeArrayFieldStart("tags");
 		for(String tag: incident.getTags()) {
@@ -48,11 +45,29 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		jsonGenerator.writeEndArray();
 		
 		//properties
-		/*jsonGenerator.writeArrayFieldStart("properties");
+		jsonGenerator.writeArrayFieldStart("properties");
 		for(String property: incident.getProperties().keySet()) {
-			jsonGenerator.writeStringField(property, incident.getProperties().get(property));
+			jsonGenerator.writeStartObject();
+			jsonGenerator.writeObjectField(property, incident.getProperties().get(property));
+			jsonGenerator.writeEndObject();
 		}
-		jsonGenerator.writeEndObject();*/
+		jsonGenerator.writeEndArray();		
+		
+		//operator
+		if(incident.getOperator() != null) {
+			jsonGenerator.writeObjectFieldStart("operator");
+			jsonGenerator.writeStringField("email", incident.getOperator().getEmail());
+			jsonGenerator.writeStringField("password", incident.getOperator().getPassword());
+			jsonGenerator.writeStringField("kind", incident.getOperator().getKind().toString());
+			jsonGenerator.writeEndObject();
+		}	
+		
+		//comments
+		jsonGenerator.writeArrayFieldStart("comments");
+		for(String comment: incident.getComments()) {
+			jsonGenerator.writeString(comment);
+		}
+		jsonGenerator.writeEndArray();
 		
 		jsonGenerator.writeEndObject();
 	}

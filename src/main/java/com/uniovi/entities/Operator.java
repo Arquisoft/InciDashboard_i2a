@@ -1,25 +1,23 @@
 package com.uniovi.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.*;
-
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import com.uniovi.entities.types.OperatorKind;
 
-@Entity
+@Document(collection = "operators")
 public class Operator {
 	@Id
-	@GeneratedValue
-	private Long id;
+	private ObjectId id;
 	
-	@Column(unique=true)
 	private String email;
 	private String password;
 	private OperatorKind kind;
 	
-	@OneToMany(mappedBy="operator", cascade=CascadeType.ALL)
-	private Set<Incident> incidents = new HashSet<>();
+	private String role;
+	public boolean mapAccess;
+	public boolean chartAccess;
+	public boolean modifyAccess;
 	
 	public Operator() {
 		
@@ -27,13 +25,35 @@ public class Operator {
 
 	public Operator(String email, String password) {
 		super();
-		this.email = email;
-		this.password = password;
+		setEmail(email);
+		setPassword(password);
 	}
 	
-	public Operator(String email, String password, OperatorKind kind) {
+	public Operator(String email, String password, OperatorKind kind, String role) {
 		this(email,password);
-		this.kind = kind;
+		setKind(kind);
+		setRole(role);		
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	public boolean isAdmin() {
+		return this.role.equals("ROLE_ADMIN");
+	}
+	
+	public void modifyOperatorRole(boolean asAdmin) {
+		if(asAdmin) {
+			setRole("ROLE_ADMIN");
+		}
+		else {
+			setRole("ROLE_OPERATOR");
+		}
 	}
 
 	public String getEmail() {
@@ -52,29 +72,44 @@ public class Operator {
 		this.password = password;
 	}
 
-	public Set<Incident> getIncidents() {
-		return incidents;
+	public OperatorKind getKind() {
+		return kind;
 	}
 
-	public void setIncidents(Set<Incident> incidents) {
-		this.incidents = incidents;
-	}
-	
-	public void assignIncident(Incident incident) {
-		this.incidents.add(incident);
-	}
-	
-	public boolean isAssignedToIncident(Incident incident) {
-		return this.incidents.contains(incident);
+	public void setKind(OperatorKind kind) {
+		this.kind = kind;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+	
+	public boolean hasMapAccess() {
+		return mapAccess;
+	}
+	
+	public void setMapAccess(boolean mapAccess) {
+		this.mapAccess = mapAccess;
+	}
+	
+	public boolean hasChartAccess() {
+		return chartAccess;
+	}
+	
+	public void setChartAccess(boolean chartAccess) {
+		this.chartAccess = chartAccess;
+	}
+	
+	public boolean hasModifyAccess() {
+		return modifyAccess;
+	}
+	
+	public void setModifyAccess(boolean modifyAccess) {
+		this.modifyAccess = modifyAccess;
 	}
 
 	@Override
@@ -101,8 +136,9 @@ public class Operator {
 
 	@Override
 	public String toString() {
-		return "Operator [id=" + id + ", email=" + email + ", password=" + password + ", incidents=" + incidents + "]";
+		return "Operator [id=" + id + ", email=" + email + ", password=" + password + ", kind=" + kind + ", role="
+				+ role + ", mapAccess=" + mapAccess + ", chartAccess=" + chartAccess + ", modifyAccess=" + modifyAccess
+				+ "]";
 	}
-		
 	
 }

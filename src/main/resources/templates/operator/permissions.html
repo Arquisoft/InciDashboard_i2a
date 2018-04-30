@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lan="en">
+	<head th:replace="fragments/head"/>
+	<body>
+		<script type="text/javascript">
+			function permissionChanged(id){
+				$.post("/operator/permissions/" + id);
+			}
+		</script>
+		<nav th:replace="fragments/nav"/>
+		<div class="container">
+			<h2>Current operators in the system</h2>
+			<p>As an admin you have permission to modify the access permissions of the operators inside the system</p>
+			<div class="panel panel-default">
+				<table class="table" name="tableIncidents">
+					<thead class="thead-light">
+						<tr>
+							<th>Email</th>
+							<th>Kind</th>
+							<th>Permissions</th>
+							<th>Admin</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="operator : ${operatorsList}">
+							<div th:if="${#authentication.principal.username != operator.email}">
+								<td th:text="${operator.email}">Operator email</td>
+								<td th:text="${operator.kind}">Operator kind</td>
+								<td>	
+									<div>
+										<label>Map Access</label>
+										<input th:id="${'map ' + '__${operator.email}__'}" type="checkbox" th:checked="${operator.mapAccess}" onClick="permissionChanged(this.id)">
+									</div>						
+									<div>
+										<label>Chart Access</label>
+										<input th:id="${'chart ' + '__${operator.email}__'}" type="checkbox" th:checked="${operator.chartAccess}" onClick="permissionChanged(this.id)">
+									</div>		
+									<div>
+										<label>Modify Access</label>
+										<input th:id="${'modify ' + '__${operator.email}__'}" type="checkbox" th:checked="${operator.modifyAccess}" onClick="permissionChanged(this.id)">
+									</div>						
+								</td>
+								<td>
+									<input th:id="${'admin ' + '__${operator.email}__'}" type="checkbox" th:checked="${operator.role == 'ROLE_ADMIN'}" onClick="permissionChanged(this.id)"	>
+								</td>
+							</div>									
+						</tr>
+					</tbody>				
+				</table>
+			</div>
+		</div>
+		<footer th:replace="fragments/footer"/>
+		
+	</body>
+</html>

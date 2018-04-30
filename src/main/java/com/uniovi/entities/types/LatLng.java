@@ -1,8 +1,5 @@
 package com.uniovi.entities.types;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class LatLng {
 	private double lat;
 	private double lng;

@@ -2,13 +2,13 @@ package com.uniovi.repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.Operator;
 
-public interface IncidentRepository extends CrudRepository<Incident, Long>{
+public interface IncidentRepository extends MongoRepository<Incident, ObjectId>{
 
 	public List<Incident> findAll();
 	

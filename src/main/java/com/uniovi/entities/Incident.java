@@ -5,78 +5,73 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 import com.uniovi.json.IncidentToJson;
 import com.uniovi.json.JsonToIncident;
 
-@Entity
+@Document(collection = "incidents")
 @JsonDeserialize(using = JsonToIncident.class)
 @JsonSerialize(using = IncidentToJson.class)
 public class Incident {
 	@Id 
-	@GeneratedValue
-	private Long id;
+	private ObjectId id;
 	
 	private String name;
 	private String description;
 	
-	@ManyToOne
-	@JoinColumn(name="agent_id")
-	private Agent agent;
+	private String agentId;
+	private int kindCode;
 	
-	@ElementCollection(targetClass=String.class)
-	private List<String> tags;
+	private List<String> tags = new ArrayList<String>();
+	
 	private LatLng location;
 	
-	@Enumerated(EnumType.STRING)
 	private InciState state;	
 	
-	@ElementCollection(targetClass=String.class)
 	private List<String> multimedia = new ArrayList<String>();	
 	
-	@ElementCollection
-	@MapKeyColumn(name="property")
-	@Column(name="value")
-	private Map<String,String> properties = new HashMap<String, String>();
+	private Map<String,Object> properties = new HashMap<String, Object>();
 	
-	@ManyToOne
-	@JoinColumn(name="operator_id")
 	private Operator operator;
 	
-	@ElementCollection(targetClass=String.class)
 	private List<String> comments = new ArrayList<String>();
 	
 	public Incident() {
 		
 	}
-
-	public Incident(String name, Agent agent, LatLng location) {
+	
+	public Incident(ObjectId id, String name, String description, String agentId, int kindCode, List<String> tags,
+			LatLng location, InciState state, List<String> multimedia, Map<String, Object> properties,
+			Operator operator, List<String> comments) {
 		super();
+		this.id = id;
 		this.name = name;
-		this.agent = agent;
+		this.description = description;
+		this.agentId = agentId;
+		this.kindCode = kindCode;
+		this.tags = tags;
 		this.location = location;
+		this.state = state;
+		this.multimedia = multimedia;
+		this.properties = properties;
+		this.operator = operator;
+		this.comments = comments;
 	}
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
+	public void setId(ObjectId id) {
 		this.id = id;
+	}
+	
+	public ObjectId getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -95,12 +90,24 @@ public class Incident {
 		this.description = description;
 	}
 
-	public Agent getAgent() {
-		return agent;
+	public String getAgentId() {
+		return agentId;
 	}
 
-	public void setAgent(Agent agent) {
-		this.agent = agent;
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
+
+	public int getKindCode() {
+		return kindCode;
+	}
+	
+	public AgentKind getAgentKind() {
+		return AgentKind.values()[kindCode-1];
+	}
+
+	public void setKindCode(int kindCode) {
+		this.kindCode = kindCode;
 	}
 
 	public List<String> getTags() {
@@ -143,11 +150,11 @@ public class Incident {
 		this.multimedia.add(file);
 	}
 
-	public Map<String, String> getProperties() {
+	public Map<String, Object> getProperties() {
 		return properties;
 	}
 	
-	public void setProperties(Map<String, String> properties) {
+	public void setProperties(Map<String, Object> properties) {
 		this.properties = properties;
 	}	
 
@@ -166,13 +173,16 @@ public class Incident {
 	public void setComments(List<String> comments) {
 		this.comments = comments;
 	}
+	
+	public void addComment(String comment) {
+		this.comments.add(comment);
+	}
 
 	@Override
 	public String toString() {
-		return "Incident [id=" + id + ", agent=" + agent + ", name=" + name + ", description=" + description
-				+ ", location=" + location + ", state=" + state + ", tags=" + tags + ", multimedia=" + multimedia
-				+ ", properties=" + properties + ", operator=" + operator + "]";
-	}
-
-	
+		return "Incident [id=" + id + ", name=" + name + ", description=" + description + ", agentId=" + agentId
+				+ ", kindCode=" + kindCode + ", tags=" + tags + ", location=" + location + ", state=" + state
+				+ ", multimedia=" + multimedia + ", properties=" + properties + ", operator=" + operator + ", comments="
+				+ comments + "]";
+	}	
 }
