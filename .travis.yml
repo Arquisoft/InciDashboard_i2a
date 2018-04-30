@@ -12,8 +12,6 @@ before_script:
 - "export DISPLAY=:99.0"
 - "sh -e /etc/init.d/xvfb start"
 - sleep 3 # give xvfb some time to start
-- rackup
-- sleep 3 # give xvfb some time to start
 before_install:
 - chmod +x mvnw
 - wget http://apache.rediris.es/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O kafka.tgz
