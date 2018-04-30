@@ -18,4 +18,4 @@ before_install:
 - nohup bash -c "cd kafka && bin/zookeeper-server-start.sh config/zookeeper.properties &"
 - nohup bash -c "cd kafka && bin/kafka-server-start.sh config/server.properties &"
 addons:
-  firefox: "44.0"
+  firefox: latest
