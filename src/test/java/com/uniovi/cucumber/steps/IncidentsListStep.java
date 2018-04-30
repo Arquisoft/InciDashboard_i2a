@@ -5,7 +5,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -25,12 +27,20 @@ public class IncidentsListStep {
 	private String URL = "http://localhost:8082/login";
 	private WebDriver driver = getDriver(PathFirefox);
 
+	   
 	@Before
 	public WebDriver getDriver(String PathFirefox) {
+		/*
 		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
 		System.setProperty("webdriver.firefox.bin", PathFirefox);
 		System.setProperty("webdriver.firefox.marionette", gecko);
-		WebDriver driver = new FirefoxDriver();
+		WebDriver driver = new FirefoxDriver();*/
+		FirefoxBinary firefoxBinary = new FirefoxBinary();
+		   firefoxBinary.addCommandLineOptions("--headless");
+		   //System.setProperty("webdriver.gecko.driver", "/opt/geckodriver");
+		   FirefoxOptions firefoxOptions = new FirefoxOptions();
+		   firefoxOptions.setBinary(firefoxBinary);
+		   FirefoxDriver driver = new FirefoxDriver(firefoxOptions);
 		return driver;
 	}
 	
