@@ -23,8 +23,8 @@ public class LoginStep {
 	@Before
 	public WebDriver getDriver(String PathFirefox) {
 		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
-		System.setProperty("webdriver.firefox.bin", PathFirefox);
-		System.setProperty("webdriver.firefox.marionette", gecko);
+		//System.setProperty("webdriver.firefox.bin", PathFirefox);
+		//System.setProperty("webdriver.firefox.marionette", gecko);
 		WebDriver driver = new FirefoxDriver();
 		return driver;
 	}
