@@ -19,7 +19,6 @@ import cucumber.api.java.en.When;
 
 @ContextConfiguration(classes = InciDashboardI2aApplication.class, loader = SpringBootContextLoader.class)
 @WebAppConfiguration
-@ActiveProfiles("INTEGRATION_TEST")
 public class IncidentsListStep {
 	private String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
 	private String gecko = "C:\\Firefox46.win\\geckodriver.exe";
@@ -29,8 +28,8 @@ public class IncidentsListStep {
 	@Before
 	public WebDriver getDriver(String PathFirefox) {
 		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
-		//System.setProperty("webdriver.firefox.bin", PathFirefox);
-		//System.setProperty("webdriver.firefox.marionette", gecko);
+		System.setProperty("webdriver.firefox.bin", PathFirefox);
+		System.setProperty("webdriver.firefox.marionette", gecko);
 		WebDriver driver = new FirefoxDriver();
 		return driver;
 	}

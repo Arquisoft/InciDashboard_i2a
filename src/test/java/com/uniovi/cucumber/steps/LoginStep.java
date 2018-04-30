@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -18,13 +19,12 @@ public class LoginStep {
 	private String gecko = "C:\\Firefox46.win\\geckodriver.exe";
 	private String URL = "http://localhost:8082/login";
 	private WebDriver driver = getDriver(PathFirefox);
-	//private WebDriver driver = new Html
 
 	@Before
 	public WebDriver getDriver(String PathFirefox) {
 		// Firefox (Versión 46.0) sin geckodriver para Selenium 2.x.
-		//System.setProperty("webdriver.firefox.bin", PathFirefox);
-		//System.setProperty("webdriver.firefox.marionette", gecko);
+		System.setProperty("webdriver.firefox.bin", PathFirefox);
+		System.setProperty("webdriver.firefox.marionette", gecko);
 		WebDriver driver = new FirefoxDriver();
 		return driver;
 	}
