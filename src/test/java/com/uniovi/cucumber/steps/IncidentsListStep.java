@@ -6,11 +6,20 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.context.SpringBootContextLoader;
+
+import com.uniovi.InciDashboardI2aApplication;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+@ContextConfiguration(classes = InciDashboardI2aApplication.class, loader = SpringBootContextLoader.class)
+@WebAppConfiguration
+@ActiveProfiles("INTEGRATION_TEST")
 public class IncidentsListStep {
 	private String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
 	private String gecko = "C:\\Firefox46.win\\geckodriver.exe";
