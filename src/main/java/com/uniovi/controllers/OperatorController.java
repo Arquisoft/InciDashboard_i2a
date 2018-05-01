@@ -72,7 +72,9 @@ public class OperatorController {
 	
 	@RequestMapping(value = "/operator/assignedIncidents", method = RequestMethod.GET)
 	public String getAssignedIncidents(Model model) {
-		model.addAttribute("incidentsList", incidentsService.getIncidentsOfOperator(getActiveOperator()));
+		Operator activeOperator = getActiveOperator();
+		model.addAttribute("activeOperator", activeOperator);
+		model.addAttribute("incidentsList", incidentsService.getIncidentsOfOperator(activeOperator));
 		return "/operator/assignedIncidents";
 	}
 	

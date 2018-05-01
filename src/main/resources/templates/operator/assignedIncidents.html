@@ -30,7 +30,9 @@
 									<td th:text="${incident.state.toString()}">Incident state</td>
 									<td th:text="${incident.properties.toString()}">Incident properties</td>
 									<td th:text="${incident.comments.toString()}">Incident comments</td>
-									<td><a th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
+									<div th:if="${incident.operator.email == activeOperator.email && activeOperator.modifyAccess==true}">
+										<td><a class="btn btn-primary" role="button" th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
+									</div>
 								</tr>
 							</tbody>				
 						</table>

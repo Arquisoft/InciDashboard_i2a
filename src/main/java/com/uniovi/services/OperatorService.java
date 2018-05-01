@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Incident;
 import com.uniovi.entities.Operator;
 import com.uniovi.entities.types.OperatorKind;
 import com.uniovi.repositories.OperatorRepository;
@@ -16,6 +17,9 @@ public class OperatorService {
 	
 	@Autowired
 	private OperatorRepository operatorRepository;
+	
+	@Autowired
+	private IncidentService incidentService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -74,6 +78,18 @@ public class OperatorService {
 		default:
 			break;	
 		}		
+		updateOperatorIncident(operator);
 		return statePermission;
+	}
+	
+	private void updateOperatorIncident(Operator operator) {
+		for(Incident inci: incidentService.getIncidents()) {
+			if(inci.getOperator() != null) {
+				if(inci.getOperator().getEmail().equals(operator.getEmail())) {
+					inci.setOperator(operator);
+					incidentService.addIncident(inci);
+				}
+			}			
+		}
 	}
 }

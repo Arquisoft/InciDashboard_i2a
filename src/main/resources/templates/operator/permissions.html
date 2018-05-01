@@ -6,10 +6,10 @@
 			function permissionChanged(id){
 				$.post("/operator/permissions/" + id, function(state){
 					if(state){						
-						document.getElementById(id).className = "btn btn-success"
+						document.getElementById(id).className = "btn btn-success";
 					}
 					else{
-						document.getElementById(id).className = "btn btn-danger"
+						document.getElementById(id).className = "btn btn-danger";
 					}
 				});
 			}
