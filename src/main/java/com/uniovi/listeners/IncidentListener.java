@@ -30,7 +30,7 @@ public class IncidentListener {
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
 	
-	@KafkaListener(topics = "incident")
+	@KafkaListener(topics = "${kafka.topic}")
 	public void listenIncident(String data) {
 		logger.info("New incident received: " + data);
 		try {
