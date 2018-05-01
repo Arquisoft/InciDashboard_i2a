@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.Operator;
@@ -82,9 +83,9 @@ public class OperatorController {
 	}
 	
 	@RequestMapping(value = "/operator/permissions/{id}", method = RequestMethod.POST)
-	public String operatorPermissionsChanged(@PathVariable String id) {
-		operatorsService.modifyPermission(id);
-		return "redirect:/operator/permissions";
+	@ResponseBody
+	public boolean operatorPermissionsChanged(@PathVariable String id) {
+		return operatorsService.modifyPermission(id);
 	}
 	
 	private Operator getActiveOperator() {

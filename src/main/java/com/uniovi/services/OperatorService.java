@@ -43,31 +43,37 @@ public class OperatorService {
 		return bCryptPasswordEncoder.matches(password, operator.getPassword());		
 	}
 
-	public void modifyPermission(String action) {
-		String[] actionSplitted = action.split(" ");
+	public boolean modifyPermission(String action) {
+		String[] actionSplitted = action.split("-");
 		String permission = actionSplitted[0];
 		String operatorEmail = actionSplitted[1];
 		Operator operator = getOperatorByEmail(operatorEmail);
 		
+		boolean statePermission = false;
 		switch(permission) {
 		case "map":
 			operator.setMapAccess(!operator.hasMapAccess());
+			statePermission = operator.hasMapAccess();
 			operatorRepository.save(operator);
 			break;
 		case "chart":
 			operator.setChartAccess(!operator.hasChartAccess());
+			statePermission = operator.hasChartAccess();
 			operatorRepository.save(operator);
 			break;
 		case "modify":
 			operator.setModifyAccess(!operator.hasModifyAccess());
+			statePermission = operator.hasModifyAccess();
 			operatorRepository.save(operator);
 			break;
 		case "admin":
 			operator.modifyOperatorRole(!operator.isAdmin());
+			statePermission = operator.isAdmin();
 			operatorRepository.save(operator);
 			break;
 		default:
 			break;	
-		}			
+		}		
+		return statePermission;
 	}
 }
