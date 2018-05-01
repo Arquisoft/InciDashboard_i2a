@@ -20,7 +20,7 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		
 		// incident's agent
 		jsonGenerator.writeStringField("agentId", incident.getAgentId());
-		jsonGenerator.writeStringField("kindCode", String.valueOf(incident.getKindCode()));		
+		jsonGenerator.writeStringField("kindCode", incident.getAgentKind().toString());		
 		// tags
 		jsonGenerator.writeArrayFieldStart("tags");
 		for(String tag: incident.getTags()) {
