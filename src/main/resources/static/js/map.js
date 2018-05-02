@@ -36,14 +36,12 @@ function initMap(){
 					"<p>State: " + mapIncidents[i].state + "</p>";
 						
 			if(mapIncidents[i].operator != null){
+				contentString += "<p>Operator: " + mapIncidents[i].operator.email + "</p>";
 				if(mapIncidents[i].operator.email == activeOperator.email && activeOperator.modifyAccess == true){
-					contentString += "<p>Operator: " + mapIncidents[i].operator.email + "</p>" +
-									"<a href='" +  markers[i].link + "'>Modify incident</a>";
-					
+					contentString += "<a href='" +  markers[i].link + "'>Modify incident</a>";					
 				}
 				
 				if(mapIncidents[i].operator.email === activeOperator.email && activeOperator.modifyAccess == true){
-					alert(mapIncidents[i].operator.email);
 					google.maps.event.addListener(markers[i], "dblclick", function(){
 						window.open(this.link, "_self");
 					});

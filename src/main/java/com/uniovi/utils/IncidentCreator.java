@@ -10,7 +10,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
 import com.uniovi.entities.Incident;
-import com.uniovi.entities.types.AgentKind;
 import com.uniovi.entities.types.InciState;
 import com.uniovi.entities.types.LatLng;
 
@@ -49,7 +48,7 @@ public class IncidentCreator {
 		return randIncident;
 	}
 	
-	private Map<String, Object> createRandomProperties(){
+	public Map<String, Object> createRandomProperties(){
 		Map<String, Object> randProperties = new HashMap<>();
 		
 		int randPriority = randNum.nextInt(5);
@@ -64,7 +63,7 @@ public class IncidentCreator {
 		return randProperties;
 	}
 	
-	private void createRandTemperatures(Map<String, Object> randProperties, int numTemps) {
+	public void createRandTemperatures(Map<String, Object> randProperties, int numTemps) {
 		Calendar calendar = Calendar.getInstance();
 		String[] temps = new String[numTemps];
 		for(int i=0; i<numTemps; i++) {			

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uniovi.entities.Incident;
 import com.uniovi.entities.Operator;
@@ -71,7 +72,9 @@ public class OperatorController {
 	
 	@RequestMapping(value = "/operator/assignedIncidents", method = RequestMethod.GET)
 	public String getAssignedIncidents(Model model) {
-		model.addAttribute("incidentsList", incidentsService.getIncidentsOfOperator(getActiveOperator()));
+		Operator activeOperator = getActiveOperator();
+		model.addAttribute("activeOperator", activeOperator);
+		model.addAttribute("incidentsList", incidentsService.getIncidentsOfOperator(activeOperator));
 		return "/operator/assignedIncidents";
 	}
 	
@@ -82,9 +85,9 @@ public class OperatorController {
 	}
 	
 	@RequestMapping(value = "/operator/permissions/{id}", method = RequestMethod.POST)
-	public String operatorPermissionsChanged(@PathVariable String id) {
-		operatorsService.modifyPermission(id);
-		return "redirect:/operator/permissions";
+	@ResponseBody
+	public boolean operatorPermissionsChanged(@PathVariable String id) {
+		return operatorsService.modifyPermission(id);
 	}
 	
 	private Operator getActiveOperator() {

@@ -4,49 +4,61 @@
 	<body>
 		<script type="text/javascript">
 			function permissionChanged(id){
-				$.post("/operator/permissions/" + id);
+				$.post("/operator/permissions/" + id, function(state){
+					if(state){						
+						document.getElementById(id).className = "btn btn-success";
+					}
+					else{
+						document.getElementById(id).className = "btn btn-danger";
+					}
+				});
 			}
 		</script>
 		<nav th:replace="fragments/nav"/>
 		<div class="container">
 			<h2>Current operators in the system</h2>
-			<p>As an admin you have permission to modify the access permissions of the operators inside the system</p>
 			<div class="panel panel-default">
-				<table class="table" name="tableIncidents">
-					<thead class="thead-light">
-						<tr>
-							<th>Email</th>
-							<th>Kind</th>
-							<th>Permissions</th>
-							<th>Admin</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="operator : ${operatorsList}">
-							<div th:if="${#authentication.principal.username != operator.email}">
-								<td th:text="${operator.email}">Operator email</td>
-								<td th:text="${operator.kind}">Operator kind</td>
-								<td>	
-									<div>
-										<label>Map Access</label>
-										<input th:id="${'map ' + '__${operator.email}__'}" type="checkbox" th:checked="${operator.mapAccess}" onClick="permissionChanged(this.id)">
-									</div>						
-									<div>
-										<label>Chart Access</label>
-										<input th:id="${'chart ' + '__${operator.email}__'}" type="checkbox" th:checked="${operator.chartAccess}" onClick="permissionChanged(this.id)">
-									</div>		
-									<div>
-										<label>Modify Access</label>
-										<input th:id="${'modify ' + '__${operator.email}__'}" type="checkbox" th:checked="${operator.modifyAccess}" onClick="permissionChanged(this.id)">
-									</div>						
-								</td>
-								<td>
-									<input th:id="${'admin ' + '__${operator.email}__'}" type="checkbox" th:checked="${operator.role == 'ROLE_ADMIN'}" onClick="permissionChanged(this.id)"	>
-								</td>
-							</div>									
-						</tr>
-					</tbody>				
-				</table>
+				<div class="card">
+					<h5 class="card-header">
+						Operator permissions:
+					</h5>
+					<div class="card-body">
+						<table class="table" name="tableIncidents">
+							<thead class="thead-light">
+								<tr>
+									<th>Email</th>
+									<th>Kind</th>
+									<th>Permissions</th>
+									<th>Admin</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="operator : ${operatorsList}">
+									<div th:if="${#authentication.principal.username != operator.email}">
+										<td th:text="${operator.email}">Operator email</td>
+										<td th:text="${operator.kind}">Operator kind</td>
+										<td>	
+											<div>
+												<button th:id="${'map-' + '__${operator.email}__'}" th:class="${operator.mapAccess} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Map</button>
+											</div>	
+											<br>					
+											<div>
+												<button th:id="${'chart-' + '__${operator.email}__'}" th:class="${operator.chartAccess} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Chart</button>
+											</div>		
+											<br>
+											<div>
+												<button th:id="${'modify-' + '__${operator.email}__'}" th:class="${operator.modifyAccess} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Modify</button>
+											</div>						
+										</td>
+										<td>
+											<button th:id="${'admin-' + '__${operator.email}__'}" th:class="${operator.role.equals('ROLE_ADMIN')} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Admin</button>
+										</td>
+									</div>									
+								</tr>
+							</tbody>				
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 		<footer th:replace="fragments/footer"/>
