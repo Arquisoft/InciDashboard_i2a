@@ -2,7 +2,6 @@ package com.uniovi.cucumber.steps;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +55,7 @@ public class ModifyIncidentStep {
 		incident.setOperator(operator);
 		incident.setName("Se quema la casa de chus");
 		incident.setState(InciState.OPEN);
+		inciService.addIncident(incident);
 		list = inciService.getIncidentsOfOperator(operator);
 	}
 	
