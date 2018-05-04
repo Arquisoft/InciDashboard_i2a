@@ -45,26 +45,27 @@
 						<br>
 					</div>								
 					
-					<div th:if="${activeOperator.chartAccess == true}">
-						<div class="card" id="cardPieChart">
-							<h5 class="card-header">
-								State comparison of active incidents
-							</h5>
-							<div class="card-body">
-								<div id="piechart" style="width:100%;height:400px"></div>
+					<div class="row" th:if="${activeOperator.chartAccess == true}">
+						<div class="col-lg-6">
+							<div class="card" id="cardPieChart">
+								<h5 class="card-header">
+									State comparison of submitted incidents
+								</h5>
+								<div class="card-body">
+									<div id="piechart" style="width:100%;height:400px"></div>
+								</div>
 							</div>
 						</div>
-						
-						<br>
-						
-						<div class="card" id="cardLineChart">
-							<h5 class="card-header">
-								Temperature evolution of incidents submitted by sensors
-							</h5>
-							<div class="card-body">
-								<div id="linechart" style="width:100%;height:400px"></div>
+						<div class="col-lg-6">
+							<div class="card" id="cardColumnChart">
+								<h5 class="card-header">
+									Agent kind comparison of submitted incidents
+								</h5>
+								<div class="card-body">
+									<div id="columnchart" style="width:100%;height:400px"></div>
+								</div>
 							</div>
-						</div>
+						</div>						
 						
 						<script src="/js/charts.js"></script>
 					
@@ -73,10 +74,10 @@
 								chartIncidents = [[${incidentsList}]];
 								updateCharts();
 							/*]]>*/
-						</script>
+						</script>											
+					</div>
 						
-						<br>
-					</div>	
+					<br>
 
 					<script src="/js/table.js"></script>
 					<div class="card">
