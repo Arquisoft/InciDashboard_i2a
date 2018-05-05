@@ -44,11 +44,11 @@ public class InsertSimpleDataService {
 			operatorService.addOperator(op);
 		}
 		
-		/*for(int i=0; i<10; i++) {
+		for(int i=0; i<10; i++) {
 			Incident randIncident = incidentCreator.createIncident();
 			randIncident.setOperator(operators.get(randNum.nextInt(operators.size())));
 			incidents.add(randIncident);
 			incidentService.addIncident(randIncident);			
-		}*/
+		}
 	}
 }

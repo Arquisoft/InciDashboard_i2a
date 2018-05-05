@@ -98,7 +98,7 @@ public class IncidentTest {
 	}
 	
 	@Test
-	public void inciAgentTest() {
+	public void inciAgentIdTest() {
 		Assert.assertEquals(agentId[0], inci1.getAgentId());
 		Assert.assertEquals(agentId[1], inci2.getAgentId());
 		
@@ -107,6 +107,17 @@ public class IncidentTest {
 
 		inci2.setAgentId(agentId[0]);
 		Assert.assertEquals(agentId[0], inci2.getAgentId());
+	}
+	
+	@Test
+	public void inciAgentKindCodeTest() {
+		Assert.assertEquals(AgentKind.PERSON, inci1.getAgentKind());
+		Assert.assertEquals(AgentKind.ENTITY, inci2.getAgentKind());
+		
+		inci1.setKindCode(2);
+		Assert.assertEquals(AgentKind.ENTITY, inci1.getAgentKind());
+		inci2.setKindCode(3);
+		Assert.assertEquals(AgentKind.SENSOR, inci2.getAgentKind());
 	}
 	
 	@Test
