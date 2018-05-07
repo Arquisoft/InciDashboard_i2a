@@ -26,7 +26,7 @@ function initMap(){
 		
 		if(draggable == false){
 			markers[i].index = i;
-			markers[i].link = "/incident/edit/" + mapIncidents[i].incidentId;
+			markers[i].link = "edit/" + mapIncidents[i].incidentId;
 
 			var contentString = "<div id='content'>" +
 				"<h3 id='firstHeading'>" + mapIncidents[i].name + "</h3>" +

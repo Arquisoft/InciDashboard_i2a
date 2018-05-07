@@ -24,7 +24,7 @@
 			
 			<div class="card">
 				<div class="card-body">
-					<form class="form-horizontal" method="post" th:action="${'/incident/edit/' + incident.id}" th:object="${incident}">
+					<form class="form-horizontal" method="post" th:action="@{/edit/} + ${incident.id}" th:object="${incident}">
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="inciState">Incident state:</label>
 							<div class="col-sm-10">
