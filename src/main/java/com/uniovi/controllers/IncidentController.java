@@ -27,18 +27,18 @@ public class IncidentController {
 	@Autowired
 	private OperatorService operatorsService;
 	
-	@RequestMapping(value = "/incident/edit/{id}")
+	@RequestMapping(value = "edit/{id}")
 	public String getEdit(Model model, @PathVariable String id) {
 		Incident incident = incidentService.getIncident(id);
 		if(incident.getOperator().equals(getActiveOperator())) {
 			model.addAttribute("incident", incident);
 			model.addAttribute("statesList", EnumSet.allOf(InciState.class));
-			return "incident/edit";
+			return "edit";
 		}
-		return "redirect:/dashboard";		
+		return "redirect:dashboard";		
 	}
 	
-	@RequestMapping(value = "/incident/edit/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
 	public String setEdit(Model model, @PathVariable String id, @RequestParam String inciState, @RequestParam String latlng, @RequestParam String comment) {
 		Incident original = incidentService.getIncident(id);
 		if(!latlng.isEmpty()) {

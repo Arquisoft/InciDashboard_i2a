@@ -4,7 +4,7 @@
 	<body>
 		<script type="text/javascript">
 			function permissionChanged(id){
-				$.post("/operator/permissions/" + id, function(state){
+				$.post("permissions/" + id, function(state){
 					if(state){						
 						document.getElementById(id).className = "btn btn-success";
 					}
