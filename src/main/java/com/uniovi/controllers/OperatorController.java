@@ -67,7 +67,7 @@ public class OperatorController {
 		List<Incident> incidents = incidentsService.getIncidents();
 		model.addAttribute("activeOperator", getActiveOperator());
 		model.addAttribute("incidentsList", incidents);
-		return "dashboard :: dashboardInfo";
+		return "dashboard :: tableInfo";
 	}
 	
 	@RequestMapping(value = "/operator/assignedIncidents", method = RequestMethod.GET)

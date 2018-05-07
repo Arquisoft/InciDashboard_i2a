@@ -8,78 +8,68 @@
 			<div class="panel panel-default">	
 				<div class="panel-body">
 					<p><span sec:authentication="principal.username"></span> - <span>The following are a list of active incidents in the system </span>
-					<button type="button" class="btn btn-primary" id="updateButton">Update</a>
 				</div>
 				
-				<script th:inline="javascript">
-					/*<![CDATA[*/
-					$("#updateButton").click(function() {
-						 var urlUpdate = "/dashboard/update";
-						 $("#dashboardInfo").load(urlUpdate);
-					 });
-					/*]]>*/
-				</script>
+				<div th:if="${activeOperator.mapAccess == true}">	
+					<div class="card">
+						<h5 class="card-header">
+							Active incidents location
+						</h5>
+						<div class="card-body">
+							<div id="mapa" style="width:100%;height:400px"></div>
+						</div>
+					</div>	
+					
+					<script src="/js/map.js"></script>
+					<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAr9ogXGdZ9_qScXx3Pd8Rg0Kv5TuSV_U"></script>
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+							mapIncidents = [[${incidentsList}]];
+							activeOperator = [[${activeOperator}]];
+							initMap();
+						/*]]>*/
+					</script>
+					
+					<br>
+				</div>		
 				
-				<div th:fragment="dashboardInfo" id="dashboardInfo">
-					<div th:if="${activeOperator.mapAccess == true}">	
-						<div class="card">
+				<div class="row" th:if="${activeOperator.chartAccess == true}">
+					<div class="col-lg-6">
+						<div class="card" id="cardPieChart">
 							<h5 class="card-header">
-								Active incidents location
+								State comparison of submitted incidents
 							</h5>
 							<div class="card-body">
-								<div id="mapa" style="width:100%;height:400px"></div>
-							</div>
-						</div>	
-						
-						<script src="/js/map.js"></script>
-						<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAr9ogXGdZ9_qScXx3Pd8Rg0Kv5TuSV_U"></script>
-						<script th:inline="javascript">
-							/*<![CDATA[*/
-								mapIncidents = [[${incidentsList}]];
-								activeOperator = [[${activeOperator}]];
-								initMap();
-							/*]]>*/
-						</script>
-						
-						<br>
-					</div>								
-					
-					<div class="row" th:if="${activeOperator.chartAccess == true}">
-						<div class="col-lg-6">
-							<div class="card" id="cardPieChart">
-								<h5 class="card-header">
-									State comparison of submitted incidents
-								</h5>
-								<div class="card-body">
-									<div id="piechart" style="width:100%;height:400px"></div>
-								</div>
+								<div id="piechart" style="width:100%;height:400px"></div>
 							</div>
 						</div>
-						<div class="col-lg-6">
-							<div class="card" id="cardColumnChart">
-								<h5 class="card-header">
-									Agent kind comparison of submitted incidents
-								</h5>
-								<div class="card-body">
-									<div id="columnchart" style="width:100%;height:400px"></div>
-								</div>
-							</div>
-						</div>						
-						
-						<script src="/js/charts.js"></script>
-					
-						<script th:inline="javascript">
-							/*<![CDATA[*/
-								chartIncidents = [[${incidentsList}]];
-								updateCharts();
-							/*]]>*/
-						</script>											
 					</div>
-						
-					<br>
-
-					<script src="/js/table.js"></script>
+					<div class="col-lg-6">
+						<div class="card" id="cardColumnChart">
+							<h5 class="card-header">
+								Agent kind comparison of submitted incidents
+							</h5>
+							<div class="card-body">
+								<div id="columnchart" style="width:100%;height:400px"></div>
+							</div>
+						</div>
+					</div>						
+					
+					<script src="/js/charts.js"></script>
+				
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+							chartIncidents = [[${incidentsList}]];
+							updateCharts();
+						/*]]>*/
+					</script>	
+					<br>										
+				</div>		
+				
+				<script src="/js/table.js"></script>
+				
+				<div th:fragment="tableInfo" id="tableInfo">					
 					<div class="card">
 						<h5 class="card-header">
 							Active incidents details
@@ -118,8 +108,9 @@
 								</tbody>				
 							</table>
 						</div>
-					</div>	
-				</div>		
+					</div>
+				</div>
+					
 			</div>				
 		</div>
 		
