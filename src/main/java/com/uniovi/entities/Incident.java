@@ -157,6 +157,10 @@ public class Incident {
 	public void setProperties(Map<String, Object> properties) {
 		this.properties = properties;
 	}	
+	
+	public void addProperty(String key, Object value) {
+		this.properties.put(key, value);
+	}
 
 	public Operator getOperator() {
 		return operator;

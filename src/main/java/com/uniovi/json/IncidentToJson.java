@@ -13,7 +13,7 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 			JsonGenerator jsonGenerator, SerializerProvider serProvider) throws IOException {
 		jsonGenerator.writeStartObject();
 		
-		jsonGenerator.writeStringField("id", incident.getId().toHexString());
+		jsonGenerator.writeStringField("incidentId", incident.getId().toHexString());
 	
 		jsonGenerator.writeStringField("name", incident.getName());
 		jsonGenerator.writeStringField("description", incident.getDescription());
@@ -45,14 +45,12 @@ public class IncidentToJson extends JsonSerializer<Incident>{
 		jsonGenerator.writeEndArray();
 		
 		//properties
-		jsonGenerator.writeArrayFieldStart("properties");
+		jsonGenerator.writeObjectFieldStart("properties");
 		for(String property: incident.getProperties().keySet()) {
-			jsonGenerator.writeStartObject();
-			jsonGenerator.writeObjectField(property, incident.getProperties().get(property));
-			jsonGenerator.writeEndObject();
+			jsonGenerator.writeStringField(property, incident.getProperties().get(property).toString());
 		}
-		jsonGenerator.writeEndArray();		
-		
+		jsonGenerator.writeEndObject();
+
 		//operator
 		if(incident.getOperator() != null) {
 			jsonGenerator.writeObjectFieldStart("operator");
