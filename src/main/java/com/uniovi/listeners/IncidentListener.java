@@ -40,7 +40,7 @@ public class IncidentListener {
 				Incident incident = obj.readValue(data.getBytes(), Incident.class);
 				OperatorKind opKind = OperatorKind.valueOf((String)incident.getProperties().get("type"));
 				incident.setOperator(operatorsService.getRandomOperatorOfKind(opKind));
-				incidentsService.addIncident(incident);
+				incidentsService.updateIncident(incident);
 				
 				messagingTemplate.convertAndSend("/incident", incident);
 			}

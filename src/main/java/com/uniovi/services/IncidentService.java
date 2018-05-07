@@ -16,7 +16,7 @@ public class IncidentService {
 	@Autowired
 	private IncidentRepository incidentsRepository;
 	
-	public void addIncident(Incident incident) {
+	public void updateIncident(Incident incident) {
 		this.incidentsRepository.save(incident);
 	}
 	

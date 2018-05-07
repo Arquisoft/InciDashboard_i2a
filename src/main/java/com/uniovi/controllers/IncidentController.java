@@ -48,7 +48,7 @@ public class IncidentController {
 		}		
 		original.setState(InciState.valueOf(inciState));		
 		original.getComments().add(comment);
-		incidentService.addIncident(original);
+		incidentService.updateIncident(original);
 		return "redirect:/dashboard";
 	}
 	

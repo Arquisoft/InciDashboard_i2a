@@ -87,7 +87,7 @@ public class OperatorService {
 			if(inci.getOperator() != null) {
 				if(inci.getOperator().getEmail().equals(operator.getEmail())) {
 					inci.setOperator(operator);
-					incidentService.addIncident(inci);
+					incidentService.updateIncident(inci);
 				}
 			}			
 		}
