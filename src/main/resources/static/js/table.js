@@ -14,7 +14,7 @@ function addIncidentToTable(incident){
 	if(incident.operator.email === activeOperator.email){
 		$("#tableBody").append(
 		"<div>"
-		+ "<td><a class='btn btn-primary' role='button' href='/incident/edit/" + incident.id + "'>Modify</a></td></tr>"
+		+ "<td><a class='btn btn-primary' role='button' href='/incident/edit/" + incident.incidentId + "'>Modify</a></td></tr>"
 		);
 	}
 }
