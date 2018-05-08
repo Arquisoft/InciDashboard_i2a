@@ -56,6 +56,8 @@ public class DatabaseTest {
 	
 	@Test
 	public void testServices() {
+		Operator o = operatorRepository.findByEmail("prueba20@mail.com");
+		if(o!=null)operatorRepository.delete(o);
 		userDet.loadUserByUsername("fireman1@gmail.com");
 		boolean except = false;
 		try {
@@ -66,13 +68,13 @@ public class DatabaseTest {
 		assertTrue(except);
 		
 		Operator o1 = new Operator();
-		o1.setEmail("prueba15@mail.com");
+		o1.setEmail("prueba20@mail.com");
 		o1.setPassword("123456");
 		o1.setRole("ROLE_OPERATOR");
 		operatorServ.addOperator(o1);
 		assertTrue(operatorServ.checkPassword(o1, "123456"));
 		assertNotNull(operatorServ.getRandomOperatorOfKind(OperatorKind.FIREMAN));
-		assertEquals(o1,operatorServ.getOperatorByEmail("prueba15@mail.com"));
+		assertEquals(o1,operatorServ.getOperatorByEmail("prueba20@mail.com"));
 		assertNotNull(operatorServ.getOperators());
 		operatorServ.updateOperatorIncident(o1);
 		
@@ -84,7 +86,7 @@ public class DatabaseTest {
 		}
 		assertTrue(except);
 		assertNotNull(security.getLogger());
-		security.autoLogin("prueba15@mail.com", "123456");
+		security.autoLogin("prueba20@mail.com", "123456");
 		assertNull(security.findLoggedInEmail());
 		
 		assertTrue(inciServ.getIncidentsOfOperator(o1).size()==0);
