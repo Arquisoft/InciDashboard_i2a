@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	com.uniovi.tests_domain.IncidentTest.class,
-	com.uniovi.cucumber.CucumberTests.class
+	//com.uniovi.cucumber.CucumberTests.class
 })
 public class InciDashboardI2aApplicationTests {
 
