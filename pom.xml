@@ -188,7 +188,7 @@
 				<version>0.7.9</version>
 				<configuration>
 					<excludes>
-					<exclude>**/controllers/**</exclude>
+					<exclude>**/IncidentController.**</exclude>
 					<exclude>**/listeners/**</exclude>
 					<exclude>**/InsertSimpleDataService.**</exclude>
 					</excludes>
