@@ -15,7 +15,8 @@
 						<table class="table" name="tableIncidents">
 							<thead class="thead-light">
 								<tr>
-									<th>Incident name</th>
+									<th>Name</th>
+									<th>Description</th>
 									<th>Location</th>
 									<th>State</th>
 									<th>Properties</th>
@@ -26,11 +27,12 @@
 							<tbody>
 								<tr th:each="incident : ${incidentsList}">
 									<td th:text="${incident.name}">Incident name</td>
+									<td th:text="${incident.description}">Incident description</td>
 									<td th:text="${incident.location.toString()}">Incident location</td>
 									<td th:text="${incident.state.toString()}">Incident state</td>
 									<td th:text="${incident.properties.toString()}">Incident properties</td>
 									<td th:text="${incident.comments.toString()}">Incident comments</td>
-									<div th:if="${incident.operator.email == activeOperator.email && activeOperator.modifyAccess==true}">
+									<div th:if="${incident.operator.email == activeOperator.email && activeOperator.hasModifyAccess()}">
 										<td><a class="btn btn-primary" role="button" th:href="${'edit/' + incident.id}">Modify</a></td>
 									</div>
 								</tr>

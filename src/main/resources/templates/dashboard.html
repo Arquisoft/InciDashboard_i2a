@@ -10,7 +10,7 @@
 					<p><span sec:authentication="principal.username"></span> - <span>The following are a list of active incidents in the system </span>
 				</div>
 				
-				<div th:if="${activeOperator.mapAccess == true}">	
+				<div th:if="${activeOperator.hasMapAccess()}">	
 					<div class="card">
 						<h5 class="card-header">
 							Active incidents location
@@ -34,7 +34,7 @@
 					<br>
 				</div>		
 				
-				<div class="row" th:if="${activeOperator.chartAccess == true}">
+				<div class="row" th:if="${activeOperator.hasChartAccess()}">
 					<div class="col-lg-6">
 						<div class="card" id="cardPieChart">
 							<h5 class="card-header">
@@ -100,7 +100,7 @@
 											<td th:text="${incident.properties.toString()}">Incident properties</td>
 											<td th:text="${incident.operator.email}">Operator</td>
 											<td th:text="${incident.comments.toString()}">Incident comments</td>
-											<div th:if="${incident.operator.email == activeOperator.email && activeOperator.modifyAccess==true}">
+											<div th:if="${incident.operator.email == activeOperator.email && activeOperator.hasModifyAccess()}">
 												<td><a class="btn btn-primary" role="button" th:href="${'edit/' + incident.id}">Modify</a></td>
 											</div>
 										</div>										

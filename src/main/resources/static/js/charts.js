@@ -62,9 +62,9 @@ function drawCharts(){
 		document.getElementById("cardColumnChart").style.display = "block";
 		var columnData = google.visualization.arrayToDataTable([
 	          ["Agent kind", "Number of incidents"],
-	          ["PERSON",     	countPerson],
-	          ["ENTITY",      	countEntity],
-	          ["SENSOR",  		countSensor]
+	          ["PERSON", countPerson],
+	          ["ENTITY", countEntity],
+	          ["SENSOR", countSensor]
 		]);
 		
 		var columnOptions = {

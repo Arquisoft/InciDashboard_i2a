@@ -7,8 +7,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import org.bson.types.ObjectId;
-import org.junit.Assert;
-
 import com.uniovi.entities.Operator;
 import com.uniovi.entities.types.OperatorKind;
 
@@ -36,66 +34,66 @@ public class OperatorTest {
 				", mapAccess=" + op2.hasMapAccess() + ", chartAccess=" + op2.hasChartAccess() + ", modifyAccess=" + op2.hasModifyAccess()+
 				"]";
 		
-		Assert.assertEquals(op1ToString, op1.toString());
-		Assert.assertEquals(op2ToString, op2.toString());
+		assertEquals(op1ToString, op1.toString());
+		assertEquals(op2ToString, op2.toString());
 	}
 	
 	@Test
 	public void opEmailPasswordTest() {
-		Assert.assertEquals("fireman@gmail.com", op1.getEmail());
-		Assert.assertEquals("policeman@gmail.com", op2.getEmail());
+		assertEquals("fireman@gmail.com", op1.getEmail());
+		assertEquals("policeman@gmail.com", op2.getEmail());
 		
 		op1.setEmail(op2.getEmail());
-		Assert.assertEquals("policeman@gmail.com", op1.getEmail());
+		assertEquals("policeman@gmail.com", op1.getEmail());
 		
 		op2.setEmail("fireman@gmail.com");
-		Assert.assertEquals("fireman@gmail.com", op2.getEmail());
+		assertEquals("fireman@gmail.com", op2.getEmail());
 	}
 	
 	@Test
 	public void opKindTest() {
-		Assert.assertEquals(OperatorKind.FIREMAN, op1.getKind());
-		Assert.assertEquals(OperatorKind.POLICE, op2.getKind());
+		assertEquals(OperatorKind.FIREMAN, op1.getKind());
+		assertEquals(OperatorKind.POLICE, op2.getKind());
 		
 		op1.setKind(op2.getKind());
-		Assert.assertEquals(OperatorKind.POLICE, op1.getKind());
+		assertEquals(OperatorKind.POLICE, op1.getKind());
 		
 		op2.setKind(OperatorKind.RESCUE);
-		Assert.assertEquals(OperatorKind.RESCUE, op2.getKind());
+		assertEquals(OperatorKind.RESCUE, op2.getKind());
 	}
 	
 	@Test
 	public void opRoleTest() {
-		Assert.assertEquals(false, op1.isAdmin());
-		Assert.assertEquals(false, op2.isAdmin());
+		assertEquals(false, op1.isAdmin());
+		assertEquals(false, op2.isAdmin());
 		
 		op1.modifyOperatorRole(true);
 		op2.modifyOperatorRole(false);
-		Assert.assertEquals(true, op1.isAdmin());
-		Assert.assertEquals(false, op2.isAdmin());
+		assertEquals(true, op1.isAdmin());
+		assertEquals(false, op2.isAdmin());
 	}
 	
 	@Test
 	public void opAccessTest() {
-		Assert.assertEquals(false, op1.hasMapAccess());
-		Assert.assertEquals(false, op1.hasChartAccess());
-		Assert.assertEquals(false, op1.hasModifyAccess());
+		assertEquals(false, op1.hasMapAccess());
+		assertEquals(false, op1.hasChartAccess());
+		assertEquals(false, op1.hasModifyAccess());
 		
-		Assert.assertEquals(false, op2.hasMapAccess());
-		Assert.assertEquals(false, op2.hasChartAccess());
-		Assert.assertEquals(false, op2.hasModifyAccess());
+		assertEquals(false, op2.hasMapAccess());
+		assertEquals(false, op2.hasChartAccess());
+		assertEquals(false, op2.hasModifyAccess());
 		
 		op1.setMapAccess(true);
 		op1.setChartAccess(true);
-		Assert.assertEquals(true, op1.hasMapAccess());
-		Assert.assertEquals(true, op1.hasChartAccess());
-		Assert.assertEquals(false, op1.hasModifyAccess());
+		assertEquals(true, op1.hasMapAccess());
+		assertEquals(true, op1.hasChartAccess());
+		assertEquals(false, op1.hasModifyAccess());
 		
 		op2.setMapAccess(true);
 		op2.setModifyAccess(true);
-		Assert.assertEquals(true, op2.hasMapAccess());
-		Assert.assertEquals(false, op2.hasChartAccess());
-		Assert.assertEquals(true, op2.hasModifyAccess());
+		assertEquals(true, op2.hasMapAccess());
+		assertEquals(false, op2.hasChartAccess());
+		assertEquals(true, op2.hasModifyAccess());
 	}
 	
 	@Test

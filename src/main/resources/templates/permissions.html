@@ -39,19 +39,19 @@
 										<td th:text="${operator.kind}">Operator kind</td>
 										<td>	
 											<div>
-												<button th:id="${'map-' + '__${operator.email}__'}" th:class="${operator.mapAccess} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Map</button>
+												<button th:id="${'map-' + '__${operator.email}__'}" th:class="${operator.hasMapAccess()} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Map</button>
 											</div>	
 											<br>					
 											<div>
-												<button th:id="${'chart-' + '__${operator.email}__'}" th:class="${operator.chartAccess} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Chart</button>
+												<button th:id="${'chart-' + '__${operator.email}__'}" th:class="${operator.hasChartAccess()} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Chart</button>
 											</div>		
 											<br>
 											<div>
-												<button th:id="${'modify-' + '__${operator.email}__'}" th:class="${operator.modifyAccess} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Modify</button>
+												<button th:id="${'modify-' + '__${operator.email}__'}" th:class="${operator.hasModifyAccess()} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Modify</button>
 											</div>						
 										</td>
 										<td>
-											<button th:id="${'admin-' + '__${operator.email}__'}" th:class="${operator.role.equals('ROLE_ADMIN')} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Admin</button>
+											<button th:id="${'admin-' + '__${operator.email}__'}" th:class="${operator.getRole() == 'ROLE_ADMIN'} ? 'btn btn-success' : 'btn btn-danger'" onClick="permissionChanged(this.id)">Admin</button>
 										</td>
 									</div>									
 								</tr>
