@@ -82,7 +82,7 @@ public class OperatorService {
 		return statePermission;
 	}
 	
-	private void updateOperatorIncident(Operator operator) {
+	public void updateOperatorIncident(Operator operator) {
 		for(Incident inci: incidentService.getIncidents()) {
 			if(inci.getOperator() != null) {
 				if(inci.getOperator().getEmail().equals(operator.getEmail())) {

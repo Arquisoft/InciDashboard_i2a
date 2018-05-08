@@ -8,7 +8,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	com.uniovi.tests_domain.IncidentTest.class,
 	com.uniovi.tests_domain.OperatorTest.class,
-	com.uniovi.tests_domain.IncidentConversorTest.class
+	com.uniovi.tests_domain.IncidentConversorTest.class,
+	com.uniovi.DatabaseTest.class
 })
 public class InciDashboardI2aApplicationTests {
 
