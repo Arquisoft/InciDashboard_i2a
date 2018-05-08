@@ -1,17 +1,18 @@
 package com.uniovi.cucumber.steps;
 
-import static org.junit.Assert.assertEquals;
-
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.uniovi.InciDashboardI2aApplication;
-import com.uniovi.controllers.OperatorController;
-import com.uniovi.entities.Operator;
-import com.uniovi.services.OperatorService;
 
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -19,18 +20,26 @@ import cucumber.api.java.en.When;
 @ContextConfiguration(classes = InciDashboardI2aApplication.class, loader = SpringBootContextLoader.class)
 @WebAppConfiguration
 public class LoginStep {
-
-	@Autowired
-	OperatorService opService;
 	
 	@Autowired
-	OperatorController opController;
+	private WebApplicationContext context;
 
-	Operator operator;
+	private MockMvc mvc;
+	
+	private WebDriver driver;
+	private String baseUrl;
+
+	@Before
+	public void setUp() throws Exception {
+		mvc = MockMvcBuilders.webAppContextSetup(context).build();
+	    driver = new HtmlUnitDriver();
+	    baseUrl = "http://localhost:8082";
+	    //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  }
 
 	@When("^operator is in home page$")
 	public void Step2() {
-		assertEquals("login", opController.getLogin());
+		driver.get(baseUrl);
 	}
 
 	@And("^clicks on Log In$")
