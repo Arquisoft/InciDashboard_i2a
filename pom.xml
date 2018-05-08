@@ -189,7 +189,8 @@
 				<configuration>
 					<excludes>
 					<exclude>**/controllers/**</exclude>
-					<exclude></exclude>
+					<exclude>**/listeners/**</exclude>
+					<exclude>**/InsertSimpleDataService.**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
