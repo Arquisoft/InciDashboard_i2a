@@ -23,31 +23,20 @@ import cucumber.api.java.en.When;
 @WebAppConfiguration
 public class LoginStep {
 
-	@Autowired
-	private WebApplicationContext context;
-
-	private MockMvc mvc;
-
 	private HtmlUnitDriver driver;
-	private String baseUrl;
+	private String baseUrl = "http://localhost:8082";
 
-	@Before
-	public void setUp() throws Exception {
-		mvc = MockMvcBuilders.webAppContextSetup(context).build();
+	
+	public HtmlUnitDriver driver() throws Exception {
 		driver = new HtmlUnitDriver();
-		//driver.setJavascriptEnabled(true);
-		
-		baseUrl = "http://localhost:8082";
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return driver;
 	}
 
 	@When("^operator is in home page$")
-	public void Step2() {
-		driver = new HtmlUnitDriver();
-		
-		baseUrl = "http://localhost:8082";
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get(baseUrl);
+	public void Step2() throws Exception {
+		driver = driver();
+		driver.navigate().to(baseUrl);
+		System.out.println("ENTRANDO EN EL INDEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	}
 
 	@And("^clicks on Log In$")
