@@ -2,6 +2,11 @@ package com.uniovi.tests_domain;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+import org.bson.types.ObjectId;
 import org.junit.Assert;
 
 import com.uniovi.entities.Operator;
@@ -91,6 +96,18 @@ public class OperatorTest {
 		Assert.assertEquals(true, op2.hasMapAccess());
 		Assert.assertEquals(false, op2.hasChartAccess());
 		Assert.assertEquals(true, op2.hasModifyAccess());
+	}
+	
+	@Test
+	public void moreTest() {
+		Operator o = new Operator();
+		o.setId(new ObjectId("507f1f77bcf86cd799439011"));
+		assertEquals(o.getId(),new ObjectId("507f1f77bcf86cd799439011"));
+		assertEquals(o.hashCode(),o.hashCode());
+		assertFalse(o.hashCode()==op1.hashCode());
+		assertFalse(o.equals(op1));
+		assertFalse(o.equals(null));
+		assertFalse(o.equals(new Object()));
 	}
 
 }

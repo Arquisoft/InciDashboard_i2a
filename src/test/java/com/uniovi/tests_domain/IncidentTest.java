@@ -1,5 +1,7 @@
 package com.uniovi.tests_domain;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -142,6 +144,8 @@ public class IncidentTest {
 		
 		inci1.getLocation().setLat(43.3584404);
 		inci1.getLocation().setLng(-5.8284433);
+		LatLng loc = new LatLng();
+		assertEquals(loc.toString(),"LatLng [lat=0.0, lng=0.0]");
 		Assert.assertEquals(43.3584404, inci1.getLocation().getLat(), 0.0001);
 		Assert.assertEquals(-5.8284433, inci1.getLocation().getLng(), 0.0001);
 		
@@ -201,6 +205,7 @@ public class IncidentTest {
 		inci2.setOperator(op1);
 		Assert.assertEquals(op2, inci1.getOperator());
 		Assert.assertEquals(op1, inci2.getOperator());
+		inci1.setTags(new ArrayList<String>());
 	}
 	
 	@Test
@@ -235,6 +240,8 @@ public class IncidentTest {
 		i1.getProperties().put("intervention", true);
 		PrintIncidentProperties<String, Object> print = new PrintIncidentProperties<>(i1.getProperties());
 		Assert.assertEquals("intervention=\"true\"", print.toString());
+		String result = i1.toString();
+		Assert.assertEquals(i1.toString(), result);
 	}
 
 }
