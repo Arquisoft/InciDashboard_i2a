@@ -28,13 +28,14 @@ public class LoginStep {
 
 	private MockMvc mvc;
 
-	private WebDriver driver;
+	private HtmlUnitDriver driver;
 	private String baseUrl;
 
 	@Before
 	public void setUp() throws Exception {
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
 		driver = new HtmlUnitDriver();
+		driver.setJavascriptEnabled(true);
 		
 		baseUrl = "http://localhost:8082";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -42,7 +43,7 @@ public class LoginStep {
 
 	@When("^operator is in home page$")
 	public void Step2() {
-driver = new HtmlUnitDriver();
+		driver = new HtmlUnitDriver();
 		
 		baseUrl = "http://localhost:8082";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
