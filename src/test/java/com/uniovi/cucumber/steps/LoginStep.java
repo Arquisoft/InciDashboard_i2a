@@ -35,12 +35,17 @@ public class LoginStep {
 	public void setUp() throws Exception {
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
 		driver = new HtmlUnitDriver();
+		
 		baseUrl = "http://localhost:8082";
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	@When("^operator is in home page$")
 	public void Step2() {
+driver = new HtmlUnitDriver();
+		
+		baseUrl = "http://localhost:8082";
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(baseUrl);
 	}
 
