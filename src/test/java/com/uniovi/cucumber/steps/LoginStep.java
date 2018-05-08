@@ -35,6 +35,7 @@ public class LoginStep {
 	@When("^operator is in home page$")
 	public void Step2() throws Exception {
 		driver = driver();
+		driver.setJavascriptEnabled(true);
 		driver.navigate().to(baseUrl);
 		System.out.println("ENTRANDO EN EL INDEXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	}
