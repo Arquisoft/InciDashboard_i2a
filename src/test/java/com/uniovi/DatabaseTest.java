@@ -5,9 +5,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,22 @@ public class DatabaseTest {
 	@Autowired
 	private IncidentService inciServ;
 	
+	private Operator operator;
+	
+	@Before
+	public void setUp() {
+		operator = new Operator();
+		operator.setEmail("prueba21@mail.com");
+		operator.setPassword("123456");
+		operator.setRole("ROLE_OPERATOR");
+		operatorServ.addOperator(operator);
+	}
+
+	@After
+	public void tearDown() {
+		operatorRepository.delete(operator);
+	}
+	
 	@Test
 	public void testConversor() {
 		Map<String,Object> mapp = new HashMap<String,Object>();
@@ -56,8 +75,6 @@ public class DatabaseTest {
 	
 	@Test
 	public void testServices() {
-		Operator o = operatorRepository.findByEmail("prueba20@mail.com");
-		if(o!=null)operatorRepository.delete(o);
 		userDet.loadUserByUsername("fireman1@gmail.com");
 		boolean except = false;
 		try {
@@ -67,16 +84,12 @@ public class DatabaseTest {
 		}
 		assertTrue(except);
 		
-		Operator o1 = new Operator();
-		o1.setEmail("prueba20@mail.com");
-		o1.setPassword("123456");
-		o1.setRole("ROLE_OPERATOR");
-		operatorServ.addOperator(o1);
-		assertTrue(operatorServ.checkPassword(o1, "123456"));
+		
+		assertTrue(operatorServ.checkPassword(operator, "123456"));
 		assertNotNull(operatorServ.getRandomOperatorOfKind(OperatorKind.FIREMAN));
-		assertEquals(o1,operatorServ.getOperatorByEmail("prueba20@mail.com"));
+		assertEquals(operator,operatorServ.getOperatorByEmail("prueba21@mail.com"));
 		assertNotNull(operatorServ.getOperators());
-		operatorServ.updateOperatorIncident(o1);
+		operatorServ.updateOperatorIncident(operator);
 		
 		except = false;
 		try {
@@ -86,11 +99,10 @@ public class DatabaseTest {
 		}
 		assertTrue(except);
 		assertNotNull(security.getLogger());
-		security.autoLogin("prueba20@mail.com", "123456");
+		security.autoLogin("prueba21@mail.com", "123456");
 		assertNull(security.findLoggedInEmail());
 		
-		assertTrue(inciServ.getIncidentsOfOperator(o1).size()==0);
-		operatorRepository.delete(o1);
+		assertTrue(inciServ.getIncidentsOfOperator(operator).size()==0);
 	}
 
 
