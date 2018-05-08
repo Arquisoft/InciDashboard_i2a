@@ -5,6 +5,6 @@ Feature: Let an operator log in the system
 Scenario: Let an operator log in
   Given an operator  
   When operator is in home page
-  When clicks on Log In
-  And fills in correctly the email and password
+  And clicks on Log In
+  Then fills in correctly the email and password
   Then operator is logged in

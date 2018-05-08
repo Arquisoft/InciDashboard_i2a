@@ -50,12 +50,6 @@ public class ModifyIncidentStep {
 
 	@Then("^he lists all the incidents$")
 	public void Step4() {
-		//We create a new incident and then assign it to him just in case
-//		Incident incident = new Incident();
-//		incident.setOperator(operator);
-//		incident.setName("Se quema la casa de chus");
-//		incident.setState(InciState.OPEN);
-//		inciService.addIncident(incident);
 		list = inciService.getIncidentsOfOperator(operator);
 	}
 	
