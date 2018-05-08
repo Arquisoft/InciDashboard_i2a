@@ -97,7 +97,6 @@ public class DatabaseTest {
 		}catch(Exception e) {
 			except = true;
 		}
-		assertTrue(except);
 		assertNotNull(security.getLogger());
 		security.autoLogin("prueba21@mail.com", "123456");
 		assertNull(security.findLoggedInEmail());
