@@ -1,4 +1,4 @@
-Feature: Test the login page
+Feature: Login page
 
 Scenario: Let an operator log in
   Given somebody is in home page

@@ -2,7 +2,6 @@ package com.uniovi.cucumber.steps;
 
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +11,6 @@ import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import com.uniovi.InciDashboardI2aApplication;
-import com.uniovi.cucumber.pageobjects.PO_HomeView;
-
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -27,7 +23,9 @@ public class LoginStep {
 	private static String gecko = "C:\\Firefox46.win\\geckodriver.exe";
 	private static WebDriver driver = getDriver();
 	private static String baseUrl = "http://localhost:8082";
-
+	private String email = "fireman1@gmail.com";
+	private String password = "123456";
+	
 	public static WebDriver getDriver() {
 		System.setProperty("webdriver.firefox.bin", PathFirefox);
 		System.setProperty("webdriver.firefox.marionette", gecko);
@@ -35,8 +33,22 @@ public class LoginStep {
 		return driver;
 	}
 
-	private String email = "fireman1@gmail.com";
-	private String password = "123456";
+	@After
+	public void tearDown() throws Exception {
+		driver.manage().deleteAllCookies();
+	}
+
+	// Antes de la primera prueba
+	@BeforeClass
+	static public void begin() {
+	}
+
+	// Al finalizar la última prueba
+	@AfterClass
+	static public void end() {
+		// Cerramos el navegador al finalizar las pruebas
+		driver.quit();
+	}
 	
 	@Given("^somebody is in home page$")
 	public void operator_is_in_home_page() {
