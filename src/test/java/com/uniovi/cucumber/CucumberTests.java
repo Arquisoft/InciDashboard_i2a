@@ -1,14 +1,12 @@
 package com.uniovi.cucumber;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
-import cucumber.api.junit.*;
-import cucumber.api.CucumberOptions; 
 
-@Ignore
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber; 
+
 @RunWith(Cucumber.class) 
-@CucumberOptions(
-	   // glue = "cucumber.steps",
-	    features = "src/test/java/com/uniovi/features/")
+@CucumberOptions(features = "src/test/java/com/uniovi/features/",
+	    glue = "cucumber.steps")
 public class CucumberTests {
 
 }

@@ -1,13 +1,8 @@
 Feature: Login page
 
-Scenario: Let an operator log in
-  Given somebody is in home page
-  When clicks on Log In
-  Then fills in correctly the email and password
-  Then operator is logged in
-  
-Scenario: Deny access to strangers
-	Given somebody is in home page
-	When clicks on Log In
-	Then fills in incorrectly the email and password
-	Then he is not logged in
+Scenario: Let an admin log in
+  Given a list of users:
+      | name    | password |
+      | fireman1@gmail.com    | 123456   |
+  When I login with name "fireman1@gmail.com " and password "123456"
+  Then admin is logged in
