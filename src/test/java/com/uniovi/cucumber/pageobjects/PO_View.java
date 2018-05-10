@@ -34,7 +34,7 @@ public class PO_View {
 	 * @return Se retornará la lista de elementos resultantes de la búsqueda.
 	 */
 	static public List<WebElement> checkKey(WebDriver driver, String key, int locale) {
-		List<WebElement> elementos = com.uniovi.cucumber.util.SeleniumUtils.EsperaCargaPagina(driver, "text", p.getString(key, locale), getTimeout());
+		List<WebElement> elementos = com.uniovi.cucumber.util.SeleniumUtils.esperaCargaPagina(driver, "text", p.getString(key, locale), getTimeout());
 		return elementos;
 	}
 	/**
@@ -46,7 +46,7 @@ public class PO_View {
 	 * @return Se retornará la lista de elementos resultantes de la búsqueda.
 	 */
 	static public List<WebElement> checkElement(WebDriver driver, String type, String text) {
-		List<WebElement> elementos = com.uniovi.cucumber.util.SeleniumUtils.EsperaCargaPagina(driver, type, text, getTimeout());
+		List<WebElement> elementos = com.uniovi.cucumber.util.SeleniumUtils.esperaCargaPagina(driver, type, text, getTimeout());
 		return elementos;		
 	}
 }

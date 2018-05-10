@@ -2,7 +2,6 @@ package com.uniovi.cucumber.steps;
 
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,18 +45,18 @@ public class LoginStep {
 	}
 	
 	@Given("^somebody is in home page$")
-	public void operator_is_in_home_page() {
+	public void operatorHomePage() {
 		driver.navigate().to(baseUrl);
 	}
 
 	@When("^clicks on Log In$")
-	public void clicks_on_log_in() {
+	public void clicksLogIn() {
 		WebElement login = driver.findElement(By.id("login"));
 		login.click();
 	}
 
 	@Then("^fills in correctly the email and password$")
-	public void fills_in_correctly_the_email_and_password() {
+	public void fillsCorrectly() {
 		WebElement emailField = driver.findElement(By.id("email"));
 		emailField.sendKeys(email);
 		WebElement pass = driver.findElement(By.id("pass"));
@@ -67,7 +66,7 @@ public class LoginStep {
 	}
 	
 	@Then("^fills in incorrectly the email and password$")
-	public void fills_in_incorrectly_the_email_and_password() {
+	public void fillsIncorrectly() {
 		email = "pepe@gmail.com";
 		WebElement emailField = driver.findElement(By.id("email"));
 		emailField.sendKeys(email);
@@ -78,13 +77,13 @@ public class LoginStep {
 	}
 
 	@Then("^operator is logged in$")
-	public void operator_is_logged_in() {
+	public void operatorLogged() {
 		//We find the welcome message
 		driver.findElement(By.partialLinkText("Incident"));
 	}
 	
 	@Then("^he is not logged in$")
-	public void he_is_not_logged_in() {
+	public void notLogged() {
 		//We find the login message
 		driver.findElement(By.partialLinkText("Login"));
 	}

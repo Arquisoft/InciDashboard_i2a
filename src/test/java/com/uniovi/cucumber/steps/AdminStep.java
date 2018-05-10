@@ -42,7 +42,7 @@ public class AdminStep {
 	}
 	
 	@Given("^a logged in admin$")
-	public void a_logged_in_admin(){
+	public void aLoggedInAdmin(){
 		driver = getDriver();		
 		driver.navigate().to(baseUrl);
 		WebElement login = driver.findElement(By.id("login"));
@@ -56,30 +56,31 @@ public class AdminStep {
 	}
 
 	@When("^he is in the main page$")
-	public void he_is_in_the_main_page() {
+	public void heIsInTheMainPage() {
 		//We find the welcome message
 		WebElement assigned = driver.findElement(By.name("tableIncidents"));
 		assertTrue(assigned !=null);
 	}
 	
 	@When("^he is in the admin page$")
-	public void he_is_in_the_admin_page() {
+	public void heIsInTheAdminPage() {
 		//We find the welcome message
 		WebElement but = driver.findElement(By.id("operatorPermissions"));
 		but.click();
 	}
 	
 	@Then("^incidents are shown")
-	public void incidents_are_shown() {
+	public void incidentsAreShown() {
 		List<WebElement> list = PO_View.checkElement(driver, "free", "//table[@name='tableIncidents']/tbody/tr");
 		// Comprobamos que hay 1
 		assertTrue(list.size() >= 1);
 	}
 	
 	@Then("^he can change some permissions")
-	public void he_can_change_some_permissions() {
-		WebElement but = driver.findElement(By.partialLinkText("Current operators"));
-		assertTrue(but !=null);
+	public void heCanChangeSomePermissions() {
+		List<WebElement> list = PO_View.checkElement(driver, "free", "//table[@name='tableIncidents']/tbody/tr");
+		// Comprobamos que hay 1
+		assertTrue(list.size() >= 1);
 	}
 	
 	
