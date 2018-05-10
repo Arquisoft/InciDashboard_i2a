@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 public class PO_Properties {
 
-	private static String Path;
+	private String path;
 	private static int SPANISH = 0;
 	private static int ENGLISH = 1;	
 	private static Locale[] idioms = new Locale[] {new Locale("ES"), new Locale("EN")};
@@ -13,11 +13,12 @@ public class PO_Properties {
 	
 	public PO_Properties(String Path) //throws FileNotFoundException, IOException 
 	{
-		PO_Properties.Path = Path;
+		path = Path;
 	}
+	
     public String getString(String prop, int locale) {
 		
-		ResourceBundle bundle = ResourceBundle.getBundle(Path, idioms[locale]);
+		ResourceBundle bundle = ResourceBundle.getBundle(path, idioms[locale]);
 		return bundle.getString(prop);
 	}
 
