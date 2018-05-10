@@ -81,7 +81,7 @@ public class OperatorController {
 	@RequestMapping(value = "/permissions", method = RequestMethod.GET)
 	public String getOperatorPermissions(Model model) {
 		model.addAttribute("operatorsList", operatorsService.getOperators());
-		return "/permissions";
+		return "permissions";
 	}
 	
 	@RequestMapping(value = "/permissions/{id}", method = RequestMethod.POST)
