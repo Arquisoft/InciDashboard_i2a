@@ -24,7 +24,7 @@ public class LoginStep {
 
 	private static String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
 	private static String gecko = "C:\\Firefox46.win\\geckodriver.exe";
-	private static WebDriver driver = getDriver();
+	private static WebDriver driver;
 	private static String baseUrl = "http://localhost:8082";
 
 	public static WebDriver getDriver() {
@@ -36,6 +36,7 @@ public class LoginStep {
 
 	@When("^operator is in home page$")
 	public void Step2() throws Exception {
+		driver = getDriver();
 		driver.navigate().to(baseUrl);
 		WebElement login = driver.findElement(By.id("login"));
 	}
@@ -61,6 +62,7 @@ public class LoginStep {
 		//We find the welcome message
 		driver.findElement(By.partialLinkText("Incident"));
 		driver.quit();
+		driver.close();
 	}
 
 }

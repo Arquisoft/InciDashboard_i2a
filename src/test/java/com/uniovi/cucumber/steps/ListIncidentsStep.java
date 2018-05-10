@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.uniovi.cucumber.util.SeleniumUtils;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -13,7 +16,7 @@ public class ListIncidentsStep {
 	
 	private static String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
 	private static String gecko = "C:\\Firefox46.win\\geckodriver.exe";
-	private static WebDriver driver = getDriver();
+	private static WebDriver driver;
 	private static String baseUrl = "http://localhost:8082";
 
 	public static WebDriver getDriver() {
@@ -24,7 +27,9 @@ public class ListIncidentsStep {
 	}
 	
 	@When("^logged in$")
-	public void Step2() throws Exception {
+	public void Step2(){
+		
+		driver = getDriver();		
 		driver.navigate().to(baseUrl);
 		WebElement login = driver.findElement(By.id("login"));
 		login.click();
