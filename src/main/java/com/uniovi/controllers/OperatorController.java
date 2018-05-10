@@ -30,7 +30,7 @@ public class OperatorController {
 	@Autowired
 	private OperatorService operatorsService;
 
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLogin() {
 		return "login";
 	}
@@ -54,7 +54,7 @@ public class OperatorController {
 		
 	}
 	
-	@RequestMapping(value = "dashboard", method = RequestMethod.GET)
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String getDashboard(Model model) {
 		List<Incident> incidents = incidentsService.getIncidents();
 		model.addAttribute("activeOperator", getActiveOperator());
@@ -70,7 +70,7 @@ public class OperatorController {
 		return "dashboard :: tableInfo";
 	}
 	
-	@RequestMapping(value = "assignedIncidents", method = RequestMethod.GET)
+	@RequestMapping(value = "/assignedIncidents", method = RequestMethod.GET)
 	public String getAssignedIncidents(Model model) {
 		Operator activeOperator = getActiveOperator();
 		model.addAttribute("activeOperator", activeOperator);
@@ -78,13 +78,13 @@ public class OperatorController {
 		return "assignedIncidents";
 	}
 	
-	@RequestMapping(value = "permissions", method = RequestMethod.GET)
+	@RequestMapping(value = "/permissions", method = RequestMethod.GET)
 	public String getOperatorPermissions(Model model) {
 		model.addAttribute("operatorsList", operatorsService.getOperators());
-		return "permissions";
+		return "/permissions";
 	}
 	
-	@RequestMapping(value = "permissions/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/permissions/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean operatorPermissionsChanged(@PathVariable String id) {
 		return operatorsService.modifyPermission(id);
