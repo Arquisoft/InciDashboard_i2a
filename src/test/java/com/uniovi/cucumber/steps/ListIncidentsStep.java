@@ -28,7 +28,6 @@ public class ListIncidentsStep {
 	
 	@When("^logged in$")
 	public void Step2(){
-		
 		driver = getDriver();		
 		driver.navigate().to(baseUrl);
 		WebElement login = driver.findElement(By.id("login"));

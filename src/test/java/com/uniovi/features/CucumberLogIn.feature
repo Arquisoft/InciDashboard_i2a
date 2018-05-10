@@ -1,10 +1,13 @@
-Feature: Let an operator log in the system
-		The operator must belong to the system
-		The email and the password must be correct	
+Feature: Test the login page
 
 Scenario: Let an operator log in
-  Given an operator  
-  When operator is in home page
-  And clicks on Log In
+  Given somebody is in home page
+  When clicks on Log In
   Then fills in correctly the email and password
   Then operator is logged in
+  
+Scenario: Deny access to strangers
+	Given somebody is in home page
+	When clicks on Log In
+	Then fills in incorrectly the email and password
+	Then he is not logged in

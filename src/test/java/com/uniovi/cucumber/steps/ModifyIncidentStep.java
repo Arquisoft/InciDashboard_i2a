@@ -32,11 +32,6 @@ public class ModifyIncidentStep {
 
 	Operator operator;
 	List<Incident> list;
-	
-	@Given("^an operator$")
-	public void Step1() {
-		operator = opService.getOperatorByEmail("medic@gmail.com");
-	}
 
 	@When("^he is logged in$")
 	public void Step2() {

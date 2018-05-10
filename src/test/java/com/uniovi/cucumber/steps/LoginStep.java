@@ -15,6 +15,7 @@ import com.uniovi.InciDashboardI2aApplication;
 import com.uniovi.cucumber.pageobjects.PO_HomeView;
 
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -24,7 +25,7 @@ public class LoginStep {
 
 	private static String PathFirefox = "C:\\Firefox46.win\\FirefoxPortable.exe";
 	private static String gecko = "C:\\Firefox46.win\\geckodriver.exe";
-	private static WebDriver driver;
+	private static WebDriver driver = getDriver();
 	private static String baseUrl = "http://localhost:8082";
 
 	public static WebDriver getDriver() {
@@ -34,35 +35,51 @@ public class LoginStep {
 		return driver;
 	}
 
-	@When("^operator is in home page$")
-	public void Step2() throws Exception {
-		driver = getDriver();
+	private String email = "fireman1@gmail.com";
+	private String password = "123456";
+	
+	@Given("^somebody is in home page$")
+	public void operator_is_in_home_page() {
 		driver.navigate().to(baseUrl);
-		WebElement login = driver.findElement(By.id("login"));
 	}
 
-	@And("^clicks on Log In$")
-	public void Step3() {
+	@When("^clicks on Log In$")
+	public void clicks_on_log_in() {
 		WebElement login = driver.findElement(By.id("login"));
 		login.click();
 	}
 
 	@Then("^fills in correctly the email and password$")
-	public void Step4() {
-		WebElement email = driver.findElement(By.id("email"));
-		email.sendKeys("fireman1@gmail.com");
+	public void fills_in_correctly_the_email_and_password() {
+		WebElement emailField = driver.findElement(By.id("email"));
+		emailField.sendKeys(email);
 		WebElement pass = driver.findElement(By.id("pass"));
-		pass.sendKeys("123456");
+		pass.sendKeys(password);
+		WebElement login = driver.findElement(By.id("login"));
+		login.click();
+	}
+	
+	@Then("^fills in incorrectly the email and password$")
+	public void fills_in_incorrectly_the_email_and_password() {
+		email = "pepe@gmail.com";
+		WebElement emailField = driver.findElement(By.id("email"));
+		emailField.sendKeys(email);
+		WebElement pass = driver.findElement(By.id("pass"));
+		pass.sendKeys(password);
 		WebElement login = driver.findElement(By.id("login"));
 		login.click();
 	}
 
 	@Then("^operator is logged in$")
-	public void Step5() {
+	public void operator_is_logged_in() {
 		//We find the welcome message
 		driver.findElement(By.partialLinkText("Incident"));
-		driver.quit();
-		driver.close();
+	}
+	
+	@Then("^he is not logged in$")
+	public void he_is_not_logged_in() {
+		//We find the login message
+		driver.findElement(By.partialLinkText("Login"));
 	}
 
 }
