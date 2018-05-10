@@ -60,4 +60,9 @@ public class KafkaConfiguration {
         props.put("sasl.jaas.config", jaasCfg);
 		return props;
 	}
+	
+	@Bean
+	public IncidentListener receiver() {
+	    return new IncidentListener();
+	}
 }
