@@ -1,11 +1,8 @@
 Feature: Admin features
 
 Scenario: Show the incidents
-  	Given a logged in admin
-  	When he is in the main page
+  	Given a list of operators as:
+      | name    | password |
+      | fireman1@gmail.com    | 123456   |
+    When I login with email "fireman1@gmail.com" and password "123456"
   	Then incidents are shown
-  
-Scenario: Modify permissions
-	Given a logged in admin
-  	When he is in the admin page
-  	Then he can change some permissions
