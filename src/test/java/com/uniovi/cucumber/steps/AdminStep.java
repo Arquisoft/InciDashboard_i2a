@@ -1,23 +1,16 @@
 package com.uniovi.cucumber.steps;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
 import com.uniovi.cucumber.pageobjects.PO_View;
-import com.uniovi.cucumber.util.SeleniumUtils;
-
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -41,11 +34,6 @@ public class AdminStep {
 		driver.manage().deleteAllCookies();
 	}
 
-	// Antes de la primera prueba
-	@BeforeClass
-	static public void begin() {
-	}
-
 	// Al finalizar la última prueba
 	@AfterClass
 	static public void end() {
@@ -54,7 +42,7 @@ public class AdminStep {
 	}
 	
 	@Given("^a logged in admin$")
-	public void Step2(){
+	public void a_logged_in_admin(){
 		driver = getDriver();		
 		driver.navigate().to(baseUrl);
 		WebElement login = driver.findElement(By.id("login"));
@@ -71,6 +59,7 @@ public class AdminStep {
 	public void he_is_in_the_main_page() {
 		//We find the welcome message
 		WebElement assigned = driver.findElement(By.name("tableIncidents"));
+		assertTrue(assigned !=null);
 	}
 	
 	@When("^he is in the admin page$")
@@ -90,6 +79,7 @@ public class AdminStep {
 	@Then("^he can change some permissions")
 	public void he_can_change_some_permissions() {
 		WebElement but = driver.findElement(By.partialLinkText("Current operators"));
+		assertTrue(but !=null);
 	}
 	
 	

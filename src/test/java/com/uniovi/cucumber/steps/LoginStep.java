@@ -38,11 +38,6 @@ public class LoginStep {
 		driver.manage().deleteAllCookies();
 	}
 
-	// Antes de la primera prueba
-	@BeforeClass
-	static public void begin() {
-	}
-
 	// Al finalizar la última prueba
 	@AfterClass
 	static public void end() {
