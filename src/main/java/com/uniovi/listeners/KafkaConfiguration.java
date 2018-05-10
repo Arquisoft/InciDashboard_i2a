@@ -19,13 +19,13 @@ import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 public class KafkaConfiguration {
 	
 	@Value("${kafka.servers}")
-	String server;
+	private String server;
 	@Value("${karafka.username}")
-	String username;
+	private String username;
 	@Value("${karafka.password}")
-	String password;
+	private String password;
 	@Value("${karafka.protocol}")
-	String protocol;
+	private String protocol;
 
 	@Bean
 	public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Integer, String>> kafkaListenerContainerFactory() {

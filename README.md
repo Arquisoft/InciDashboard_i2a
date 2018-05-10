@@ -51,3 +51,5 @@ Finally, to start the application, open a command line window, move to the appli
 * Juan Aza Gutiérrez [@juanaza](https://github.com/juanaza)
 * Lorena Castillero Corriols [@lorenacasti](https://github.com/lorenacasti)
 
+## Contributors
+* Javier Díez García [@javicodema](https://github.com/javicodema)

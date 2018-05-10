@@ -26,11 +26,12 @@ function initMap(){
 		
 		if(draggable == false){
 			markers[i].index = i;
-			markers[i].link = "/incident/edit/" + mapIncidents[i].id;
+			markers[i].link = "edit/" + mapIncidents[i].incidentId;
 
 			var contentString = "<div id='content'>" +
 				"<h3 id='firstHeading'>" + mapIncidents[i].name + "</h3>" +
 				"<div id='bodyContent'>" + 
+					"<p>Description: " + mapIncidents[i].description + "</p>" +
 					"<p>Submitted by: " + mapIncidents[i].agentId + "</p>" +
 					"<p>Agent type: " + mapIncidents[i].kindCode + "</p>" +
 					"<p>State: " + mapIncidents[i].state + "</p>";
@@ -38,10 +39,7 @@ function initMap(){
 			if(mapIncidents[i].operator != null){
 				contentString += "<p>Operator: " + mapIncidents[i].operator.email + "</p>";
 				if(mapIncidents[i].operator.email == activeOperator.email && activeOperator.modifyAccess == true){
-					contentString += "<a href='" +  markers[i].link + "'>Modify incident</a>";					
-				}
-				
-				if(mapIncidents[i].operator.email === activeOperator.email && activeOperator.modifyAccess == true){
+					contentString += "<a href='" +  markers[i].link + "'>Modify incident</a>";		
 					google.maps.event.addListener(markers[i], "dblclick", function(){
 						window.open(this.link, "_self");
 					});

@@ -15,8 +15,8 @@ public class Operator {
 	private OperatorKind kind;
 	
 	private String role;
-	public boolean mapAccess;
-	public boolean chartAccess;
+	private boolean mapAccess;
+	private boolean chartAccess;
 	public boolean modifyAccess;
 	
 	public Operator() {
@@ -44,7 +44,7 @@ public class Operator {
 	}
 	
 	public boolean isAdmin() {
-		return this.role.equals("ROLE_ADMIN");
+		return role.equals("ROLE_ADMIN");
 	}
 	
 	public void modifyOperatorRole(boolean asAdmin) {

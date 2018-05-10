@@ -10,7 +10,7 @@ function connect(){
 	        chartIncidents.push(incident);
 	        initMap();
 	        updateCharts();  
-	        addIncidentToTable(incident);
+	        updateTable();
 		});		
 	});
 }

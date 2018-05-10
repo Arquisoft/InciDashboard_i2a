@@ -30,22 +30,22 @@ public class OperatorController {
 	@Autowired
 	private OperatorService operatorsService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String getLogin() {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/admin/login", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/login", method = RequestMethod.GET)
 	public String getAdminLogin() {
 		return "adminLogin";
 	}
 	
-	@RequestMapping(value = "/admin/login", method = RequestMethod.POST)
+	@RequestMapping(value = "admin/login", method = RequestMethod.POST)
 	public String adminLogin(Model model, @RequestParam String email, @RequestParam String password) {
 		Operator operator = operatorsService.getOperatorByEmail(email);
 		if(operator != null && operatorsService.checkPassword(operator, password) && operator.getRole().equals("ROLE_ADMIN")) {
 			securityService.autoLogin(email, password);
-			return "redirect:/dashboard";
+			return "redirect:dashboard";
 		}
 		else {
 			model.addAttribute("error", true);
@@ -54,7 +54,7 @@ public class OperatorController {
 		
 	}
 	
-	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	@RequestMapping(value = "dashboard", method = RequestMethod.GET)
 	public String getDashboard(Model model) {
 		List<Incident> incidents = incidentsService.getIncidents();
 		model.addAttribute("activeOperator", getActiveOperator());
@@ -62,29 +62,29 @@ public class OperatorController {
 		return "dashboard";
 	}
 	
-	@RequestMapping(value = "/dashboard/update", method = RequestMethod.GET)
+	@RequestMapping(value = "dashboard/update", method = RequestMethod.GET)
 	public String updateDashboard(Model model) {
 		List<Incident> incidents = incidentsService.getIncidents();
 		model.addAttribute("activeOperator", getActiveOperator());
 		model.addAttribute("incidentsList", incidents);
-		return "dashboard :: dashboardInfo";
+		return "dashboard :: tableInfo";
 	}
 	
-	@RequestMapping(value = "/operator/assignedIncidents", method = RequestMethod.GET)
+	@RequestMapping(value = "assignedIncidents", method = RequestMethod.GET)
 	public String getAssignedIncidents(Model model) {
 		Operator activeOperator = getActiveOperator();
 		model.addAttribute("activeOperator", activeOperator);
 		model.addAttribute("incidentsList", incidentsService.getIncidentsOfOperator(activeOperator));
-		return "/operator/assignedIncidents";
+		return "assignedIncidents";
 	}
 	
-	@RequestMapping(value = "/operator/permissions", method = RequestMethod.GET)
+	@RequestMapping(value = "permissions", method = RequestMethod.GET)
 	public String getOperatorPermissions(Model model) {
 		model.addAttribute("operatorsList", operatorsService.getOperators());
-		return "/operator/permissions";
+		return "permissions";
 	}
 	
-	@RequestMapping(value = "/operator/permissions/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "permissions/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean operatorPermissionsChanged(@PathVariable String id) {
 		return operatorsService.modifyPermission(id);

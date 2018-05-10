@@ -48,7 +48,11 @@ public class InsertSimpleDataService {
 			Incident randIncident = incidentCreator.createIncident();
 			randIncident.setOperator(operators.get(randNum.nextInt(operators.size())));
 			incidents.add(randIncident);
+<<<<<<< HEAD
 			incidentService.addIncident(randIncident);			
+=======
+			incidentService.updateIncident(randIncident);			
+>>>>>>> master
 		}
 	}
 }

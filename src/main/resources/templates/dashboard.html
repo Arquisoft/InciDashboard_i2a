@@ -8,77 +8,68 @@
 			<div class="panel panel-default">	
 				<div class="panel-body">
 					<p><span sec:authentication="principal.username"></span> - <span>The following are a list of active incidents in the system </span>
-					<button type="button" class="btn btn-primary" id="updateButton">Update</a>
 				</div>
 				
-				<script th:inline="javascript">
-					/*<![CDATA[*/
-					$("#updateButton").click(function() {
-						 var urlUpdate = "/dashboard/update";
-						 $("#dashboardInfo").load(urlUpdate);
-					 });
-					/*]]>*/
-				</script>
-				
-				<div th:fragment="dashboardInfo" id="dashboardInfo">
-					<div th:if="${activeOperator.mapAccess == true}">	
-						<div class="card">
-							<h5 class="card-header">
-								Active incidents location
-							</h5>
-							<div class="card-body">
-								<div id="mapa" style="width:100%;height:400px"></div>
-							</div>
-						</div>	
-						
-						<script src="/js/map.js"></script>
-						<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAr9ogXGdZ9_qScXx3Pd8Rg0Kv5TuSV_U"></script>
-						<script th:inline="javascript">
-							/*<![CDATA[*/
-								mapIncidents = [[${incidentsList}]];
-								activeOperator = [[${activeOperator}]];
-								initMap();
-							/*]]>*/
-						</script>
-						
-						<br>
-					</div>								
+				<div th:if="${activeOperator.hasMapAccess()}">	
+					<div class="card">
+						<h5 class="card-header">
+							Active incidents location
+						</h5>
+						<div class="card-body">
+							<div id="mapa" style="width:100%;height:400px"></div>
+						</div>
+					</div>	
 					
-					<div th:if="${activeOperator.chartAccess == true}">
+					<script src="/js/map.js"></script>
+					<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAr9ogXGdZ9_qScXx3Pd8Rg0Kv5TuSV_U"></script>
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+							mapIncidents = [[${incidentsList}]];
+							activeOperator = [[${activeOperator}]];
+							initMap();
+						/*]]>*/
+					</script>
+					
+					<br>
+				</div>		
+				
+				<div class="row" th:if="${activeOperator.hasChartAccess()}">
+					<div class="col-lg-6">
 						<div class="card" id="cardPieChart">
 							<h5 class="card-header">
-								State comparison of active incidents
+								State comparison of submitted incidents
 							</h5>
 							<div class="card-body">
 								<div id="piechart" style="width:100%;height:400px"></div>
 							</div>
 						</div>
-						
-						<br>
-						
-						<div class="card" id="cardLineChart">
+					</div>
+					<div class="col-lg-6">
+						<div class="card" id="cardColumnChart">
 							<h5 class="card-header">
-								Temperature evolution of incidents submitted by sensors
+								Agent kind comparison of submitted incidents
 							</h5>
 							<div class="card-body">
-								<div id="linechart" style="width:100%;height:400px"></div>
+								<div id="columnchart" style="width:100%;height:400px"></div>
 							</div>
 						</div>
-						
-						<script src="/js/charts.js"></script>
+					</div>						
 					
-						<script th:inline="javascript">
-							/*<![CDATA[*/
-								chartIncidents = [[${incidentsList}]];
-								updateCharts();
-							/*]]>*/
-						</script>
-						
-						<br>
-					</div>	
-
-					<script src="/js/table.js"></script>
+					<script src="/js/charts.js"></script>
+				
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+							chartIncidents = [[${incidentsList}]];
+							updateCharts();
+						/*]]>*/
+					</script>	
+					<br>										
+				</div>		
+				
+				<script src="/js/table.js"></script>
+				
+				<div th:fragment="tableInfo" id="tableInfo">					
 					<div class="card">
 						<h5 class="card-header">
 							Active incidents details
@@ -109,16 +100,17 @@
 											<td th:text="${incident.properties.toString()}">Incident properties</td>
 											<td th:text="${incident.operator.email}">Operator</td>
 											<td th:text="${incident.comments.toString()}">Incident comments</td>
-											<div th:if="${incident.operator.email == activeOperator.email && activeOperator.modifyAccess==true}">
-												<td><a class="btn btn-primary" role="button" th:href="${'/incident/edit/' + incident.id}">Modify</a></td>
+											<div th:if="${incident.operator.email == activeOperator.email && activeOperator.hasModifyAccess()}">
+												<td><a class="btn btn-primary" role="button" th:href="${'edit/' + incident.id}">Modify</a></td>
 											</div>
 										</div>										
 									</tr>
 								</tbody>				
 							</table>
 						</div>
-					</div>	
-				</div>		
+					</div>
+				</div>
+					
 			</div>				
 		</div>
 		
